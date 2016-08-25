@@ -1,11 +1,11 @@
 <?php
 
 /**
- * PBCC 顺丰速运 配送方式插件
+ * PBCC 中通快递 配送方式插件
  * ============================================================================
  * * 版权所有 2013-2014 加拿大极地熊集团，并保留所有权利。
  * ============================================================================
- * $Id: sf_express.php $
+ * $Id: zt_express.php $
  */
 
 if (!defined('IN_ECS'))
@@ -13,7 +13,7 @@ if (!defined('IN_ECS'))
     die('Hacking attempt');
 }
 
-$shipping_lang = ROOT_PATH.'languages/' .$GLOBALS['_CFG']['lang']. '/shipping/sf_express.php';
+$shipping_lang = ROOT_PATH.'languages/' .$GLOBALS['_CFG']['lang']. '/shipping/zt_express.php';
 
 if (file_exists($shipping_lang))
 {
@@ -35,7 +35,7 @@ if (isset($set_modules) && $set_modules == TRUE)
     $modules[$i]['version'] = '1.0.0';
 
     /* 配送方式的描述 */
-    $modules[$i]['desc']    = 'sf_express_desc';
+    $modules[$i]['desc']    = 'zt_express_desc';
 
     /* 配送方式是否支持货到付款 */
     $modules[$i]['cod']     = false;
@@ -57,7 +57,7 @@ if (isset($set_modules) && $set_modules == TRUE)
     $modules[$i]['print_model'] = 2;
 
     /* 打印单背景 */
-    $modules[$i]['print_bg'] = '/images/receipt/dly_sf_express.jpg';
+    $modules[$i]['print_bg'] = '/images/receipt/dly_zt_express.jpg';
 
    /* 打印快递单标签位置信息 */
     $modules[$i]['config_lable'] = 't_shop_name,' . $_LANG['lable_box']['shop_name'] . ',150,29,112,137,b_shop_name||,||t_shop_address,' . $_LANG['lable_box']['shop_address'] . ',268,55,105,168,b_shop_address||,||t_shop_tel,' . $_LANG['lable_box']['shop_tel'] . ',55,25,177,224,b_shop_tel||,||t_customer_name,' . $_LANG['lable_box']['customer_name'] . ',78,23,299,265,b_customer_name||,||t_customer_address,' . $_LANG['lable_box']['customer_address'] . ',271,94,104,293,b_customer_address||,||';
@@ -66,15 +66,13 @@ if (isset($set_modules) && $set_modules == TRUE)
 }
 
 /**
- * 顺丰速运费用计算方式: 起点到终点 * 重量(kg)
+ * 中通快递费用计算方式: 重量(kg)
  * ====================================================================================
- * -浙江，上海，江苏地区为15元/公斤，续重(2元/公斤)
- * -续重每500克或其零数 (具体请上顺丰速运网站查询:http://www.sf-express.com/sfwebapp/price.jsp 客服电话 4008111111)
  *
  * -------------------------------------------------------------------------------------
  */
 
-class sf_express
+class zt_express
 {
     /*------------------------------------------------------ */
     //-- PUBLIC ATTRIBUTEs
@@ -96,7 +94,7 @@ class sf_express
      *
      * @return null
      */
-    function sf_express($cfg=array())
+    function zt_express($cfg=array())
     {
         foreach ($cfg AS $key=>$val)
         {
@@ -121,7 +119,7 @@ class sf_express
         }
         else
         {
-            @$fee = $this->configure['base_fee'];
+            $fee = $this->configure['base_fee'];
             $this->configure['fee_compute_mode'] = !empty($this->configure['fee_compute_mode']) ? $this->configure['fee_compute_mode'] : 'by_weight';
 
             if ($this->configure['fee_compute_mode'] == 'by_number')
@@ -135,7 +133,6 @@ class sf_express
                     $fee += (ceil(($goods_weight - 1))) * $this->configure['step_fee'];
                 }
             }
-           // $_SESSION['cart_weight'] = $goods_weight;
             return $fee;
         }
     }
@@ -148,8 +145,9 @@ class sf_express
      */
     function query($invoice_sn)
     {
-        $form_str = '<a href="http://www.sf-express.com/cn/sc/dynamic_functions/waybill/#search/bill-number/'.$invoice_sn.'" target="_blank">' .$invoice_sn. '</a>';
-        return $form_str;
+        //$form_str = '<a href="http://www.sf-express.com/cn/sc/dynamic_functions/waybill/#search/bill-number/'.$invoice_sn.'" target="_blank">' .$invoice_sn. '</a>';
+        //return $form_str;
+        return "";
     }
 }
 
