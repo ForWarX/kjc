@@ -1,0 +1,17 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<div style="float:left">
+{if $user_info}
+
+<span>亲爱的 <span class="f7_b"><b class="f7">{$user_info.username}</b></span> ，欢迎来到跨境城！&nbsp;</span>    
+[ <a href="user.php">{$lang.user_center}</a> /  
+ <a href="user.php?act=logout">{$lang.user_logout}</a>  ] 
+
+{else}
+<span>{$lang.hello}，欢迎来到跨境城！ &nbsp;| </span>
+  <a href="user.php">请登录</a> | 
+ <a href="user.php?act=register">免费注册</a> |  
+{/if}
+
+ 
+</div>

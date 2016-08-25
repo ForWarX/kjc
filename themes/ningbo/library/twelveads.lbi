@@ -1,0 +1,215 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<script type="text/javascript" src="themes/ningbo/js/jssor.core.js"></script>
+<script type="text/javascript" src="themes/ningbo/js/jssor.utils.js"></script>
+<script type="text/javascript" src="themes/ningbo/js/jssor.slider.js"></script>
+<script>
+	jQuery(document).ready(function ($) {
+		var options = {
+			$AutoPlay: true,
+			$AutoPlaySteps: 1,
+			$AutoPlayInterval: 4000,
+			$PauseOnHover: 1,
+			$ArrowKeyNavigation: false,
+			$SlideDuration: 0,
+			$MinDragOffsetToSlide: 20,
+			$SlideSpacing: 5,
+			$DisplayPieces: 1,
+			$ParkingPosition: 0,
+			$UISearchMode: 1,
+			$PlayOrientation: 1,
+			$DragOrientation: 0,
+			$ThumbnailNavigatorOptions: {
+				$Class: $JssorThumbnailNavigator$,
+				$ChanceToShow: 2,
+				$Loop: 2,
+				$AutoCenter: 3,
+				$Lanes: 1,
+				$SpacingX: 0,
+				$SpacingY: 0,
+				$DisplayPieces: 4,
+				$ParkingPosition: 0,
+				$Orientation: 2,
+				$DisableDrag: true
+			}
+		};
+
+		var jssor_slider1 = new $JssorSlider$("slider1_container", options);
+		var jssor_slider2 = new $JssorSlider$("slider2_container", options);
+		var jssor_slider3 = new $JssorSlider$("slider3_container", options);
+		var jssor_slider4 = new $JssorSlider$("slider4_container", options);
+
+		
+	});
+</script>
+	<div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 302.33px; height: 90px; background: #eee; overflow: hidden; float: left;">
+        <div u="loading" style="position: absolute; top: 0px; left: 0px;">
+            <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
+                background-color: #fff; top: 0px; left: 0px;width: 100%;height:100%;">
+            </div>
+            <div style="position: absolute; display: block; background: url(images/loading.gif) no-repeat center center;
+                top: 0px; left: 0px;width: 100%;height:100%;">
+            </div>
+        </div>
+        <div u="slides" style="cursor: pointer; position: absolute; left: 0px; top: 0px; width: 233.33px; height: 90px;
+            overflow: hidden;">
+            <!--{foreach from=$three_each_0 item=goods}-->
+            <div>
+                <div class="kjContInner" style="display: block;">
+                    <div class="kjAdImg">
+                        <a title="{$goods.name}" target="_blank" href="{$goods.url}"><img alt="{$goods.name}" src="{$goods.thumb}"></a>
+                    </div>
+                     <a class="kjAdCover" title="{$goods.name}" target="_blank" href="{$goods.url}"><img alt="trp" src="images/empty.png"></a>
+                    <ul>
+                        <li class="yh18 kjAdCred">
+                        <span class="kjAdPrice"><!--{if $goods.promote_price neq ''}-->{$goods.promote_price}<!--{else}-->{$goods.shop_price}<!--{/if}--></span>
+                        <span style="display:none"></span>
+                        </li>
+                        <li class="kjAdCred"><span style="display:none"></span></li>
+                        <li class="kjAdName">{$goods.name}</li>
+                    </ul>
+                </div>
+                <div u="thumb">
+                    <div class="t">{$goods.cat_name}</div>
+                </div>
+            </div>
+            <!--{/foreach}-->
+        </div>
+		
+		 <div u="thumbnavigator" class="jssort11" style="position: absolute; width: 68px; height: 90px; left:233px; top:0px;">
+		 <div u="slides" style="cursor: pointer;">
+                <div u="prototype" class="p" style="position: absolute; width: 68px; height: 30px; top: 0; left: 0px;">
+                    <thumbnailtemplate style=" width: 100%; height: 100%; border: none;position:absolute; top: 0; left: 0;"></thumbnailtemplate>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="slider2_container" style="position: relative; top: 0px; left: 0px; width: 302.33px; height: 90px; background: #eee; overflow: hidden; float: left;">
+        <div u="loading" style="position: absolute; top: 0px; left: 0px;">
+            <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
+                background-color: #fff; top: 0px; left: 0px;width: 100%;height:100%;">
+            </div>
+            <div style="position: absolute; display: block; background: url(images/loading.gif) no-repeat center center;
+                top: 0px; left: 0px;width: 100%;height:100%;">
+            </div>
+        </div>
+        <div u="slides" style="cursor: pointer; position: absolute; left: 0px; top: 0px; width: 233.33px; height: 90px;
+            overflow: hidden;">
+            <!--{foreach from=$three_each_1 item=goods}-->
+            <div>
+                <div class="kjContInner" style="display: block;">
+                    <div class="kjAdImg">
+                        <a title="{$goods.name}" target="_blank" href="{$goods.url}"><img alt="{$goods.name}" src="{$goods.thumb}"></a>
+                    </div>
+                     <a class="kjAdCover" title="{$goods.name}" target="_blank" href="{$goods.url}"><img alt="trp" src="images/empty.png"></a>
+                    <ul>
+                        <li class="yh18 kjAdCred">
+                        <span class="kjAdPrice"><!--{if $goods.promote_price neq ''}-->{$goods.promote_price}<!--{else}-->{$goods.shop_price}<!--{/if}--></span>
+                        <span style="display:none"></span>
+                        </li>
+                        <li class="kjAdCred"><span style="display:none"></span></li>
+                        <li class="kjAdName">{$goods.name}</li>
+                    </ul>
+                </div>
+                <div u="thumb">
+                    <div class="t">{$goods.cat_name}</div>
+                </div>
+            </div>
+            <!--{/foreach}-->
+        </div>
+		
+		 <div u="thumbnavigator" class="jssort11" style="position: absolute; width: 68px; height: 90px; left:233px; top:0px;">
+		 <div u="slides" style="cursor: pointer;">
+                <div u="prototype" class="p" style="position: absolute; width: 68px; height: 30px; top: 0; left: 0px;">
+                    <thumbnailtemplate style=" width: 100%; height: 100%; border: none;position:absolute; top: 0; left: 0;"></thumbnailtemplate>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="slider3_container" style="position: relative; top: 0px; left: 0px; width: 302.33px; height: 90px; background: #eee; overflow: hidden; float: left;">
+        <div u="loading" style="position: absolute; top: 0px; left: 0px;">
+            <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
+                background-color: #fff; top: 0px; left: 0px;width: 100%;height:100%;">
+            </div>
+            <div style="position: absolute; display: block; background: url(images/loading.gif) no-repeat center center;
+                top: 0px; left: 0px;width: 100%;height:100%;">
+            </div>
+        </div>
+        <div u="slides" style="cursor: pointer; position: absolute; left: 0px; top: 0px; width: 233.33px; height: 90px;
+            overflow: hidden;">
+            <!--{foreach from=$three_each_2 item=goods}-->
+            <div>
+                <div class="kjContInner" style="display: block;">
+                    <div class="kjAdImg">
+                        <a title="{$goods.name}" target="_blank" href="{$goods.url}"><img alt="{$goods.name}" src="{$goods.thumb}"></a>
+                    </div>
+                     <a class="kjAdCover" title="{$goods.name}" target="_blank" href="{$goods.url}"><img alt="trp" src="images/empty.png"></a>
+                    <ul>
+                        <li class="yh18 kjAdCred">
+                        <span class="kjAdPrice"><!--{if $goods.promote_price neq ''}-->{$goods.promote_price}<!--{else}-->{$goods.shop_price}<!--{/if}--></span>
+                        <span style="display:none"></span>
+                        </li>
+                        <li class="kjAdCred"><span style="display:none"></span></li>
+                        <li class="kjAdName">{$goods.name}</li>
+                    </ul>
+                </div>
+                <div u="thumb">
+                    <div class="t">{$goods.cat_name}</div>
+                </div>
+            </div>
+            <!--{/foreach}-->
+        </div>
+		
+		 <div u="thumbnavigator" class="jssort11" style="position: absolute; width: 68px; height: 90px; left:233px; top:0px;">
+		 <div u="slides" style="cursor: pointer;">
+                <div u="prototype" class="p" style="position: absolute; width: 68px; height: 30px; top: 0; left: 0px;">
+                    <thumbnailtemplate style=" width: 100%; height: 100%; border: none;position:absolute; top: 0; left: 0;"></thumbnailtemplate>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="slider4_container" style="position: relative; top: 0px; left: 0px; width: 302.33px; height: 90px; background: #eee; overflow: hidden; float: left;">
+        <div u="loading" style="position: absolute; top: 0px; left: 0px;">
+            <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
+                background-color: #fff; top: 0px; left: 0px;width: 100%;height:100%;">
+            </div>
+            <div style="position: absolute; display: block; background: url(images/loading.gif) no-repeat center center;
+                top: 0px; left: 0px;width: 100%;height:100%;">
+            </div>
+        </div>
+        <div u="slides" style="cursor: pointer; position: absolute; left: 0px; top: 0px; width: 233.33px; height: 90px;
+            overflow: hidden;">
+            <!--{foreach from=$three_each_3 item=goods}-->
+            <div>
+                <div class="kjContInner" style="display: block;">
+                    <div class="kjAdImg">
+                        <a title="{$goods.name}" target="_blank" href="{$goods.url}"><img alt="{$goods.name}" src="{$goods.thumb}"></a>
+                    </div>
+                     <a class="kjAdCover" title="{$goods.name}" target="_blank" href="{$goods.url}"><img alt="trp" src="images/empty.png"></a>
+                    <ul>
+                        <li class="yh18 kjAdCred">
+                        <span class="kjAdPrice"><!--{if $goods.promote_price neq ''}-->{$goods.promote_price}<!--{else}-->{$goods.shop_price}<!--{/if}--></span>
+                        <span style="display:none"></span>
+                        </li>
+                        <li class="kjAdCred"><span style="display:none"></span></li>
+                        <li class="kjAdName">{$goods.name}</li>
+                    </ul>
+                </div>
+                <div u="thumb">
+                    <div class="t">{$goods.cat_name}</div>
+                </div>
+            </div>
+            <!--{/foreach}-->
+        </div>
+		
+		 <div u="thumbnavigator" class="jssort11" style="position: absolute; width: 68px; height: 90px; left:233px; top:0px;">
+		 <div u="slides" style="cursor: pointer;">
+                <div u="prototype" class="p" style="position: absolute; width: 68px; height: 30px; top: 0; left: 0px;">
+                    <thumbnailtemplate style=" width: 100%; height: 100%; border: none;position:absolute; top: 0; left: 0;"></thumbnailtemplate>
+                </div>
+            </div>
+        </div>
+    </div>

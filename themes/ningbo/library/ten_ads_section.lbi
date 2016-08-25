@@ -1,0 +1,25 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<div class="hotgoods">
+  <div class="xm-box">
+    <div class="bd clearfix" style="
+    width: 1210px;">
+      <ul class="goods clearfix" style="
+    margin-left: 30px;">
+        {insert name='ads' id=6 num=1}
+    	{insert name='ads' id=7 num=2}
+        {insert name='ads' id=8 num=2}
+    	{insert name='ads' id=9 num=1}
+        {insert name='ads' id=10 num=1}
+      </ul>
+      <div class=" w xm-box home-goods-sublist ">
+        <div class=" w bd">
+          <ul class="w">
+            {insert name='ads' id=11 num=2}
+        	{insert name='ads' id=12 num=1}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

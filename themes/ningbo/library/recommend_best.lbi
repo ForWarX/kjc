@@ -1,0 +1,68 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $best_goods} -->
+<!-- {if $cat_rec_sign neq 1} -->
+<div class="box">
+
+ 
+  
+  <div class="tit1 tit2">
+    <img src="images/index-hot.jpg" alt=""/>
+        <a class="more" href="../search.php?intro=hot">更多</a> 
+      </div>
+  
+  <div class="blank"></div>
+  
+  
+  <div id="show_best_area" class="clearfix">
+  <!-- {/if} -->
+  <script type="text/javascript">
+//SYNTAX: ddtabmenu.definemenu("tab_menu_id", integer OR "auto")
+ddtabmenu.definemenu("best-cat", 0) //initialize Tab Menu #3 with 2nd tab selected
+</script>
+
+<div id="best-cat" class="solidblockmenu">
+<ul>
+<li><a href="" rel="best-cat-1" class="current" style="
+    width: 105px;
+">饮料-水</a></li>
+<li><a href="" rel="best-cat-2" class="" style="
+    width: 105px;
+">葡萄酒</a></li>
+
+</ul>
+</div>
+
+<DIV class="tabcontainer ieclass">
+
+<div id="best-cat-1" class="tabcontent">
+	<div class="best-right">
+  <!--{foreach from=$best_goods_90 item=goods}-->
+  <div class="goodsItem3">
+  	<div class="best-good-img"><a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" class="goodsimg" /></a></div>
+    <div class="best-good-info"><ul><li class="name" title="{$goods.name|escape:html}"><a href="{$goods.url}">{$goods.short_style_name}</a></li><li class="price"> <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}--></li><li class="market">市场价：</li><li><a href="{$goods.url}"><img src="images/btn_nowbuy.png"/></a></li></ul></div>
+        </div>
+  <!--{/foreach}-->
+ </div>
+	
+</div>
+<div id="best-cat-2" class="tabcontent">
+<div class="best-right">
+  <!--{foreach from=$best_goods_86 item=goods}-->
+  <div class="goodsItem3">
+  	<div class="best-good-img"><a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" class="goodsimg" /></a></div>
+    <div class="best-good-info"><ul><li class="name" title="{$goods.name|escape:html}"><a href="{$goods.url}">{$goods.short_style_name}</a></li><li class="price"> <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}--></li><li class="market">市场价：</li><li><a href="{$goods.url}"><img src="images/btn_nowbuy.png"/></a></li></ul></div>
+        </div>
+  <!--{/foreach}-->
+ </div>
+</div>                      
+</div>
+  
+  <!--<div class="best-left hot-big"><img src="images/guanggao/infant.jpg" alt=""/></div>-->
+  
+  <!-- {if $cat_rec_sign neq 1} -->
+  </div>
+
+</div>
+<div class="blank"></div>
+  <!-- {/if} -->
+<!-- {/if} -->

@@ -1,0 +1,441 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div id="change-city">
+<div class="city_main">
+        	<h3>请选择城市（红字为跨境贸易电子商务试点城市）</h3><a id="close" style="cursor:pointer;position:absolute;right:7px;top:7px;color:#fff;">[关闭]</a>
+
+            <dl class="city_area" id="city_area">
+            <dt class="fl">直辖市</dt>
+			<dd class="fl"><a href="index.php" >北京</a><a href="index.php" class="kjc">上海</a><a href="index.php" class="kjc">天津</a><a href="index.php" class="kjc">重庆</a></dd>
+            <dt class="fl ml120">其他地区</dt>
+			<dd class=""><a href="index.php" >台湾</a><a href="index.php" >香港</a><a href="index.php" >澳门</a></dd>
+            </dl>
+
+
+        <dl class="city_area">
+            <dt>华东地区</dt>
+            
+<dd><strong>江苏</strong><div class="city_name">
+<a href="index.php" >南京</a>|
+<a href="index.php" >无锡</a>|
+<a href="index.php" >徐州</a>|
+<a href="index.php" >常州</a>|
+<a href="index.php" >苏州</a>|
+<a href="index.php" >南通</a>|
+<a href="index.php" >连云港</a>|
+<a href="index.php" >淮安</a>|
+<a href="index.php" >盐城</a>|
+<a href="index.php" >扬州</a>|
+<a href="index.php" >镇江</a>|
+<a href="index.php" >泰州</a>|
+<a href="index.php" >宿迁</a></div></dd>
+                        <dd><div class="city_name"><a href="index.php" >高淳</a>|<a href="index.php" >江阴</a>|<a href="index.php" >宜兴</a>|<a href="index.php" >张家港</a>|<a href="index.php" >常熟</a>|<a href="index.php" >昆山</a>|<a href="index.php" >海安</a>|<a href="index.php" >如皋</a>|<a href="index.php" >如东</a>|<a href="index.php" >东台</a>|<a href="index.php" >大丰</a>|<a href="index.php" >兴化</a>|<a href="index.php" >靖江</a>|<a href="index.php" >姜堰</a>|<a href="index.php" >泰兴</a></div></dd>
+                    
+<dd><strong>浙江</strong><div class="city_name">
+<a href="index.php" class="kjc">杭州</a>|
+<a href="index.php" class="kjc">宁波</a>|
+<a href="index.php" >温州</a>|
+<a href="index.php" >嘉兴</a>|
+<a href="index.php" >湖州</a>|
+<a href="index.php" >绍兴</a>|
+<a href="index.php" >金华</a>|
+<a href="index.php" >衢州</a>|
+<a href="index.php" >舟山</a>|
+<a href="index.php" >台州</a>|
+<a href="index.php" >丽水</a></div></dd>
+<dd><strong>安徽</strong><div class="city_name">
+<a href="index.php" >合肥</a>|
+<a href="index.php" >芜湖</a>|
+<a href="index.php" >蚌埠</a>|
+<a href="index.php" >淮南</a>|
+<a href="index.php" >马鞍山</a>|
+<a href="index.php" >淮北</a>|
+<a href="index.php" >铜陵</a>|
+<a href="index.php" >安庆</a>|
+<a href="index.php" >黄山</a>|
+<a href="index.php" >滁州</a>|
+<a href="index.php" >阜阳</a>|
+<a href="index.php" >宿州</a>|
+<a href="index.php" >巢湖</a>|
+<a href="index.php" >六安</a>|
+<a href="index.php" >亳州</a>|
+<a href="index.php" >池州</a>|
+<a >宣城</a></div></dd>
+<dd><strong>福建</strong><div class="city_name">
+<a href="index.php" >福州</a>|
+<a href="index.php" >厦门</a>|
+<a href="index.php" >莆田</a>|
+<a href="index.php" >三明</a>|
+<a href="index.php" >泉州</a>|
+<a href="index.php" >漳州</a>|
+<a href="index.php" >南平</a>|
+<a href="index.php" >龙岩</a>|
+<a href="index.php" >宁德</a>|
+<a href="index.php" class="kjc">平潭</a></div></dd>
+<dd><strong>江西</strong><div class="city_name">
+<a href="index.php" >南昌</a>|
+<a href="index.php" >景德镇</a>|
+<a href="index.php" >萍乡</a>|
+<a href="index.php" >九江</a>|
+<a href="index.php" >新余</a>|
+<a href="index.php" >鹰潭</a>|
+<a href="index.php" >赣州</a>|
+<a href="index.php" >吉安</a>|
+<a href="index.php" >宜春</a>|
+<a href="index.php" >抚州</a>|
+<a href="index.php" >上饶</a></div></dd>
+<dd><strong>山东</strong><div class="city_name">
+<a href="index.php" >济南</a>|
+<a href="index.php" class="kjc">青岛</a>|
+<a href="index.php" >淄博</a>|
+<a href="index.php" >枣庄</a>|
+<a href="index.php" >东营</a>|
+<a href="index.php" class="kjc">烟台</a>|
+<a href="index.php" >潍坊</a>|
+<a href="index.php" >济宁</a>|
+<a href="index.php" >泰安</a>|
+<a href="index.php" >威海</a>|
+<a href="index.php" >日照</a>|
+<a href="index.php" >莱芜</a>|
+<a href="index.php" >临沂</a>|
+<a href="index.php" >德州</a>|
+<a href="index.php" >聊城</a>|
+<a href="index.php" >滨州</a>|
+<a href="index.php" >菏泽</a></div></dd>
+			</dl>
+
+            
+                    <dl class="city_area">
+                    <dt>华北地区 </dt>
+                    
+ <dd><strong>河北</strong><div class="city_name">
+<a href="index.php" >石家庄</a>|
+<a href="index.php" >唐山</a>|
+<a href="index.php" >秦皇岛</a>|
+<a href="index.php" >邯郸</a>|
+<a href="index.php" >邢台</a>|
+<a href="index.php" >保定</a>|
+<a href="index.php" >张家口</a>|
+<a href="index.php" >承德</a>|
+<a href="index.php" >沧州</a>|
+<a href="index.php" >廊坊</a>|
+<a href="index.php" >衡水</a></div></dd>
+ <dd><strong>山西</strong><div class="city_name">
+<a href="index.php" >太原</a>|
+<a href="index.php" >大同</a>|
+<a href="index.php" >阳泉</a>|
+<a href="index.php" >长治</a>|
+<a href="index.php" >晋城</a>|
+<a href="index.php" >朔州</a>|
+<a href="index.php" >晋中</a>|
+<a href="index.php" >运城</a>|
+<a href="index.php" >忻州</a>|
+<a href="index.php" >临汾</a>|
+<a href="index.php" >吕梁</a></div></dd>
+ <dd><strong>内蒙古</strong><div class="city_name">
+<a href="index.php" >呼和浩特</a>|
+<a href="index.php" >包头</a>|
+<a href="index.php" >乌海</a>|
+<a href="index.php" >赤峰</a>|
+<a href="index.php" >通辽</a>|
+<a href="index.php" >鄂尔多斯</a>|
+<a href="index.php" >呼伦贝尔</a>|
+<a href="index.php" >巴彦淖尔</a>|
+<a href="index.php" >乌兰察布</a>|
+<a href="index.php" >兴安</a>|
+<a href="index.php" >锡林郭勒</a>|
+<a href="index.php" >阿拉善</a></div></dd>
+                    </dl>
+                    
+                    <dl class="city_area">
+                    <dt>东北地区 </dt>
+                    
+ <dd><strong>辽宁</strong><div class="city_name">
+<a href="index.php" >沈阳</a>|
+<a href="index.php" >大连</a>|
+<a href="index.php" >鞍山</a>|
+<a href="index.php" >抚顺</a>|
+<a href="index.php" >本溪</a>|
+<a href="index.php" >丹东</a>|
+<a href="index.php" >锦州</a>|
+<a href="index.php" >营口</a>|
+<a href="index.php" >阜新</a>|
+<a href="index.php" >辽阳</a>|
+<a href="index.php" >盘锦</a>|
+<a href="index.php" >铁岭</a>|
+<a href="index.php" >朝阳</a>|
+<a href="index.php" >葫芦岛</a></div></dd>
+ <dd><strong>吉林</strong><div class="city_name">
+<a href="index.php" class="kjc">长春</a>|
+<a href="index.php" >吉林</a>|
+<a href="index.php" >四平</a>|
+<a href="index.php" >辽源</a>|
+<a href="index.php" >通化</a>|
+<a href="index.php" >白山</a>|
+<a href="index.php" >松原</a>|
+<a href="index.php" >白城</a>|
+<a href="index.php" >延边</a></div></dd>
+ <dd><strong>黑龙江</strong><div class="city_name">
+<a href="index.php" class="kjc">哈尔滨</a>|
+<a href="index.php" >齐齐哈尔</a>|
+<a href="index.php" >鸡西</a>|
+<a href="index.php" >鹤岗</a>|
+<a href="index.php" >双鸭山</a>|
+<a href="index.php" >大庆</a>|
+<a href="index.php" >伊春</a>|
+<a href="index.php" >佳木斯</a>|
+<a href="index.php" >七台河</a>|
+<a href="index.php" class="kjc">牡丹江</a>|
+<a href="index.php" >黑河</a>|
+<a href="index.php" >绥化</a>|
+<a href="index.php" >大兴安岭</a></div></dd>
+                    </dl>
+                    
+                    <dl class="city_area">
+                    <dt>中南地区 </dt>
+                    
+ <dd><strong>河南</strong><div class="city_name">
+<a href="index.php" class="kjc">郑州</a>|
+<a href="index.php" >开封</a>|
+<a href="index.php" >洛阳</a>|
+<a href="index.php" >平顶山</a>|
+<a href="index.php" >安阳</a>|
+<a href="index.php" >鹤壁</a>|
+<a href="index.php" >新乡</a>|
+<a href="index.php" >焦作</a>|
+<a href="index.php" >濮阳</a>|
+<a href="index.php" >许昌</a>|
+<a href="index.php" >漯河</a>|
+<a href="index.php" >三门峡</a>|
+<a href="index.php" >南阳</a>|
+<a href="index.php" >商丘</a>|
+<a href="index.php" >信阳</a>|
+<a href="index.php" >周口</a>|
+<a href="index.php" >驻马店</a></div></dd>
+ <dd><strong>湖北</strong><div class="city_name">
+<a href="index.php" >武汉</a>|
+<a href="index.php" >黄石</a>|
+<a href="index.php" >十堰</a>|
+<a href="index.php" >宜昌</a>|
+<a href="index.php" >襄樊</a>|
+<a href="index.php" >鄂州</a>|
+<a href="index.php" >荆门</a>|
+<a href="index.php" >孝感</a>|
+<a href="index.php" >荆州</a>|
+<a href="index.php" >黄冈</a>|
+<a href="index.php" >咸宁</a>|
+<a href="index.php" >随州</a>|
+<a href="index.php" >恩施</a>|
+<a href="index.php" >仙桃</a>|
+<a href="index.php" >潜江</a>|
+<a href="index.php" >天门</a>|
+<a href="index.php" >神农架</a></div></dd>
+ <dd><strong>湖南</strong><div class="city_name">
+<a href="index.php" >长沙</a>|
+<a href="index.php" >株洲</a>|
+<a href="index.php" >湘潭</a>|
+<a href="index.php" >衡阳</a>|
+<a href="index.php" >邵阳</a>|
+<a href="index.php" >岳阳</a>|
+<a href="index.php" >常德</a>|
+<a href="index.php" >张家界</a>|
+<a href="index.php" >益阳</a>|
+<a href="index.php" >郴州</a>|
+<a href="index.php" >永州</a>|
+<a href="index.php" >怀化</a>|
+<a href="index.php" >娄底</a>|
+<a href="index.php" >湘西</a></div></dd>
+ <dd><strong>广东</strong><div class="city_name">
+<a href="index.php" class="kjc">广州</a>|
+<a href="index.php" >韶关</a>|
+<a href="index.php" >深圳</a>|
+<a href="index.php" >珠海</a>|
+<a href="index.php" >汕头</a>|
+<a href="index.php" >佛山</a>|
+<a href="index.php" >江门</a>|
+<a href="index.php" >湛江</a>|
+<a href="index.php" >茂名</a>|
+<a href="index.php" >肇庆</a>|
+<a href="index.php" >惠州</a>|
+<a href="index.php" >梅州</a>|
+<a href="index.php" >汕尾</a>|
+<a href="index.php" >河源</a>|
+<a href="index.php" >阳江</a>|
+<a href="index.php" >清远</a>|
+<a href="index.php" class="kjc">东莞</a>|
+<a href="index.php" >中山</a>|
+<a href="index.php" >潮州</a>|
+<a href="index.php" >揭阳</a>|
+<a href="index.php" >云浮</a></div></dd>
+ <dd><strong>广西</strong><div class="city_name">
+<a href="index.php" >南宁</a>|
+<a href="index.php" >柳州</a>|
+<a href="index.php" >桂林</a>|
+<a href="index.php" >梧州</a>|
+<a href="index.php" >北海</a>|
+<a href="index.php" >防城港</a>|
+<a href="index.php" >钦州</a>|
+<a href="index.php" >贵港</a>|
+<a href="index.php" >玉林</a>|
+<a href="index.php" >百色</a>|
+<a href="index.php" >贺州</a>|
+<a href="index.php" >河池</a>|
+<a href="index.php" >来宾</a>|
+<a href="index.php" >崇左</a></div></dd>
+ <dd><strong>海南</strong><div class="city_name">
+<a href="index.php" >海口</a>|
+<a href="index.php" >三亚</a>|
+<a href="index.php" >五指山</a>|
+<a href="index.php" >琼海</a>|
+<a href="index.php" >儋州</a>|
+<a href="index.php" >文昌</a>|
+<a href="index.php" >万宁</a>|
+<a href="index.php" >东方</a>|
+<a href="index.php" >定安</a>|
+<a href="index.php" >屯昌</a>|
+<a href="index.php" >澄迈</a>|
+<a href="index.php" >临高</a>|
+<a href="index.php" >白沙</a>|
+<a href="index.php" >昌江</a>|
+<a href="index.php" >乐东</a>|
+<a href="index.php" >陵水</a>|
+<a href="index.php" >保亭</a>|
+<a href="index.php" >琼中</a>|
+<a href="index.php" >西沙</a>|
+<a href="index.php" >南沙</a>|
+<a href="index.php" >中沙</a>|
+<a href="index.php" >东沙</a></div></dd>
+                    </dl>
+                    
+                    <dl class="city_area">
+                    <dt>西南地区 </dt>
+                    
+ <dd><strong>四川</strong><div class="city_name">
+<a href="index.php" >成都</a>|
+<a href="index.php" >自贡</a>|
+<a href="index.php" >攀枝花</a>|
+<a href="index.php" >泸州</a>|
+<a href="index.php" >德阳</a>|
+<a href="index.php" >绵阳</a>|
+<a href="index.php" >广元</a>|
+<a href="index.php" >遂宁</a>|
+<a href="index.php" >内江</a>|
+<a href="index.php" >乐山</a>|
+<a href="index.php" >南充</a>|
+<a href="index.php" >眉山</a>|
+<a href="index.php" >宜宾</a>|
+<a href="index.php" >广安</a>|
+<a href="index.php" >达州</a>|
+<a href="index.php" >雅安</a>|
+<a href="index.php" >巴中</a>|
+<a href="index.php" >资阳</a>|
+<a href="index.php" >阿坝</a>|
+<a href="index.php" >甘孜</a>|
+<a href="index.php" >凉山</a></div></dd>
+ <dd><strong>贵州</strong><div class="city_name">
+<a href="index.php" >贵阳</a>|
+<a href="index.php" >六盘水</a>|
+<a href="index.php" >遵义</a>|
+<a href="index.php" >安顺</a>|
+<a href="index.php" >铜仁</a>|
+<a href="index.php" >黔西南</a>|
+<a href="index.php" >毕节</a>|
+<a href="index.php" >黔东南</a>|
+<a href="index.php" >黔南</a></div></dd>
+ <dd><strong>云南</strong><div class="city_name">
+<a href="index.php" >昆明</a>|
+<a href="index.php" >曲靖</a>|
+<a href="index.php" >玉溪</a>|
+<a href="index.php" >保山</a>|
+<a href="index.php" >昭通</a>|
+<a href="index.php" >丽江</a>|
+<a href="index.php" >普洱</a>|
+<a href="index.php" >临沧</a>|
+<a href="index.php" >楚雄</a>|
+<a href="index.php" >红河</a>|
+<a href="index.php" >文山</a>|
+<a href="index.php" >西双版纳</a>|
+<a href="index.php" >大理</a>|
+<a href="index.php" >德宏</a>|
+<a href="index.php" >怒江</a>|
+<a href="index.php" >迪庆</a></div></dd>
+ <dd><strong>西藏</strong><div class="city_name">
+<a href="index.php" >拉萨</a>|
+<a href="index.php" >昌都</a>|
+<a href="index.php" >山南</a>|
+<a href="index.php" >日喀则</a>|
+<a href="index.php" >那曲</a>|
+<a href="index.php" >阿里</a>|
+<a href="index.php" >林芝</a></div></dd>
+                    </dl>
+                    
+                    <dl class="city_area">
+                    <dt>西北地区 </dt>
+                    
+ <dd><strong>陕西</strong><div class="city_name">
+<a href="index.php" class="kjc">西安</a>|
+<a href="index.php" >铜川</a>|
+<a href="index.php" >宝鸡</a>|
+<a href="index.php" >咸阳</a>|
+<a href="index.php" >渭南</a>|
+<a href="index.php" >延安</a>|
+<a href="index.php" >汉中</a>|
+<a href="index.php" >榆林</a>|
+<a href="index.php" >安康</a>|
+<a href="index.php" >商洛</a></div></dd>
+ <dd><strong>甘肃</strong><div class="city_name">
+<a href="index.php" >兰州</a>|
+<a href="index.php" >嘉峪关</a>|
+<a href="index.php" >金昌</a>|
+<a href="index.php" >白银</a>|
+<a href="index.php" >天水</a>|
+<a href="index.php" >武威</a>|
+<a href="index.php" >张掖</a>|
+<a href="index.php" >平凉</a>|
+<a href="index.php" >酒泉</a>|
+<a href="index.php" >庆阳</a>|
+<a href="index.php" >定西</a>|
+<a href="index.php" >陇南</a>|
+<a href="index.php" >临夏</a>|
+<a href="index.php" >甘南</a></div></dd>
+ <dd><strong>青海</strong><div class="city_name">
+<a href="index.php" >西宁</a>|
+<a href="index.php" >海东</a>|
+<a href="index.php" >海北</a>|
+<a href="index.php" >黄南</a>|
+<a href="index.php" >海南</a>|
+<a href="index.php" >果洛</a>|
+<a href="index.php" >玉树</a>|
+<a href="index.php" >海西</a></div></dd>
+ <dd><strong>宁夏</strong><div class="city_name">
+<a href="index.php" class="kjc">银川</a>|
+<a href="index.php" >石嘴山</a>|
+<a href="index.php" >吴忠</a>|
+<a href="index.php" >固原</a>|
+<a href="index.php" >中卫</a></div></dd>
+ <dd><strong>新疆</strong><div class="city_name">
+<a href="index.php" >乌鲁木齐</a>|
+<a href="index.php" >克拉玛依</a>|
+<a href="index.php" >吐鲁番</a>|
+<a href="index.php" >哈密</a>|
+<a href="index.php" >昌吉</a>|
+<a href="index.php" >博尔塔拉</a>|
+<a href="index.php" >巴音郭楞</a>|
+<a href="index.php" >阿克苏</a>|
+<a href="index.php" >克孜勒苏</a>|
+<a href="index.php" >喀什</a>|
+<a href="index.php" >和田</a>|
+<a href="index.php" >伊犁</a>|
+<a href="index.php" >塔城</a>|
+<a href="index.php" >阿勒泰</a>|
+<a href="index.php" >石河子</a>|
+<a href="index.php" >阿拉尔</a>|
+<a href="index.php" >图木舒克</a>|
+<a href="index.php" >五家渠</a></div></dd>
+                    </dl>
+                    
+        </div>
+</div>
+<script>
+	$('#close').click(function(){document.getElementById("change-city").style.display = "none";});
+	$(document).keyup(function(e){if (e.keyCode == 27) {document.getElementById("change-city").style.display = "none";}});
+</script>

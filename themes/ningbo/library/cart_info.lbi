@@ -1,0 +1,44 @@
+<!-- {if $goods} -->
+<div class="cat_ul" onMouseOver="this.className='cat_ul on'" onMouseOut="this.className='cat_ul'">
+	<div class="clearfix divt">
+		<p class="clearfix ptt">
+			<span class="cart_sp">
+            	<em class="left">购物车：<span id="qty_on_top">{$goods_number} </span>件</em>
+                <em class="right"><span id="amount_on_top"> ${$order_amount}</span> 元</em>
+            </span>
+		</p>
+     </div>
+	<ul class="cart_box clearfix">
+		{foreach from=$goods item=goods name=goods key=key}
+		<li {if $key%2 neq 0}class="clearfix nobk"{else} class="clearfix"{/if}>
+			<span class="sgood left">
+            	<a href="{$goods.url}" >
+                	<img src="{$goods.goods_thumb}" width="50px" alt="{$goods.goods_name}">
+                </a>
+            </span>
+			<p class="left sgoodc">
+            	<a class="name" href="{$goods.url}">{$goods.short_name}</a>
+				<span>{$goods.goods_jj}</span>
+			</p>
+			<p class="right sgoodt">
+				<span><span id="unit_price">{$goods.goods_price}</span><span id="times"><br/>×</span><span id="quantity">{$goods.goods_number}</span></span>
+                <br/><a class="del" href="javascript:" onClick="deleteCartGoods({$goods.rec_id})">[删除]</a>
+            </p>
+		</li>
+		{/foreach}
+		<li class="clearfix zllcart">
+			<span class="ie6left">共 
+            	<em>{$goods_number}</em> 件 
+                <span class="pipe">|</span>
+                 价格总计:
+                 <em> ${$order_amount} </em><span>元</span>
+            </span>
+            <a href="flow.php" class="right">去购物车结算>></a>
+		</li>
+	</ul>
+</div>
+<!-- {else} -->
+<ul class="car_ul onp clearfix">
+	<p class="clearfix ptt">购物车内暂无商品</p>
+<ul>
+<!-- {/if} -->

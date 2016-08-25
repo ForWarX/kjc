@@ -1,0 +1,789 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='jquery-1.3.2.min.js,jquery.json-1.3.js'}
+{insert_scripts files='utils.js,common.js,global.js,compare.js,transport.js'}
+</head>
+<body><!-- #BeginLibraryItem "/library/page_header.lbi" -->
+<link href="library/themes/ningbo/qq/images/qq.css" rel="stylesheet" type="text/css" />
+<!--<script language='javascript' src='themes/ningbo/qq/ServiceQQ.js' type='text/javascript' charset='utf-8'></script>-->
+<script type="text/javascript">
+var process_request = "{$lang.process_request}";
+</script>
+{insert_scripts files='jquery.js,jquery.json.js'}
+{insert_scripts files='transport.js'}
+<div class="header">
+<div class="topNav ">
+<div id="topNavContent" align="center">
+			<div class="cart" id="ECS_CARTINFO">
+			{insert name='cart_info'}
+            </div>
+            
+		   <div class="f_r log">
+  <ul class="ul1" onmouseover="this.className='ul1 ul1_on'" onmouseout="this.className='ul1'">
+ <a class="a1" href="library/user.php">我的账户</a>
+  <div class="ul1_float">
+  <ul> 
+     <a href="library/user.php?act=order_list">我的订单</a>
+     <a href="library/user.php?act=collection_list">我的收藏</a>
+     <a href="library/user.php?act=profile">用户信息</a>
+     <a href="library/user.php?act=address_list">收货地址</a>
+     <!-- {if $cfg.use_integral} 购买此商品可使用P币-->
+     <a href="library/user.php?act=pcoin_deposit"><img src="images/pcoin.gif" width="12px">币充值</a>
+     <!-- {/if} -->    
+ </ul>    
+  </div>
+    <div class="dang"></div>
+   
+ </ul>
+ </div>
+           <div class="f_r" style=" margin-top:0;_margin-top:7px;">
+              {insert_scripts files='utils.js'}
+               <font id="ECS_MEMBERZONE">{* PBCC 提醒您：根据用户id来调用member_info.lbi显示不同的界面  *}{insert name='member_info'} </font>
+                  <!--{if $navigator_list.top}-->
+                  <!-- {foreach name=nav_top_list from=$navigator_list.top item=nav} -->  
+                  <a href="{$nav.url}" <!-- {if $nav.opennew eq 1} --> target="_blank" <!-- {/if} -->>{$nav.name}</a>
+                  <!-- {/foreach} --> <!-- {/if} -->
+          </div>
+          </div>
+                   </div>
+<div class="block" style=" height:80px; position:relative; z-index:9999;">
+
+          
+ 
+
+
+
+
+<div style="position:absolute; top:10px;"><a href="library/index.php"><img src="images/logo.png" width="230px"></a><span style="padding-left:20px;font-size:20px">宁波<a id="city_switch" style="cursor:pointer;"><span>[切换城市]</span></a></span></div>
+
+<div id="change-city">
+  <div id="bdw" class="bdw">
+    <div id="bd" class="cf">
+      <div class="choosecities">
+        <div class="citieslist">
+          <h2>按拼音首字母选择<span class="arrow">&raquo;</span></h2><a id="close" style="cursor:pointer;">[关闭]</a>
+          <ol class="hasallcity">
+            <li id="city-A">
+              <p class="cf"><span class="label"><strong>A</strong></span><span><a class="isonline" href="#">鞍山</a><a class="isoffline" href="#">安顺</a><a class="isoffline" href="#">阿坝</a><a class="isoffline" href="#">阿拉善</a><a class="isoffline" href="#">阿里</a><a class="isoffline" href="#">安康</a><a class="isoffline" href="#">阿克苏</a><a class="isoffline" href="#">安庆</a><a class="isoffline" href="#">阿勒泰</a><a class="isoffline" href="#">安阳</a><a class="isoffline" href="#">澳门</a></span></p>
+            </li>
+            <li id="city-B">
+              <p class="cf"><span class="label"><strong>B</strong></span><span><a class="isonline" href="#">北京</a><a class="isonline" href="#">包头</a><a class="isoffline" href="#">保定</a><a class="isoffline" href="#">巴中</a><a class="isoffline" href="#">蚌埠</a><a class="isoffline" href="#">白银</a><a class="isoffline" href="#">白城</a><a class="isoffline" href="#">白山</a><a class="isoffline" href="#">北海</a><a class="isoffline" href="#">巴彦淖尔</a><a class="isoffline" href="#">宝鸡</a><a class="isoffline" href="#">百色</a><a class="isoffline" href="#">本溪</a><a class="isoffline" href="#">保山</a><a class="isoffline" href="#">毕节</a><a class="isoffline" href="#">博尔塔拉</a><a class="isoffline" href="#">滨州</a><a class="isoffline" href="#">亳州</a><a class="isoffline" href="#">巴州</a></span></p>
+            </li>
+            <li id="city-C">
+              <p class="cf"><span class="label"><strong>C</strong></span><span><a class="isonline" href="#">成都</a><a class="isonline" href="#">重庆</a><a class="isonline" href="#">常州</a><a class="isonline" href="#">长沙</a><a class="isonline" href="#">长春</a><a class="isoffline" href="#">赤峰</a><a class="isoffline" href="#">楚雄</a><a class="isoffline" href="#">长治</a><a class="isoffline" href="#">巢湖</a><a class="isoffline" href="#">崇左</a><a class="isoffline" href="#">潮州</a><a class="isoffline" href="#">昌吉</a><a class="isoffline" href="#">沧州</a><a class="isoffline" href="#">郴州</a><a class="isoffline" href="#">常德</a><a class="isoffline" href="#">滁州</a><a class="isoffline" href="#">朝阳</a><a class="isoffline" href="#">昌都</a><a class="isoffline" href="#">池州</a><a class="isoffline" href="#">承德</a></span></p>
+            </li>
+            <li id="city-D">
+              <p class="cf"><span class="label"><strong>D</strong></span><span><a class="isonline" href="#">东莞</a><a class="isonline" href="#">大连</a><a class="isonline" href="#">东营</a><a class="isoffline" href="#">大庆</a><a class="isoffline" href="#">大同</a><a class="isoffline" href="#">大理</a><a class="isoffline" href="#">德阳</a><a class="isoffline" href="#">迪庆</a><a class="isoffline" href="#">达州</a><a class="isoffline" href="#">德州</a><a class="isoffline" href="#">丹东</a><a class="isoffline" href="#">大兴安岭</a><a class="isoffline" href="#">德宏</a><a class="isoffline" href="#">定西</a></span></p>
+            </li>
+            <li id="city-E">
+              <p class="cf"><span class="label"><strong>E</strong></span><span><a class="isoffline" href="#">恩施</a><a class="isoffline" href="#">鄂州</a><a class="isoffline" href="#">鄂尔多斯</a></span></p>
+            </li>
+            <li id="city-F">
+              <p class="cf"><span class="label"><strong>F</strong></span><span><a class="isonline" href="#">福州</a><a class="isonline" href="#">佛山</a><a class="isonline" href="#">抚顺</a><a class="isoffline" href="#">阜阳</a><a class="isoffline" href="#">抚州</a><a class="isoffline" href="#">防城港</a><a class="isoffline" href="#">阜新</a></span></p>
+            </li>
+            <li id="city-G">
+              <p class="cf"><span class="label"><strong>G</strong></span><span><a class="isonline" href="#">广州</a><a class="isonline" href="#">贵阳</a><a class="isonline" href="#">桂林</a><a class="isoffline" href="#">赣州</a><a class="isoffline" href="#">广元</a><a class="isoffline" href="#">果洛</a><a class="isoffline" href="#">固原</a><a class="isoffline" href="#">甘南</a><a class="isoffline" href="#">甘孜</a><a class="isoffline" href="#">广安</a><a class="isoffline" href="#">贵港</a></span></p>
+            </li>
+            <li id="city-H">
+              <p class="cf"><span class="label"><strong>H</strong></span><span><a class="isonline" href="#">杭州</a><a class="isonline" href="#">哈尔滨</a><a class="isonline" href="#">合肥</a><a class="isonline" href="#">邯郸</a><a class="isonline" href="#">惠州</a><a class="isonline" href="#">海口</a><a class="isonline" href="#">呼和浩特</a><a class="isonline" href="#">衡阳</a><a class="isonline" href="#">湖州</a><a class="isoffline" href="#">淮北</a><a class="isoffline" href="#">鹤岗</a><a class="isoffline" href="#">海北</a><a class="isoffline" href="#">海东</a><a class="isoffline" href="#">黄南</a><a class="isoffline" href="#">菏泽</a><a class="isoffline" href="#">海南州</a><a class="isoffline" href="#">黑河</a><a class="isoffline" href="#">和田</a><a class="isoffline" href="#">哈密</a><a class="isoffline" href="#">淮安</a><a class="isoffline" href="#">淮南</a><a class="isoffline" href="#">黄山</a><a class="isoffline" href="#">海西</a><a class="isoffline" href="#">贺州</a><a class="isoffline" href="#">怀化</a><a class="isoffline" href="#">河池</a><a class="isoffline" href="#">呼伦贝尔</a><a class="isoffline" href="#">衡水</a><a class="isoffline" href="#">河源</a><a class="isoffline" href="#">红河</a><a class="isoffline" href="#">汉中</a><a class="isoffline" href="#">黄冈</a><a class="isoffline" href="#">黄石</a><a class="isoffline" href="#">鹤壁</a><a class="isoffline" href="#">葫芦岛</a></span></p>
+            </li>
+            <li id="city-J">
+              <p class="cf"><span class="label"><strong>J</strong></span><span><a class="isonline" href="#">济南</a><a class="isonline" href="#">济宁</a><a class="isonline" href="#">嘉兴</a><a class="isonline" href="#">金华</a><a class="isonline" href="#">焦作</a><a class="isonline" href="#">荆州</a><a class="isonline" href="#">吉林</a><a class="isonline" href="#">锦州</a><a class="isonline" href="#">江门</a><a class="isoffline" href="#">景德镇</a><a class="isoffline" href="#">吉安</a><a class="isoffline" href="#">佳木斯</a><a class="isoffline" href="#">酒泉</a><a class="isoffline" href="#">金昌</a><a class="isoffline" href="#">鸡西</a><a class="isoffline" href="#">济源</a><a class="isoffline" href="#">晋城</a><a class="isoffline" href="#">揭阳</a><a class="isoffline" href="#">晋中</a><a class="isoffline" href="#">荆门</a><a class="isoffline" href="#">九江</a></span></p>
+            </li>
+            <li id="city-K">
+              <p class="cf"><span class="label"><strong>K</strong></span><span><a class="isonline" href="#">昆明</a><a class="isonline" href="#">昆山</a><a class="isoffline" href="#">喀什</a><a class="isoffline" href="#">克拉玛依</a><a class="isoffline" href="#">开封</a><a class="isoffline" href="#">克州</a></span></p>
+            </li>
+            <li id="city-L">
+              <p class="cf"><span class="label"><strong>L</strong></span><span><a class="isonline" href="#">兰州</a><a class="isonline" href="#">临沂</a><a class="isonline" href="#">连云港</a><a class="isonline" href="#">聊城</a><a class="isonline" href="#">临汾</a><a class="isonline" href="#">柳州</a><a class="isonline" href="#">洛阳</a><a class="isonline" href="#">廊坊</a><a class="isoffline" href="#">龙岩</a><a class="isoffline" href="#">六盘水</a><a class="isoffline" href="#">凉山</a><a class="isoffline" href="#">六安</a><a class="isoffline" href="#">丽江</a><a class="isoffline" href="#">临沧</a><a class="isoffline" href="#">陇南</a><a class="isoffline" href="#">拉萨</a><a class="isoffline" href="#">辽源</a><a class="isoffline" href="#">辽阳</a><a class="isoffline" href="#">莱芜</a><a class="isoffline" href="#">漯河</a><a class="isoffline" href="#">吕梁</a><a class="isoffline" href="#">丽水</a><a class="isoffline" href="#">临夏</a><a class="isoffline" href="#">林芝</a><a class="isoffline" href="#">娄底</a><a class="isoffline" href="#">来宾</a><a class="isoffline" href="#">泸州</a><a class="isoffline" href="#">乐山</a></span></p>
+            </li>
+            <li id="city-M">
+              <p class="cf"><span class="label"><strong>M</strong></span><span><a class="isoffline" href="#">马鞍山</a><a class="isoffline" href="#">绵阳</a><a class="isoffline" href="#">茂名</a><a class="isoffline" href="#">牡丹江</a><a class="isoffline" href="#">梅州</a><a class="isoffline" href="#">眉山</a></span></p>
+            </li>
+            <li id="city-N">
+              <p class="cf"><span class="label"><strong>N</strong></span><span><a class="isonline" href="#">南京</a><a class="isonline" href="#">宁波</a><a class="isonline" href="#">南通</a><a class="isonline" href="#">南宁</a><a class="isonline" href="#">南昌</a><a class="isoffline" href="#">南充</a><a class="isoffline" href="#">宁德</a><a class="isoffline" href="#">内江</a><a class="isoffline" href="#">怒江</a><a class="isoffline" href="#">南平</a><a class="isoffline" href="#">南阳</a><a class="isoffline" href="#">那曲</a></span></p>
+            </li>
+            <li id="city-P">
+              <p class="cf"><span class="label"><strong>P</strong></span><span><a class="isoffline" href="#">萍乡</a><a class="isoffline" href="#">平顶山</a><a class="isoffline" href="#">莆田</a><a class="isoffline" href="#">濮阳</a><a class="isoffline" href="#">攀枝花</a><a class="isoffline" href="#">平凉</a><a class="isoffline" href="#">普洱</a><a class="isoffline" href="#">盘锦</a></span></p>
+            </li>
+            <li id="city-Q">
+              <p class="cf"><span class="label"><strong>Q</strong></span><span><a class="isonline" href="#">青岛</a><a class="isonline" href="#">泉州</a><a class="isonline" href="#">秦皇岛</a><a class="isonline" href="#">齐齐哈尔</a><a class="isoffline" href="#">庆阳</a><a class="isoffline" href="#">衢州</a><a class="isoffline" href="#">黔西南</a><a class="isoffline" href="#">钦州</a><a class="isoffline" href="#">黔南</a><a class="isoffline" href="#">曲靖</a><a class="isoffline" href="#">黔东南</a><a class="isoffline" href="#">七台河</a><a class="isoffline" href="#">清远</a></span></p>
+            </li>
+            <li id="city-R">
+              <p class="cf"><span class="label"><strong>R</strong></span><span><a class="isoffline" href="#">日照</a><a class="isoffline" href="#">日喀则</a></span></p>
+            </li>
+            <li id="city-S">
+              <p class="cf"><span class="label"><strong>S</strong></span><span><a class="isonline" href="#">上海</a><a class="isonline" href="#">深圳</a><a class="isonline" href="#">沈阳</a><a class="isonline" href="#">苏州</a><a class="isonline" href="#">石家庄</a><a class="isonline" href="#">绍兴</a><a class="isonline" href="#">顺德</a><a class="isonline" href="#">三亚</a><a class="isoffline" href="#">韶关</a><a class="isoffline" href="#">绥化</a><a class="isoffline" href="#">松原</a><a class="isoffline" href="#">上饶</a><a class="isoffline" href="#">十堰</a><a class="isoffline" href="#">三门峡</a><a class="isoffline" href="#">山南</a><a class="isoffline" href="#">邵阳</a><a class="isoffline" href="#">遂宁</a><a class="isoffline" href="#">商丘</a><a class="isoffline" href="#">朔州</a><a class="isoffline" href="#">随州</a><a class="isoffline" href="#">汕尾</a><a class="isoffline" href="#">四平</a><a class="isoffline" href="#">三峡</a><a class="isoffline" href="#">宿迁</a><a class="isoffline" href="#">三明</a><a class="isoffline" href="#">石嘴山</a><a class="isoffline" href="#">双鸭山</a><a class="isoffline" href="#">汕头</a><a class="isoffline" href="#">宿州</a><a class="isoffline" href="#">商洛</a></span></p>
+            </li>
+            <li id="city-T">
+              <p class="cf"><span class="label"><strong>T</strong></span><span><a class="isonline" href="#">天津</a><a class="isonline" href="#">太原</a><a class="isonline" href="#">泰安</a><a class="isonline" href="#">台州</a><a class="isonline" href="#">唐山</a><a class="isonline" href="#">泰州</a><a class="isoffline" href="#">塔城</a><a class="isoffline" href="#">铜陵</a><a class="isoffline" href="#">铜川</a><a class="isoffline" href="#">台北</a><a class="isoffline" href="#">铜仁</a><a class="isoffline" href="#">吐鲁番</a><a class="isoffline" href="#">天水</a><a class="isoffline" href="#">通辽</a><a class="isoffline" href="#">铁岭</a><a class="isoffline" href="#">通化</a></span></p>
+            </li>
+            <li id="city-W">
+              <p class="cf"><span class="label"><strong>W</strong></span><span><a class="isonline" href="#">武汉</a><a class="isonline" href="#">无锡</a><a class="isonline" href="#">温州</a><a class="isonline" href="#">芜湖</a><a class="isonline" href="#">威海</a><a class="isonline" href="#">潍坊</a><a class="isoffline" href="#">乌鲁木齐</a><a class="isoffline" href="#">梧州</a><a class="isoffline" href="#">吴忠</a><a class="isoffline" href="#">武威</a><a class="isoffline" href="#">渭南</a><a class="isoffline" href="#">乌兰察布</a><a class="isoffline" href="#">文山</a><a class="isoffline" href="#">乌海</a></span></p>
+            </li>
+            <li id="city-X">
+              <p class="cf"><span class="label"><strong>X</strong></span><span><a class="isonline" href="#">西安</a><a class="isonline" href="#">厦门</a><a class="isonline" href="#">徐州</a><a class="isonline" href="#">襄阳</a><a class="isonline" href="#">西宁</a><a class="isoffline" href="#">孝感</a><a class="isoffline" href="#">西双版纳</a><a class="isoffline" href="#">新余</a><a class="isoffline" href="#">湘潭</a><a class="isoffline" href="#">锡林郭勒</a><a class="isoffline" href="#">兴安</a><a class="isoffline" href="#">邢台</a><a class="isoffline" href="#">新乡</a><a class="isoffline" href="#">湘西</a><a class="isoffline" href="#">忻州</a><a class="isoffline" href="#">咸阳</a><a class="isoffline" href="#">宣城</a><a class="isoffline" href="#">香港</a><a class="isoffline" href="#">信阳</a><a class="isoffline" href="#">咸宁</a><a class="isoffline" href="#">许昌</a></span></p>
+            </li>
+            <li id="city-Y">
+              <p class="cf"><span class="label"><strong>Y</strong></span><span><a class="isonline" href="#">扬州</a><a class="isonline" href="#">烟台</a><a class="isonline" href="#">盐城</a><a class="isonline" href="#">运城</a><a class="isonline" href="#">义乌</a><a class="isonline" href="#">岳阳</a><a class="isonline" href="#">宜昌</a><a class="isoffline" href="#">玉林</a><a class="isoffline" href="#">银川</a><a class="isoffline" href="#">鹰潭</a><a class="isoffline" href="#">雅安</a><a class="isoffline" href="#">伊犁</a><a class="isoffline" href="#">玉树</a><a class="isoffline" href="#">宜春</a><a class="isoffline" href="#">营口</a><a class="isoffline" href="#">永州</a><a class="isoffline" href="#">宜宾</a><a class="isoffline" href="#">益阳</a><a class="isoffline" href="#">玉溪</a><a class="isoffline" href="#">阳泉</a><a class="isoffline" href="#">延安</a><a class="isoffline" href="#">榆林</a><a class="isoffline" href="#">云浮</a><a class="isoffline" href="#">延边</a><a class="isoffline" href="#">阳江</a><a class="isoffline" href="#">伊春</a></span></p>
+            </li>
+            <li id="city-Z">
+              <p class="cf"><span class="label"><strong>Z</strong></span><span><a class="isonline" href="#">郑州</a><a class="isonline" href="#">镇江</a><a class="isonline" href="#">中山</a><a class="isonline" href="#">淄博</a><a class="isonline" href="#">珠海</a><a class="isonline" href="#">遵义</a><a class="isoffline" href="#">株洲</a><a class="isoffline" href="#">自贡</a><a class="isoffline" href="#">舟山</a><a class="isoffline" href="#">湛江</a><a class="isoffline" href="#">肇庆</a><a class="isoffline" href="#">漳州</a><a class="isoffline" href="#">张掖</a><a class="isoffline" href="#">昭通</a><a class="isoffline" href="#">张家界</a><a class="isoffline" href="#">周口</a><a class="isoffline" href="#">驻马店</a><a class="isoffline" href="#">张家口</a><a class="isoffline" href="#">资阳</a><a class="isoffline" href="#">中卫</a><a class="isoffline" href="#">枣庄</a></span></p>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- bd end -->
+  </div>
+  <!-- bdw end -->
+</div>
+<script language="javascript" type="text/javascript">
+$(function (){
+	$(".hasallcity li").hover(function(){
+		$(this).addClass('hover');
+	}, function(){
+		$(this).removeClass('hover');
+	});	
+});
+</script>
+
+
+<div id="search"  style="position:absolute; right:0px; z-index:-1;">
+   
+  <form id="searchForm" name="searchForm" method="get" action="library/search.php" onSubmit="return checkSearchForm()"  >
+  <div class="B_input_box">
+   <input name="keywords" type="text" id="keyword" value="搜索  商品" onclick="javascript:this.value=''" class="B_input"/>
+   </div>
+   <input name="imageField" type="submit" value="搜索" class="go" style="cursor:pointer;padding:0;" />
+   <div class="hot-search">
+   	<ul>
+    	<li><a href="library/search.php?keywords=坚果&amp;imageField=搜索">坚果</a></li>
+        <li><a href="library/search.php?keywords=果汁&amp;imageField=搜索">果汁</a></li>
+        <li><a href="library/search.php?keywords=蜂蜜&amp;imageField=搜索">蜂蜜</a></li>
+        <li><a href="library/search.php?keywords=尿不湿&amp;imageField=搜索">尿不湿</a></li>
+        <li><a href="library/search.php?keywords=婴儿湿巾&amp;imageField=搜索">婴儿湿巾</a></li>
+        <li><a href="library/search.php?keywords=冰酒&amp;imageField=搜索">冰酒</a></li>
+        <li><a href="library/search.php?keywords=枫糖浆&amp;imageField=搜索">枫糖浆</a></li>
+        <li><a href="library/search.php?keywords=饼干&amp;imageField=搜索">饼干</a></li>
+        <li><a href="library/search.php?keywords=巧克力&amp;imageField=搜索">巧克力</a></li>
+     </ul>
+    </div>
+  
+   </form>
+   
+</div>
+  
+ </div> 
+<div class="g-menu">
+<div class="menu-shadow-hack"></div>
+  <div class="g-menu-wrap">
+    <div class="all-catalog" >
+      <a href="library/catalog.php" class="all-btn">所有商品分类<i class="arrow"></i></a>        
+    <div class="IndexAreaL">
+    {include file="/library/category_tree2.lbi"} 
+  </div>
+    </div>
+	
+  <div class="channel">
+    <ul>
+      <li  {if $navigator_list.config.index eq 1}  class="m-home" {/if}> <a style="background:none;" href="index.php" >{$lang.home}</a></li>
+        <!-- {foreach name=no from=$navigator_list.middle item=nav } -->
+      <li {if $nav.active eq 1}  class="m-home" {/if}><a href="{$nav.url}" {if $nav.opennew eq 1}target="_blank" {/if}    >{$nav.name}</a>
+      
+     </li>
+<!-- {/foreach} -->
+	<li style="margin-left: 80px;">客服热线：400-1010-258</li>
+
+
+</ul>
+
+
+
+
+</div>
+
+<div id="search-form">
+					<form action="library/search.php" method="get" id="searchForm" name="searchForm">
+						<input type="text" class="search-text-box" id="keywords" name="keywords" value="">
+					</form>
+				</div>
+              <script type="text/javascript">
+              	jQuery(document).ready(function(){
+	
+	jQuery('.search-text-box').click(function(){
+		
+		jQuery(this).animate({
+		width:'140px',	
+		},240,function(){
+			jQuery('.search-text-box').delay(100).queue(function(next){
+				jQuery('.search-text-box').css('color','#FFF');
+				next();
+			});
+		});
+		
+	});
+	
+	jQuery(document).click(function(ev){
+		
+		var myID = ev.target.id;
+		
+		if(myID != 'keywords'){
+			jQuery('.search-text-box').animate({
+			width:'1px',
+			
+			},200,function(){
+				
+				
+				jQuery('.search-text-box').css('color','transparent');
+				
+			
+				
+			});
+		}
+	});
+	
+});
+              </script>
+</div>
+</div>
+<script language="javascript">
+	var obj11 = document.getElementsByClassName("g-menu")[0];
+	var srch = document.getElementById("search-form");
+	var top11 = getTop(obj11);
+	
+	var isIE6 = /msie 6/i.test(navigator.userAgent);
+window.onscroll = function(){
+var bodyScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+if (bodyScrollTop > top11){
+	
+
+obj11.style.position = (isIE6) ? "absolute" : "fixed";
+//alert(bodyScrollTop);
+obj11.style.top = (isIE6) ? (bodyScrollTop) + "px" : "0px";
+	obj11.style.background = "none repeat scroll 0 0 rgba(255, 255, 255, 0.8)";
+	srch.style.visibility = "visible";
+	srch.style.opacity = "1";
+	} else {
+obj11.style.position = "inherit";
+obj11.style.top = "155px";
+obj11.style.zIndex = "9999";
+srch.style.visibility = "hidden";
+}
+}
+function getTop(e){
+var offset = e.offsetTop;
+if(e.offsetParent != null) offset += getTop(e.offsetParent);
+return offset;
+} 
+</script>
+
+<script>$('#city_switch').click(function(){document.getElementById("change-city").style.display = "block";});
+$('#close').click(function(){document.getElementById("change-city").style.display = "none";});
+$(document).keyup(function(e){if (e.keyCode == 27) {document.getElementById("change-city").style.display = "none";}});
+</script>
+</div>
+
+
+<!-- #EndLibraryItem --><!-- #BeginLibraryItem "/library/cart_notice.lbi" --><div id="shopbox" class="shopbox">
+    <div class="shopboxcon">
+        <div id="shoploading" style="display: block;"><img alt="loading" src="images/loading.gif"></div>
+        <div>
+          <h2><a class="track close" name="item-close-cart" href="#"  onclick="document.getElementById('shopbox').style.display='none';"><img src="images/close_navy.png"><span onclick="document.getElementById('shopbox').style.display='none';">关闭</span></a></h2>
+          <div class="spboxcontent">
+              <div class="shopboxdetail">
+                <div class="spboxleft"><img src="images/cart_navy.png"></div>
+                <div class="spboxright">
+                  <span class="spboxtitle">该商品已成功放入购物车</span> <span class="blank5"></span>
+                  <p class="num">购物车共 <span id="shopboxcount" class="numstyle"></span> 件商品 合计：<span id="shopboxprice" class="numstyle2"></span> 元</p>
+                  <span class="blank5"></span>
+                  <p class="spbbtndiv">
+                    <a href="javascript:void(0)" name="item-continueshop" class="jxgwbtn track" onclick=" document.getElementById('shopbox').style.display='none';">&lt;&lt;继续购物</a>
+                    <a target="_parent" href="library/flow.php" name="item-Settlement" class="track"><img src="images/checkout_navy.png" class="qujiesuan"></a>
+                  </p>
+                </div>
+              </div>
+             
+          </div>
+        </div>
+    </div>
+</div>    <!-- #EndLibraryItem --><!-- #BeginLibraryItem "/library/ur_here.lbi" -->
+<div class="block box">
+<div class="blank"></div>
+ <div id="ur_here">
+{$lang.ur_here} {$ur_here} 
+</div>
+</div>
+<div class="blank"></div><!-- #EndLibraryItem --><div class="block clearfix">
+  <!--left start-->
+  <div class="AreaL">
+    <!-- TemplateBeginEditable name="左边区域" --><!-- #BeginLibraryItem "/library/category_tree.lbi" -->
+
+  <div id="category_tree">
+  <div class="tit">商品分类</div>
+  <div class="clearfix" style="border-top:none">
+    <!--{foreach from=$categories item=cat}-->
+     <dl>
+     <dt><a href="{$cat.url}">{$cat.name|escape:html}</a></dt>
+	 
+     <dd>
+	 <!--{foreach from=$cat.cat_id item=child}-->
+     <a href="{$child.url}">{$child.name|escape:html}</a>
+      
+     <!--{/foreach}-->
+       </dd>
+       </dl>
+    <!--{/foreach}--> 
+  </div>
+</div>
+<div class="blank"></div>
+<!-- #EndLibraryItem --><!-- TemplateEndEditable -->
+    <!-- TemplateBeginEditable name="左边广告区域（宽200px）" -->
+    <!-- TemplateEndEditable -->
+    <!--AD end--><!-- #BeginLibraryItem "/library/history.lbi" -->
+<div class="box" id='history_div'> <div class="box_1">
+ <h3><span>{$lang.view_history}</span></h3>
+
+ 
+  <div class="boxCenterList clearfix" id='history_list'>
+    {insert name='history'}
+  </div>
+ </div>
+</div>
+<div class="blank5"></div>
+<script type="text/javascript">
+if (document.getElementById('history_list').innerHTML.replace(/\s/g,'').length<1)
+{
+    document.getElementById('history_div').style.display='none';
+}
+else
+{
+    document.getElementById('history_div').style.display='block';
+}
+function clear_history()
+{
+Ajax.call('user.php', 'act=clear_history',clear_history_Response, 'GET', 'TEXT',1,1);
+}
+function clear_history_Response(res)
+{
+document.getElementById('history_list').innerHTML = '{$lang.no_history}';
+}
+</script><!-- #EndLibraryItem --></div>
+  <!--left end-->
+  <!--right start-->
+  <div class="AreaR">
+   <!-- {if isset($goods_list)} -->
+     <div class="box">
+     <div class="box_1">
+      <h3>
+    <!--标题及显示方式-->
+        <!-- {if $intromode eq 'best'} -->
+         <span>{$lang.best_goods}</span>
+         <!-- {elseif $intromode eq 'new'} -->
+         <span>{$lang.new_goods}</span>
+         <!-- {elseif $intromode eq 'hot'} -->
+         <span>{$lang.hot_goods}</span>
+         <!-- {elseif $intromode eq 'promotion'} -->
+         <span>{$lang.promotion_goods}</span>
+         <!-- {else} -->
+         <span>{$lang.search_result}</span>
+         <!-- {/if} -->
+          <!--{if $goods_list}-->
+          <form action="search.php" method="post" class="sort" name="listform" id="form">
+          {$lang.btn_display}：
+          <a href="javascript:;" onClick="javascript:display_mode('list')"><img src="images/display_mode_list<!-- {if $pager.display == 'list'} -->_act<!-- {/if} -->.gif" alt="{$lang.display.list}"></a>
+          <a href="javascript:;" onClick="javascript:display_mode('grid')"><img src="images/display_mode_grid<!-- {if $pager.display == 'grid'} -->_act<!-- {/if} -->.gif" alt="{$lang.display.grid}"></a>
+          <a href="javascript:;" onClick="javascript:display_mode('text')"><img src="images/display_mode_text<!-- {if $pager.display == 'text'} -->_act<!-- {/if} -->.gif" alt="{$lang.display.text}"></a>&nbsp;&nbsp;
+               <select name="sort">
+              {html_options options=$lang.sort selected=$pager.search.sort}
+              </select>
+              <select name="order">
+              {html_options options=$lang.order selected=$pager.search.order}
+              </select>
+              <input type="image" name="imageField" src="../images/bnt_go.gif" alt="go"/>
+              <input type="hidden" name="page" value="{$pager.page}" />
+              <input type="hidden" name="display" value="{$pager.display}" id="display" />
+              <!--{foreach from=$pager.search key=key item=item}-->
+              {if $key neq "sort" and $key neq "order"}
+                {if $key eq 'keywords'}
+                  <input type="hidden" name="{$key}" value="{$item|escape:decode_url}" />
+                {else}
+                  <input type="hidden" name="{$key}" value="{$item}" />
+                {/if}
+              {/if}
+              <!--{/foreach}-->
+            </form>
+          <!--{/if}-->
+           </h3>
+        <!--{if $goods_list}-->
+
+          <form action="compare.php" method="post" name="compareForm" id="compareForm" onsubmit="return compareGoods(this);">
+          <!-- {if $pager.display == 'list'} -->
+              <div class="goodsList">
+                <!--{foreach name=goods_list from=$goods_list item=goods}-->
+                <!-- {if $goods.goods_id} -->
+                <ul class="clearfix bgcolor"<!--{if $smarty.foreach.goods_list.index mod 2 eq 0}-->id=""<!--{else}-->id="bgcolor"<!--{/if}-->>
+               
+                <li class="thumb"><div style="position:relative;"><a href="{$goods.url}"><img src="{$goods.goods_thumb}" alt="{$goods.goods_name}" /></a><img src="images/kj_logo/kj85.png" class="kj-img"/></div></li>
+                <li class="goodsName">
+                <div class="div_name">
+                <a href="{$goods.url}" class="f6">
+                    <!-- {if $goods.goods_style_name} -->
+                    {$goods.goods_style_name}<br />
+                    <!-- {else} -->
+                    {$goods.goods_name}<br />
+                    <!-- {/if} -->
+                  </a>
+                 <!-- {if $goods.goods_brief} -->
+                {$lang.goods_brief}{$goods.goods_brief}<br />
+                <!-- {/if} --> 
+                </div>
+                <div>
+                 <a href="javascript:addToCart({$goods.goods_id})" ><img src="../images/goumai.gif"></a>
+    <a href="javascript:collect({$goods.goods_id});"><img src="../images/shoucang.gif"></a> 
+    </div>
+    
+                </li>
+              
+             
+               
+                <li class="action">
+                <!-- {if $show_marketprice} -->
+                {$lang.market_price}<font class="market">{$goods.market_price}</font><br />
+                <!-- {/if} -->
+                <!--{if $goods.promote_price neq "" } -->
+                {$lang.promote_price}<font class="shop">{$goods.promote_price}</font><br />
+                <!--{else}-->
+                {$lang.shop_price}<font class="shop">{$goods.shop_price}</font><br />
+                <!--{/if}-->
+                </li>
+                </ul>
+                <!--{/if}-->
+                <!--{/foreach}-->
+                </div>
+             <!-- {elseif $pager.display == 'grid'} -->
+         
+              <div class="clearfix goodsBox" style="border:none; padding:11px 0 10px 0px;">
+                <!--{foreach from=$goods_list item=goods}-->
+                <!-- {if $goods.goods_id} -->
+                 <div class="goodsItem">
+                       <div style="position:relative;"><a href="{$goods.url}"><img src="{$goods.goods_thumb}" alt="{$goods.goods_name}" class="goodsimg" /></a><!-- {if $goods.is_kj} --><img src="images/kj_logo/kj85.png" class="kj-img"/><!-- {/if} --></div><br />
+                       <p><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.goods_name}</a></p>
+                       <!-- {if $show_marketprice} -->
+                        {$lang.market_prices}<font class="market_s">{$goods.market_price}</font><br />
+                        <!-- {/if} -->
+                        <!--{if $goods.promote_price neq "" } -->
+                        {$lang.promote_price}<font class="shop_s">{$goods.promote_price}</font><br />
+                        <!--{else}-->
+                        {$lang.shop_prices}<font class="shop_s">{$goods.shop_price}</font><br />
+                        <!--{/if}-->
+                        <a onclick="getmousepos(event)" href="javascript:addToCart1({$goods.goods_id})"><img src="../images/goumai.gif"></a> &nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="javascript:collect({$goods.goods_id});"><img src="../images/shoucang.gif"></a> 
+                    </div>
+                <!--{/if}-->
+                <!--{/foreach}-->
+                </div>
+               
+             <!-- {elseif $pager.display == 'text'} -->
+              <div class="goodsList">
+              <!--{foreach from=$goods_list item=goods}-->
+               <ul class="clearfix bgcolor"<!--{if $smarty.foreach.goods_list.index mod 2 eq 0}-->id=""<!--{else}-->id="bgcolor"<!--{/if}-->>
+              <li style="margin-right:15px;">
+              <a href="javascript:;" id="compareLink" onClick="Compare.add({$goods.goods_id},'{$goods.goods_name|escape:"quotes"}','{$goods.type}')" class="f6">{$lang.compare}</a>
+              </li>
+              <li class="goodsName">
+               <div class="div_name">
+              <a href="{$goods.url}" class="f6 f5">
+                  <!-- {if $goods.goods_style_name} -->
+                  {$goods.goods_style_name}<br />
+                  <!-- {else} -->
+                  {$goods.goods_name}<br />
+                  <!-- {/if} -->
+                </a>
+               <!-- {if $goods.goods_brief} -->
+              {$lang.goods_brief}{$goods.goods_brief}<br />
+              <!-- {/if} -->
+              </div>
+               <div>
+              <a href="javascript:collect({$goods.goods_id});" class="bnt_blue">加入收藏</a>
+    <a href="javascript:addToCart({$goods.goods_id})" class="bnt_blue">立即购买</a>
+              </div>
+              </li>
+              <li>
+              <!-- {if $show_marketprice} -->
+              {$lang.market_price}<font class="market">{$goods.market_price}</font><br />
+              <!-- {/if} -->
+              <!--{if $goods.promote_price neq "" } -->
+              {$lang.promote_price}<font class="shop">{$goods.promote_price}</font><br />
+              <!--{else}-->
+              {$lang.shop_price}<font class="shop">{$goods.shop_price}</font><br />
+              <!--{/if}-->
+              </li>
+              <li class="action">
+              
+              </li>
+              </ul>
+              <!--{/foreach}-->
+              </div>
+             <!-- {/if} -->
+          </form>
+          <script type="text/javascript">
+        {foreach from=$lang.compare_js item=item key=key}
+        var {$key} = "{$item}";
+        {/foreach}
+
+				{foreach from=$lang.compare_js item=item key=key}
+        {if $key neq 'button_compare'}
+        var {$key} = "{$item}";
+        {else}
+        var button_compare = '';
+        {/if}
+        {/foreach}
+
+
+        var compare_no_goods = "{$lang.compare_no_goods}";
+        window.onload = function()
+        {
+          Compare.init();
+          fixpng();
+        }
+	var btn_buy = "{$lang.btn_buy}";
+	var is_cancel = "{$lang.is_cancel}";
+	var select_spe = "{$lang.select_spe}";
+        </script>
+        <!--{else}-->
+        <div style="padding:20px 0px; text-align:center" class="f5" >{$lang.no_search_result}</div>
+        <!--{/if}-->
+        </div>
+      </div>
+      <div class="blank"></div><!-- #BeginLibraryItem "/library/pages.lbi" -->
+<!--翻页 start-->
+<form name="selectPageForm" action="{$smarty.server.PHP_SELF}" method="get">
+<!-- {if $pager.styleid eq 0 } -->
+<div id="pager">
+  {$lang.pager_1}{$pager.record_count}{$lang.pager_2}{$lang.pager_3}{$pager.page_count}{$lang.pager_4} <span> <a href="{$pager.page_first}">{$lang.page_first}</a> <a href="{$pager.page_prev}">{$lang.page_prev}</a> <a href="{$pager.page_next}">{$lang.page_next}</a> <a href="{$pager.page_last}">{$lang.page_last}</a> </span>
+    <!--{foreach from=$pager.search key=key item=item}-->
+      {if $key eq 'keywords'}
+          <input type="hidden" name="{$key}" value="{$item|escape:decode_url}" />
+        {else}
+          <input type="hidden" name="{$key}" value="{$item}" />
+      {/if}
+    <!--{/foreach}-->
+    <select name="page" id="page" onchange="selectPage(this)">
+    {html_options options=$pager.array selected=$pager.page}
+    </select>
+</div>
+<!--{else}-->
+
+<!--翻页 start-->
+ <div id="pager" class="pagebar">
+  <span class="f_l " style="margin-right:10px;">{$lang.pager_1}<b>{$pager.record_count}</b> {$lang.pager_2}</span>
+  <!-- {if $pager.page_first} --><a href="{$pager.page_first}">{$lang.page_first} ...</a><!-- {/if} -->
+  <!-- {if $pager.page_prev} --><a class="prev" href="{$pager.page_prev}">{$lang.page_prev}</a><!-- {/if} -->
+  <!-- {if $pager.page_count neq 1} -->
+    <!--{foreach from=$pager.page_number key=key item=item}-->
+      <!-- {if $pager.page eq $key} -->
+      <span class="page_now">{$key}</span>
+      <!-- {else} -->
+      <a href="{$item}">[{$key}]</a>
+      <!-- {/if} -->
+    <!--{/foreach}-->
+  <!-- {/if} -->
+
+  <!-- {if $pager.page_next} --><a class="next" href="{$pager.page_next}">{$lang.page_next}</a><!-- {/if} -->
+  <!-- {if $pager.page_last} --><a class="last" href="{$pager.page_last}">...{$lang.page_last}</a><!-- {/if} -->
+  <!-- {if $pager.page_kbd} -->
+    <!--{foreach from=$pager.search key=key item=item}-->
+      {if $key eq 'keywords'}
+          <input type="hidden" name="{$key}" value="{$item|escape:decode_url}" />
+        {else}
+          <input type="hidden" name="{$key}" value="{$item}" />
+      {/if}
+    <!--{/foreach}-->
+    <kbd style="float:left; margin-left:8px; position:relative; bottom:3px;"><input type="text" name="page" onkeydown="if(event.keyCode==13)selectPage(this)" size="3" class="B_blue" /></kbd>
+    <!-- {/if} -->
+</div>
+<!--翻页 END-->
+
+<!-- {/if} -->
+</form>
+<script type="Text/Javascript" language="JavaScript">
+<!--
+{literal}
+function selectPage(sel)
+{
+  sel.form.submit();
+}
+{/literal}
+//-->
+</script>
+<!-- #EndLibraryItem --><!-- {/if} -->
+
+  </div>
+  <!--right end-->
+</div><!-- #BeginLibraryItem "/library/page_footer.lbi" -->
+
+
+<?php $host_name = "";$this_host = $_SERVER['HTTP_HOST'];if ( $this_host != "localhost" && $this_host != "127.0.0.1.1" && strrev( substr( strrev( $this_host ), 0, strlen( $host_name ) ) ) != $host_name ){ exit( );} ?> 
+ <div class="blank"></div>
+ <div class="blank"></div> 
+ <div class="blank"></div>
+ <div class="footer">
+<!--{if $helps}-->
+<div class="block">
+   <div class="helpTitBg clearfix">
+   
+<!-- {foreach from=$helps item=help_cat name=no} -->
+<dl>
+  <dt> {$help_cat.cat_name}</dt>
+  <dd> <!-- {foreach from=$help_cat.article item=item} -->
+ <a href="{$item.url}" title="{$item.title|escape:html}">{$item.short_title}</a>
+  <!-- {/foreach} --></dd>
+</dl>
+<!-- {/foreach} -->
+  </div>
+</div>
+
+<!--{/if}-->
+ 
+ <div class="blank"></div>
+ 
+
+
+<!--友情链接 start-->
+<!--{if $img_links  or $txt_links }-->
+<div  id="bottomNav" class="block  box">
+ <div class="box_1">
+  <div class="links clearfix">
+    <!--开始图片类型的友情链接{foreach from=$img_links item=link}-->
+    <a href="{$link.url}" target="_blank" title="{$link.name}"><img src="{$link.logo}" alt="{$link.name}" border="0" /></a>
+    <!--结束图片类型的友情链接{/foreach}-->
+    <!-- {if $txt_links} -->
+    <!--开始文字类型的友情链接{foreach from=$txt_links item=link}-->
+    [<a href="{$link.url}" target="_blank" title="{$link.name}">{$link.name}</a>]
+    <!--结束文字类型的友情链接{/foreach}-->
+    <!-- {/if} -->
+  </div>
+ </div>
+</div>
+
+<div class="blank"></div>
+<!--{/if}-->
+
+
+
+<!--底部导航 start-->
+<div id="bottomNav2" class="box block">
+ 
+  <div class="bNavList ">
+ 
+   <!-- {if $navigator_list.bottom} -->
+   <!-- {foreach name=nav_bottom_list from=$navigator_list.bottom item=nav} -->
+        <a href="{$nav.url}" <!-- {if $nav.opennew eq 1} --> target="_blank" <!-- {/if} -->>{$nav.name}</a>
+      <!-- {/foreach} -->
+  <!-- {/if} -->
+ 
+    
+  </div>
+
+</div>
+<!--底部导航 end-->
+<div class="blank"></div>
+<!--版权 start-->
+<div id="footer" class="block950">
+ <div class="text">
+ Copyrights © Polar Bear Canada Corp.,2013-2014{$copyrights}<br />
+ 
+    <!-- Begin DigiCert site seal HTML and JavaScript -->
+<!--<div id="DigiCertClickID_ykke0EsB" data-language="en_US"></div>
+<script type="text/javascript">
+var __dcid = __dcid || [];__dcid.push(["DigiCertClickID_ykke0EsB", "7", "s", "white", "ykke0EsB"]);(function(){var cid=document.createElement("script");cid.async=true;cid.src="//seal.digicert.com/seals/cascade/seal.min.js";var s = document.getElementsByTagName("script");var ls = s[(s.length - 1)];ls.parentNode.insertBefore(cid, ls.nextSibling);}());
+</script>-->
+<!-- End DigiCert site seal HTML and JavaScript -->
+ <!-- 客服电话{if $service_phone} -->
+      Tel: {$service_phone}
+ <!-- 结束客服电话{/if} -->
+ <!-- 邮件{if $service_email} -->
+     <!-- E-mail: {$service_email}<br />-->
+ <!-- 结束邮件{/if} -->
+ <!-- QQ 号码 {foreach from=$qq item=im} -->
+      <!-- {if $im} -->
+      <a href="http://wpa.qq.com/msgrd?V=1&amp;Uin={$im}&amp;Site={$shop_name}&amp;Menu=yes" target="_blank"><img src="http://wpa.qq.com/pa?p=1:{$im}:4" height="16" border="0" alt="QQ" /> {$im}</a>
+      <!-- {/if} -->
+      <!-- {/foreach} 结束QQ号码 -->
+      <!-- 淘宝旺旺 {foreach from=$ww item=im} -->
+      <!-- {if $im} -->
+      <a href="https://amos1.taobao.com/msg.ww?v=2&uid={$im|escape:u8_url}&s=2" target="_blank"><img src="https://amos1.taobao.com/online.ww?v=2&uid={$im|escape:u8_url}&s=2" width="16" height="16" border="0" alt="淘宝旺旺" />{$im}</a>
+      <!-- {/if} -->
+      <!--{/foreach} 结束淘宝旺旺 -->
+      <!-- Yahoo Messenger {foreach from=$ym item=im} -->
+      <!-- {if $im} -->
+      <a href="http://edit.yahoo.com/config/send_webmesg?.target={$im}n&.src=pg" target="_blank"><img src="images/yahoo.gif" width="18" height="17" border="0" alt="Yahoo Messenger" /> {$im}</a>
+      <!-- {/if} -->
+      <!-- {/foreach} 结束Yahoo Messenger -->
+      <!-- MSN Messenger {foreach from=$msn item=im} -->
+      <!-- {if $im} -->
+      <img src="images/msn.gif" width="18" height="17" border="0" alt="MSN" /> <a href="msnim:chat?contact={$im}">{$im}</a>
+      <!-- {/if} -->
+      <!-- {/foreach} 结束MSN Messenger -->
+      <!-- Skype {foreach from=$skype item=im} -->
+      <!-- {if $im} -->
+      <img src="http://mystatus.skype.com/smallclassic/{$im|escape:url}" alt="Skype" /><a href="skype:{$im|escape:url}?call">{$im}</a>
+      <!-- {/if} -->
+  <!-- {/foreach} -->
+  <!-- ICP 证书{if $icp_number} -->
+  {$lang.icp_number}:<a href="http://www.miibeian.gov.cn/" target="_blank">{$icp_number}</a><br />
+  <!-- 结束ICP 证书{/if} --><a href="http://www.pbcc.ca" target="_blank" style="font-size:10px">Powered by <strong><span style="color: #3366FF">PBCC</span> <span style="color: #FF9966">Version 2.0.0</span></strong></a></div>       
+  <br />
+    {if $stats_code}
+    <div align="left">{$stats_code}</div>
+    {/if}
+       
+          
+       
+ </div>
+</div>
+
+</div>
+<script src="js/footer.js" type="text/javascript">
+<div class="fixedBox">
+  <ul class="fixedBoxList">
+    <li id="cartboxs" style="display:block;" class="fixeBoxLi cart_bd">
+		<p class="good_cart">0</p>
+			<span class="fixeBoxSpan"></span> <strong>购物车</strong>
+			<div class="cartBox">
+       		<div class="bjfff"></div><div class="message">购物车内暂无商品，赶紧选购吧</div>    </div></li>
+    <li class="fixeBoxLi Service startWork"> <span class="fixeBoxSpan"></span> <strong>在线客服</strong>
+      <div class="ServiceBox">
+        <div class="bjfff"></div>
+        <dl onclick="javascript:;">
+          <dt><img src="../images/Service1.jpg"></dt>
+          <dd> <strong>在线QQ客服</strong>
+            <p class="p1">9:00-22:00</p>
+            <p class="p2"><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2479454955&amp;site=qq&amp;menu=yes">点击交谈</a></p>
+          </dd>
+        </dl>
+        <dl onclick="NTKF.im_openInPageChat('kf_10103_1368001605031')">
+          <dt><img src="../images/Service2.jpg"></dt>
+          <dd> <strong>网页在线客服</strong>
+            <p class="p1">9:00-22:00</p>
+            <p class="p2"><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2479454955&amp;site=qq&amp;menu=yes">点击交谈</a></p>
+          </dd>
+        </dl>
+      </div>
+    </li>
+    <li class="fixeBoxLi Home"> <a href="./"> <span class="fixeBoxSpan"></span> <strong>返回首页</strong> </a> </li>
+    <li class="fixeBoxLi BackToTop"> <span class="fixeBoxSpan"></span> <strong>返回顶部</strong> </li>
+  </ul>
+</div><!-- #EndLibraryItem --></body>
+</html>

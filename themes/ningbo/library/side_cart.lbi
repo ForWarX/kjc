@@ -1,0 +1,45 @@
+<!-- {if $goods1} -->
+		<p class="good_cart">{$goods_number1}</p>
+		<span class="fixeBoxSpan"></span>
+		<strong>购物车</strong>
+		<div class="cartBox">
+			<div class="bjfff"></div>
+		
+			<div class="cartBoxC ">
+				<ul>
+					{foreach from=$goods1 item=goods1 name=goods1 key=key}
+					<li>
+						<div class="p-img">
+							<a href="{$goods1.url}" target="_blank"><img src="{$goods1.goods_thumb}"> </a>
+						</div>
+						<div class="p-name">
+							<a href="{$goods1.url}" target="_blank">{$goods1.short_name}</a> 
+						</div>
+						<div class="p-detail"> 
+							<span class="p-price"> 			<strong>{$goods1.goods_price}</strong> × {$goods1.goods_number} 
+							</span><a class="del" href="javascript:" onClick="deleteCartGoods({$goods1.rec_id})">[删除]</a>
+						</div>
+					</li>
+					{/foreach}
+				</ul>
+			</div>
+		
+			<div class="cartBoxFoot">
+				<span>小计(不含运费)：</span>
+				<em>￥</em> 
+				<strong>{$order_amount1}</strong> 
+				<a href="flow.php" id="btn-payforgoods">去购物车结算</a> 
+			</div>
+		
+		</div>
+			
+<!-- {else} -->
+		<p class="good_cart">0</p>
+		<span class="fixeBoxSpan"></span> 
+		<strong>购物车</strong>
+		<div class="cartBox">
+			<div class="bjfff"></div>
+			<div class="message">购物车内暂无商品，赶紧选购吧</div>
+		</div>
+            
+<!-- {/if} -->

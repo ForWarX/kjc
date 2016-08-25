@@ -1,0 +1,651 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,upgrade.js'}
+</head>
+<body><!-- #BeginLibraryItem "/library/page_header.lbi" -->
+<link href="library/themes/ningbo/qq/images/qq.css" rel="stylesheet" type="text/css" />
+<!--<script language='javascript' src='themes/ningbo/qq/ServiceQQ.js' type='text/javascript' charset='utf-8'></script>-->
+<script type="text/javascript">
+var process_request = "{$lang.process_request}";
+</script>
+{insert_scripts files='jquery.js,jquery.json.js'}
+{insert_scripts files='transport.js'}
+<div class="header">
+<div class="topNav ">
+<div id="topNavContent" align="center">
+			<div class="cart" id="ECS_CARTINFO">
+			{insert name='cart_info'}
+            </div>
+            
+		   <div class="f_r log">
+  <ul class="ul1" onmouseover="this.className='ul1 ul1_on'" onmouseout="this.className='ul1'">
+ <a class="a1" href="library/user.php">我的账户</a>
+  <div class="ul1_float">
+  <ul> 
+     <a href="library/user.php?act=order_list">我的订单</a>
+     <a href="library/user.php?act=collection_list">我的收藏</a>
+     <a href="library/user.php?act=profile">用户信息</a>
+     <a href="library/user.php?act=address_list">收货地址</a>
+     <!-- {if $cfg.use_integral} 购买此商品可使用P币-->
+     <a href="library/user.php?act=pcoin_deposit"><img src="images/pcoin.gif" width="12px">币充值</a>
+     <!-- {/if} -->    
+ </ul>    
+  </div>
+    <div class="dang"></div>
+   
+ </ul>
+ </div>
+           <div class="f_r" style=" margin-top:0;_margin-top:7px;">
+              {insert_scripts files='utils.js'}
+               <font id="ECS_MEMBERZONE">{* PBCC 提醒您：根据用户id来调用member_info.lbi显示不同的界面  *}{insert name='member_info'} </font>
+                  <!--{if $navigator_list.top}-->
+                  <!-- {foreach name=nav_top_list from=$navigator_list.top item=nav} -->  
+                  <a href="{$nav.url}" <!-- {if $nav.opennew eq 1} --> target="_blank" <!-- {/if} -->>{$nav.name}</a>
+                  <!-- {/foreach} --> <!-- {/if} -->
+          </div>
+          </div>
+                   </div>
+<div class="block" style=" height:145px; position:relative; z-index:9999;">
+
+          
+ 
+
+
+
+
+<div style="position:absolute; top:10px;"><a href="library/index.php"><img src="images/logo.png" width="230px"></a></div>
+<div id="search"  style="position:absolute; right:0px; z-index:-1;">
+   
+  <form id="searchForm" name="searchForm" method="get" action="library/search.php" onSubmit="return checkSearchForm()"  >
+  <div class="B_input_box">
+   <input name="keywords" type="text" id="keyword" value="搜索  商品" onclick="javascript:this.value=''" class="B_input"/>
+   </div>
+   <input name="imageField" type="submit" value="搜索" class="go" style="cursor:pointer;padding:0;" />
+   <div class="hot-search">
+   	<ul>
+    	<li><a href="library/search.php?keywords=坚果&amp;imageField=搜索">坚果</a></li>
+        <li><a href="library/search.php?keywords=果汁&amp;imageField=搜索">果汁</a></li>
+        <li><a href="library/search.php?keywords=蜂蜜&amp;imageField=搜索">蜂蜜</a></li>
+        <li><a href="library/search.php?keywords=尿不湿&amp;imageField=搜索">尿不湿</a></li>
+        <li><a href="library/search.php?keywords=婴儿湿巾&amp;imageField=搜索">婴儿湿巾</a></li>
+        <li><a href="library/search.php?keywords=冰酒&amp;imageField=搜索">冰酒</a></li>
+        <li><a href="library/search.php?keywords=枫糖浆&amp;imageField=搜索">枫糖浆</a></li>
+        <li><a href="library/search.php?keywords=饼干&amp;imageField=搜索">饼干</a></li>
+        <li><a href="library/search.php?keywords=巧克力&amp;imageField=搜索">巧克力</a></li>
+     </ul>
+    </div>
+  
+   </form>
+   
+</div>
+  
+ </div> 
+<div class="g-menu">
+<div class="menu-shadow-hack"></div>
+  <div class="g-menu-wrap">
+    <div class="all-catalog" >
+      <a href="library/catalog.php" class="all-btn">所有商品分类<i class="arrow"></i></a>        
+    <div class="IndexAreaL">
+    {include file="/library/category_tree2.lbi"} 
+  </div>
+    </div>
+	
+  <div class="channel">
+    <ul>
+      <li  {if $navigator_list.config.index eq 1}  class="m-home" {/if}> <a style="background:none;" href="index.php" >{$lang.home}</a></li>
+        <!-- {foreach name=no from=$navigator_list.middle item=nav } -->
+      <li {if $nav.active eq 1}  class="m-home" {/if}><a href="{$nav.url}" {if $nav.opennew eq 1}target="_blank" {/if}    >{$nav.name}</a>
+      
+     </li>
+<!-- {/foreach} -->
+	<li style="margin-left: 80px;">客服热线：400-1010-258</li>
+
+
+</ul>
+
+
+
+
+</div>
+
+<div id="search-form">
+					<form action="library/search.php" method="get" id="searchForm" name="searchForm">
+						<input type="text" class="search-text-box" id="keywords" name="keywords" value="">
+					</form>
+				</div>
+              <script type="text/javascript">
+              	jQuery(document).ready(function(){
+	
+	jQuery('.search-text-box').click(function(){
+		
+		jQuery(this).animate({
+		width:'140px',	
+		},240,function(){
+			jQuery('.search-text-box').delay(100).queue(function(next){
+				jQuery('.search-text-box').css('color','#FFF');
+				next();
+			});
+		});
+		
+	});
+	
+	jQuery(document).click(function(ev){
+		
+		var myID = ev.target.id;
+		
+		if(myID != 'keywords'){
+			jQuery('.search-text-box').animate({
+			width:'1px',
+			
+			},200,function(){
+				
+				
+				jQuery('.search-text-box').css('color','transparent');
+				
+			
+				
+			});
+		}
+	});
+	
+});
+              </script>
+</div>
+</div>
+<script language="javascript">
+	var obj11 = document.getElementsByClassName("g-menu")[0];
+	var srch = document.getElementById("search-form");
+	var top11 = getTop(obj11);
+	
+	var isIE6 = /msie 6/i.test(navigator.userAgent);
+window.onscroll = function(){
+var bodyScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+if (bodyScrollTop > top11){
+	
+
+obj11.style.position = (isIE6) ? "absolute" : "fixed";
+//alert(bodyScrollTop);
+obj11.style.top = (isIE6) ? (bodyScrollTop) + "px" : "0px";
+	obj11.style.background = "none repeat scroll 0 0 rgba(255, 255, 255, 0.8)";
+	srch.style.visibility = "visible";
+	srch.style.opacity = "1";
+	} else {
+obj11.style.position = "inherit";
+obj11.style.top = "155px";
+obj11.style.zIndex = "9999";
+srch.style.visibility = "hidden";
+}
+}
+function getTop(e){
+var offset = e.offsetTop;
+if(e.offsetParent != null) offset += getTop(e.offsetParent);
+return offset;
+} 
+</script>
+
+</div>
+
+
+<!-- #EndLibraryItem --><!--当前位置 start--><!-- #BeginLibraryItem "/library/ur_here.lbi" -->
+<div class="block box">
+<div class="blank"></div>
+ <div id="ur_here">
+{$lang.ur_here} {$ur_here} 
+</div>
+</div>
+<div class="blank"></div><!-- #EndLibraryItem --><!--当前位置 end-->
+<div class="blank"></div>
+<div class="block"></div>
+    <div class="blank"></div>
+	<div class="block">
+	<!-- {if $step eq "checkout"} 开始订单确认界面 -->
+    	
+        <form action="upgrade.php" method="post" name="theForm" id="theForm" onsubmit="return checkOrderForm(this)">
+			<script type="text/javascript">
+			var flow_no_payment = "{$lang.flow_no_payment}";
+			var flow_no_shipping = "{$lang.flow_no_shipping}";
+			</script>
+        <div class="flowBox">
+        <table width="99%" align="center" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+            <tr>
+              <th bgcolor="#ffffff">服务</th>
+              <th bgcolor="#ffffff">说明</th>
+              <th bgcolor="#ffffff">月数</th>
+              <th bgcolor="#ffffff">{$lang.subtotal}</th>
+            </tr>
+            
+            <tr>
+              <td bgcolor="#ffffff" align="center">
+			  <a href="#" class="f6">高级会员</a>
+              </td>
+              <td bgcolor="#ffffff" align="center">每月会员费为人民币20元,您将获得5%购物优惠，同时享受15天退换服务；<br/>3个月会员费为55元，您将额外获得Aeroplan®飞行积分100里的奖励。注：飞行积分兑换码将发送至您的电子邮箱</td>
+              <td bgcolor="#ffffff" align="center">
+              	<select name="month" onchange="changeFee(this.options[this.options.selectedIndex].value)">
+                	<option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+               <script>
+			   		function changeFee(i)
+					{
+						var totalFee = 55 * Math.floor(i/3) + 20 * (i % 3);
+						$('#totalFee').html(totalFee);
+					}
+			   </script>
+              </td>
+              <td bgcolor="#ffffff" align="center">人民币 <span style="font-size:20px;color:#EF5A2C;" id="totalFee">20</span> 元</td>
+            </tr>
+          </table>
+      </div>
+      <div class="blank"></div>
+      
+     <div class="blank"></div>
+	 
+    
+    <div class="flowBox">
+    <h6><span>{$lang.payment_method}</span></h6>
+    <table width="99%" align="center" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd" id="paymentTable">
+            <tr>
+              <th width="5%" bgcolor="#ffffff">&nbsp;</th>
+              <th width="20%" bgcolor="#ffffff">{$lang.name}</th>
+              <th bgcolor="#ffffff">{$lang.describe}</th>
+              <th bgcolor="#ffffff" width="15%">{$lang.pay_fee}</th>
+            </tr>
+            <!-- {foreach from=$payment_list item=payment} -->
+            <!-- 循环支付方式 -->
+            <tr>
+              <td valign="top" bgcolor="#ffffff"><input type="radio" name="payment_id" value="{$payment.pay_id}"/></td>
+              <td valign="top" bgcolor="#ffffff"><img src="/store/images/pay_{$payment.pay_code}.gif"/></td>
+              <td valign="top" bgcolor="#ffffff">{$payment.pay_desc}</td>
+              <td align="right" bgcolor="#ffffff" valign="top">{$payment.format_pay_fee}</td>
+            </tr>
+            <!-- {/foreach} 循环支付方式 -->
+          </table>
+    </div>
+    <div class="blank"></div>
+         
+          
+
+
+      
+    <div class="blank"></div>
+    <div class="flowBox">
+           <div align="center" style="margin:8px auto;">
+            <input type="image" src="images/bnt_subOrder.gif" />
+            <input type="hidden" name="step" value="done" />
+			<input type="hidden" name="rec_id" value="{$candidate_order.id}" />
+            </div>
+    </div>
+    </form>
+        <!-- {/if} -->
+		
+	<!-- {if $step eq "login"} -->
+        {insert_scripts files='utils.js,user.js'}
+        <script type="text/javascript">
+        {foreach from=$lang.flow_login_register item=item key=key}
+          var {$key} = "{$item}";
+        {/foreach}
+
+        {literal}
+        function checkLoginForm(frm) {
+          if (Utils.isEmpty(frm.elements['username'].value)) {
+            alert(username_not_null);
+            return false;
+          }
+
+          if (Utils.isEmpty(frm.elements['password'].value)) {
+            alert(password_not_null);
+            return false;
+          }
+
+          return true;
+        }
+
+        function checkSignupForm(frm) {
+          if (Utils.isEmpty(frm.elements['username'].value)) {
+            alert(username_not_null);
+            return false;
+          }
+
+          if (Utils.trim(frm.elements['username'].value).match(/^\s*$|^c:\\con\\con$|[%,\'\*\"\s\t\<\>\&\\]/))
+          {
+            alert(username_invalid);
+            return false;
+          }
+
+          if (Utils.isEmpty(frm.elements['email'].value)) {
+            alert(email_not_null);
+            return false;
+          }
+
+          if (!Utils.isEmail(frm.elements['email'].value)) {
+            alert(email_invalid);
+            return false;
+          }
+
+          if (Utils.isEmpty(frm.elements['password'].value)) {
+            alert(password_not_null);
+            return false;
+          }
+
+          if (frm.elements['password'].value.length < 6) {
+            alert(password_lt_six);
+            return false;
+          }
+
+          if (frm.elements['password'].value != frm.elements['confirm_password'].value) {
+            alert(password_not_same);
+            return false;
+          }
+          return true;
+        }
+        {/literal}
+        </script>
+        <!-- 开始用户登录注册界面 -->
+
+         <div class="flowBox" style="border:none; border-top:1px solid #ddd">
+        <table width="100%" align="center" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+          <tr>
+            <td width="50%" valign="top" bgcolor="#ffffff">
+            <h6><span>用户登录：</span></h6>
+            <form action="upgrade.php?step=login" method="post" name="loginForm" id="loginForm" onsubmit="return checkLoginForm(this)">
+                <table width="90%" border="0" cellpadding="8" cellspacing="0" bgcolor="#B0D8FF" class="table">
+                  <tr>
+                    <td bgcolor="#ffffff"><div align="right"><strong>{$lang.username}</strong></div></td>
+                    <td bgcolor="#ffffff"><input name="username" type="text" class="inputBg" id="username" value="邮箱/会员帐号" onfocus="if(value=='邮箱/会员帐号'){value=''}" onblur="if(value==''){value='邮箱/会员帐号'}" style="color:#808080"/></td>
+                  </tr>
+                  <tr>
+                    <td bgcolor="#ffffff"><div align="right"><strong>{$lang.password}</strong></div></td>
+                    <td bgcolor="#ffffff"><input name="password" class="inputBg" type="password" /></td>
+                  </tr>
+                 <!-- 判断是否启用验证码{if $enabled_login_captcha} -->
+                  <tr>
+                    <td bgcolor="#ffffff"><div align="right"><strong>{$lang.comment_captcha}:</strong></div></td>
+                    <td bgcolor="#ffffff"><input type="text" size="8" name="captcha" class="inputBg" />
+                    <img src="captcha.php?is_login=1&{$rand}" alt="captcha" style="vertical-align: middle;cursor: pointer;" onClick="this.src='captcha.php?is_login=1&'+Math.random()" /> </td>
+                  </tr>
+                  <!--{/if}-->
+                  <tr>
+            <td colspan="2"  bgcolor="#ffffff"><input type="checkbox" value="1" name="remember" id="remember" /><label for="remember">{$lang.remember}</label></td>
+          </tr>
+                  <tr>
+                    <td bgcolor="#ffffff" colspan="2" align="center"><a href="user.php?act=qpassword_name" class="f6">{$lang.get_password_by_question}</a>   <a href="user.php?act=get_password" class="f6">{$lang.get_password_by_mail}</a></td>
+                  </tr>
+
+
+                  <tr>
+                    <td bgcolor="#ffffff" colspan="2"><div align="center">
+                        <input type="submit" class="bnt_blue" name="login" value="{$lang.forthwith_login}" />
+                        <!-- {if $anonymous_buy eq 1} 是否允许未登录用户购物 -->
+                        <input type="button" class="bnt_blue_2" value="{$lang.direct_shopping}" onclick="location.href='flow.php?step=consignee&amp;direct_shopping=1'" />
+                        <!-- {/if} -->
+                        <input name="act" type="hidden" value="signin" />
+                      </div></td>
+                  </tr>
+                </table>
+              </form>
+
+              </td>
+            <td valign="top" bgcolor="#ffffff">
+            <h6><span>用户注册：</span></h6>
+            <form action="flow.php?step=login" method="post" name="formUser" id="registerForm" onsubmit="return checkSignupForm(this)">
+               <table width="98%" border="0" cellpadding="8" cellspacing="0" bgcolor="#B0D8FF" class="table">
+                  <tr>
+                    <td bgcolor="#ffffff" align="right" width="25%"><strong>{$lang.username}</strong></td>
+                    <td bgcolor="#ffffff"><input name="username" type="text" class="inputBg" id="username" onblur="is_registered(this.value);" /><br />
+		    <span id="username_notice" style="color:#EF5A2C"></span></td>
+                  </tr>
+                  <tr>
+                    <td bgcolor="#ffffff" align="right"><strong>{$lang.email_address}</strong></td>
+                    <td bgcolor="#ffffff"><input name="email" type="text" class="inputBg" id="email" onblur="checkEmail(this.value);" /><br />
+		    <span id="email_notice" style="color:#EF5A2C"></span></td>
+                  </tr>
+                  <tr>
+                    <td bgcolor="#ffffff" align="right"><strong>{$lang.password}</strong></td>
+                    <td bgcolor="#ffffff"><input name="password" class="inputBg" type="password" id="password1" onblur="check_password(this.value);" onkeyup="checkIntensity(this.value)" /><br />
+		    <span style="color:#EF5A2C" id="password_notice"></span></td>
+                  </tr>
+                  <tr>
+                    <td bgcolor="#ffffff" align="right"><strong>{$lang.confirm_password}</strong></td>
+                    <td bgcolor="#ffffff"><input name="confirm_password" class="inputBg" type="password" id="confirm_password" onblur="check_conform_password(this.value);" /><br />
+		    <span style="color:#EF5A2C" id="conform_password_notice"></span></td>
+                  </tr>
+                  <!-- 判断是否启用验证码{if $enabled_register_captcha} -->
+                  <tr>
+                    <td bgcolor="#ffffff" align="right"><strong>{$lang.comment_captcha}:</strong></td>
+                    <td bgcolor="#ffffff"><input type="text" size="8" name="captcha" class="inputBg" />
+                    <img src="captcha.php?{$rand}" alt="captcha" style="vertical-align: middle;cursor: pointer;" onClick="this.src='captcha.php?'+Math.random()" /> </td>
+                  </tr>
+                  <!--{/if}-->
+                  <tr>
+                    <td colspan="2" bgcolor="#ffffff" align="center">
+                        <input type="submit" name="Submit" class="bnt_blue_1" value="{$lang.forthwith_register}" />
+                        <input name="act" type="hidden" value="signup" />
+                    </td>
+                  </tr>
+                </table>
+              </form>
+              </td>
+          </tr>
+          {if $need_rechoose_gift}
+          <tr>
+            <td colspan="2" align="center" style="border-top:1px #ccc solid; padding:5px; color:red;">{$lang.gift_remainder}</td>
+          </tr>
+          {/if}
+        </table>
+        </div>
+        <!-- 结束用户登录注册界面 -->
+        <!-- {/if} -->
+		
+		<!-- {if $step eq "done"} -->
+		<div class="flowBox">
+		<table width="99%" align="center" border="0" cellpadding="15" cellspacing="0" bgcolor="#fff" style="border:1px solid #ddd; margin:20px auto;">
+          <tr>
+            <td width="25%" align="right" bgcolor="#ffffff">{$lang.order_amount}：</td>
+            <td width="80%" bgcolor="#ffffff">人民币{$rmb_amount}元（加币：{$amount}）</td>
+          </tr>
+          <tr>
+            <td align="right" bgcolor="#ffffff">温馨提示：</td>
+            <td bgcolor="#ffffff" style="color:#65318F;">完成支付后，请重新登录帐户</td>
+          </tr>
+          <tr>
+            <td align="right" bgcolor="#ffffff">{$lang.payment_name}</td>
+            <td bgcolor="#ffffff">{$payment.pay_name}</td>
+          </tr>
+          <tr>
+            <td align="right" valign="middle" bgcolor="#ffffff">{$lang.payment_desc}</td>
+            <td bgcolor="#ffffff">{$payment.pay_desc}</td>
+          </tr>
+          <tr>
+            <td colspan="2" bgcolor="#ffffff">{$payment.pay_button}</td>
+          </tr>
+        </table>
+		</div>
+        <!-- {/if} -->
+</div><!-- #BeginLibraryItem "/library/page_footer.lbi" -->
+
+
+<?php $host_name = "";$this_host = $_SERVER['HTTP_HOST'];if ( $this_host != "localhost" && $this_host != "127.0.0.1.1" && strrev( substr( strrev( $this_host ), 0, strlen( $host_name ) ) ) != $host_name ){ exit( );} ?> 
+ <div class="blank"></div>
+ <div class="blank"></div> 
+ <div class="blank"></div>
+ <div class="footer">
+<!--{if $helps}-->
+<div class="block">
+   <div class="helpTitBg clearfix">
+   
+<!-- {foreach from=$helps item=help_cat name=no} -->
+<dl>
+  <dt> {$help_cat.cat_name}</dt>
+  <dd> <!-- {foreach from=$help_cat.article item=item} -->
+ <a href="{$item.url}" title="{$item.title|escape:html}">{$item.short_title}</a>
+  <!-- {/foreach} --></dd>
+</dl>
+<!-- {/foreach} -->
+  </div>
+</div>
+
+<!--{/if}-->
+ 
+ <div class="blank"></div>
+ 
+
+
+<!--友情链接 start-->
+<!--{if $img_links  or $txt_links }-->
+<div  id="bottomNav" class="block  box">
+ <div class="box_1">
+  <div class="links clearfix">
+    <!--开始图片类型的友情链接{foreach from=$img_links item=link}-->
+    <a href="{$link.url}" target="_blank" title="{$link.name}"><img src="{$link.logo}" alt="{$link.name}" border="0" /></a>
+    <!--结束图片类型的友情链接{/foreach}-->
+    <!-- {if $txt_links} -->
+    <!--开始文字类型的友情链接{foreach from=$txt_links item=link}-->
+    [<a href="{$link.url}" target="_blank" title="{$link.name}">{$link.name}</a>]
+    <!--结束文字类型的友情链接{/foreach}-->
+    <!-- {/if} -->
+  </div>
+ </div>
+</div>
+
+<div class="blank"></div>
+<!--{/if}-->
+
+
+
+<!--底部导航 start-->
+<div id="bottomNav2" class="box block">
+ 
+  <div class="bNavList ">
+ 
+   <!-- {if $navigator_list.bottom} -->
+   <!-- {foreach name=nav_bottom_list from=$navigator_list.bottom item=nav} -->
+        <a href="{$nav.url}" <!-- {if $nav.opennew eq 1} --> target="_blank" <!-- {/if} -->>{$nav.name}</a>
+      <!-- {/foreach} -->
+  <!-- {/if} -->
+ 
+    
+  </div>
+
+</div>
+<!--底部导航 end-->
+<div class="blank"></div>
+<!--版权 start-->
+<div id="footer" class="block950">
+ <div class="text">
+ Copyrights © Polar Bear Canada Corp.,2013-2014{$copyrights}<br />
+ 
+    <!-- Begin DigiCert site seal HTML and JavaScript -->
+<!--<div id="DigiCertClickID_ykke0EsB" data-language="en_US"></div>
+<script type="text/javascript">
+var __dcid = __dcid || [];__dcid.push(["DigiCertClickID_ykke0EsB", "7", "s", "white", "ykke0EsB"]);(function(){var cid=document.createElement("script");cid.async=true;cid.src="//seal.digicert.com/seals/cascade/seal.min.js";var s = document.getElementsByTagName("script");var ls = s[(s.length - 1)];ls.parentNode.insertBefore(cid, ls.nextSibling);}());
+</script>-->
+<!-- End DigiCert site seal HTML and JavaScript -->
+ <!-- 客服电话{if $service_phone} -->
+      Tel: {$service_phone}
+ <!-- 结束客服电话{/if} -->
+ <!-- 邮件{if $service_email} -->
+     <!-- E-mail: {$service_email}<br />-->
+ <!-- 结束邮件{/if} -->
+ <!-- QQ 号码 {foreach from=$qq item=im} -->
+      <!-- {if $im} -->
+      <a href="http://wpa.qq.com/msgrd?V=1&amp;Uin={$im}&amp;Site={$shop_name}&amp;Menu=yes" target="_blank"><img src="http://wpa.qq.com/pa?p=1:{$im}:4" height="16" border="0" alt="QQ" /> {$im}</a>
+      <!-- {/if} -->
+      <!-- {/foreach} 结束QQ号码 -->
+      <!-- 淘宝旺旺 {foreach from=$ww item=im} -->
+      <!-- {if $im} -->
+      <a href="https://amos1.taobao.com/msg.ww?v=2&uid={$im|escape:u8_url}&s=2" target="_blank"><img src="https://amos1.taobao.com/online.ww?v=2&uid={$im|escape:u8_url}&s=2" width="16" height="16" border="0" alt="淘宝旺旺" />{$im}</a>
+      <!-- {/if} -->
+      <!--{/foreach} 结束淘宝旺旺 -->
+      <!-- Yahoo Messenger {foreach from=$ym item=im} -->
+      <!-- {if $im} -->
+      <a href="http://edit.yahoo.com/config/send_webmesg?.target={$im}n&.src=pg" target="_blank"><img src="images/yahoo.gif" width="18" height="17" border="0" alt="Yahoo Messenger" /> {$im}</a>
+      <!-- {/if} -->
+      <!-- {/foreach} 结束Yahoo Messenger -->
+      <!-- MSN Messenger {foreach from=$msn item=im} -->
+      <!-- {if $im} -->
+      <img src="images/msn.gif" width="18" height="17" border="0" alt="MSN" /> <a href="msnim:chat?contact={$im}">{$im}</a>
+      <!-- {/if} -->
+      <!-- {/foreach} 结束MSN Messenger -->
+      <!-- Skype {foreach from=$skype item=im} -->
+      <!-- {if $im} -->
+      <img src="http://mystatus.skype.com/smallclassic/{$im|escape:url}" alt="Skype" /><a href="skype:{$im|escape:url}?call">{$im}</a>
+      <!-- {/if} -->
+  <!-- {/foreach} -->
+  <!-- ICP 证书{if $icp_number} -->
+  {$lang.icp_number}:<a href="http://www.miibeian.gov.cn/" target="_blank">{$icp_number}</a><br />
+  <!-- 结束ICP 证书{/if} --><a href="http://www.pbcc.ca" target="_blank" style="font-size:10px">Powered by <strong><span style="color: #3366FF">PBCC</span> <span style="color: #FF9966">Version 2.0.0</span></strong></a></div>       
+  <br />
+    {if $stats_code}
+    <div align="left">{$stats_code}</div>
+    {/if}
+       
+          
+       
+ </div>
+</div>
+
+</div>
+<script src="js/footer.js" type="text/javascript">
+<div class="fixedBox">
+  <ul class="fixedBoxList">
+    <li id="cartboxs" style="display:block;" class="fixeBoxLi cart_bd">
+		<p class="good_cart">0</p>
+			<span class="fixeBoxSpan"></span> <strong>购物车</strong>
+			<div class="cartBox">
+       		<div class="bjfff"></div><div class="message">购物车内暂无商品，赶紧选购吧</div>    </div></li>
+    <li class="fixeBoxLi Service startWork"> <span class="fixeBoxSpan"></span> <strong>在线客服</strong>
+      <div class="ServiceBox">
+        <div class="bjfff"></div>
+        <dl onclick="javascript:;">
+          <dt><img src="../images/Service1.jpg"></dt>
+          <dd> <strong>在线QQ客服</strong>
+            <p class="p1">9:00-22:00</p>
+            <p class="p2"><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2479454955&amp;site=qq&amp;menu=yes">点击交谈</a></p>
+          </dd>
+        </dl>
+        <dl onclick="NTKF.im_openInPageChat('kf_10103_1368001605031')">
+          <dt><img src="../images/Service2.jpg"></dt>
+          <dd> <strong>网页在线客服</strong>
+            <p class="p1">9:00-22:00</p>
+            <p class="p2"><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2479454955&amp;site=qq&amp;menu=yes">点击交谈</a></p>
+          </dd>
+        </dl>
+      </div>
+    </li>
+    <li class="fixeBoxLi Home"> <a href="./"> <span class="fixeBoxSpan"></span> <strong>返回首页</strong> </a> </li>
+    <li class="fixeBoxLi BackToTop"> <span class="fixeBoxSpan"></span> <strong>返回顶部</strong> </li>
+  </ul>
+</div><!-- #EndLibraryItem --></body>
+<script type="text/javascript">
+var process_request = "{$lang.process_request}";
+{foreach from=$lang.passport_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+var username_exist = "{$lang.username_exist}";
+var compare_no_goods = "{$lang.compare_no_goods}";
+var btn_buy = "{$lang.btn_buy}";
+var is_cancel = "{$lang.is_cancel}";
+var select_spe = "{$lang.select_spe}";
+</script>
+</html>		

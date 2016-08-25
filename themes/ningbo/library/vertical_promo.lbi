@@ -1,0 +1,83 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<div class="vertical-promo">
+	<div class="ver-col1">
+		<div class="ver-wrap">
+			<a href="category.php?id=77"><h2 class="ver-tit">立即购</h2></a>
+			<ul class="ver-list">
+				{insert name='ads' id=14 num=1}
+				{insert name='ads' id=18 num=3}
+			</ul>
+		</div>
+	</div>
+	<div class="ver-col2">
+		<div class="ver-wrap">
+			<a href="category.php?id=78"><h2 class="ver-tit">跨境购</h2></a>
+			<ul class="ver-list">
+				{insert name='ads' id=15 num=1}
+				{insert name='ads' id=19 num=3}
+			</ul>
+		</div>
+	</div>
+	<div class="ver-col3">
+		<div class="ver-wrap">
+			<a href="http://www.pbccstore.com/"><h2 class="ver-tit">越洋购</h2></a>
+			<ul class="ver-list">
+				{insert name='ads' id=16 num=1}
+				{insert name='ads' id=20 num=3}
+			</ul>
+		</div>
+	</div>
+	<div class="ver-col4">
+		<div class="ver-wrap">
+			<a href="category.php?id=122"><h2 class="ver-tit">中国购</h2></a>
+			<ul class="ver-list" style="position:relative;">
+				{insert name='ads' id=17 num=1}
+                <span style="position:absolute;top:120px;left:65px;">
+                	<form enctype="multipart/form-data" action="" method="post" name="IndexForm" autocomplete="off">
+                	<select name="goods_region_2" onchange="goods_region2(this);"><option value="0">1.选择省份</option>{$regions}</select><span id="cnclist"><select name="goods_region_3" onchange="goods_region3(this);"><option value="0">2.选择城市</option></select></span></form>
+                </span>
+                <span id="region_goods"><ul>{insert name='ads' id=21 num=3}</ul></span>
+			</ul>
+		</div>
+	</div>
+
+</div>
+
+<script>
+function goods_region2(obj){
+	var region = obj.form.elements['goods_region_2'].value;
+	Ajax.call('index.php?act=update_region', 'from_region=' + region + '&type=2', make_region_option2, 'GET', 'JSON');
+}
+function make_region_option2(result){
+	var len = result.length;
+	var opt = '<select name="goods_region_3" onchange="goods_region3(this);"><option value="0">2.选择城市</option>';
+	
+	for (var i = 0; i < len; ++i)
+	{
+	   opt += '<option value="' + result[i].region_id + '">' +  result[i].region_name + '</option>';
+	}
+	opt += '</select>';
+	document.getElementById('cnclist').innerHTML = opt;
+}
+function goods_region3(obj){
+	var region = obj.form.elements['goods_region_3'].value;
+	Ajax.call('index.php?act=get_region_goods', 'from_region=' + region, show_region_goods, 'GET', 'JSON');
+}
+function show_region_goods(result){
+	var len = result.length;
+	
+	if (len > 0){
+		var res = '<ul>';
+		for (var i = 0; i < len; ++i)
+		{
+		   res += '<li style="height:100px;"><div class="kjContInner" style="display: block;"><div class="kjAdImg"><a title="' + result[i].goods_name + '" target="_blank" href="' + 'goods.php?id=' + result[i].goods_id + '"><img alt="' + result[i].goods_name + '" src="' + result[i].goods_thumb + '"></a></div><a class="kjAdCover2" title="' + result[i].goods_name + '" target="_blank" href="' + 'goods.php?id=' + result[i].goods_id + '"><img src="images/empty.png"></a><ul style="width:165px"><li class="yh18 kjAdCred"><span class="kjAdPrice">￥' + result[i].shop_price + '</span><span style="display:none"></span></li><li class="kjAdCred" style="height:12px;"><span style="display:none"></span></li><li style="width:100%;" class="kjAdName">' + result[i].goods_name + '</li></ul></div></li>';
+		}
+		res += '</ul>';
+	}
+	else{
+		var res = '<p>试试其他省份吧~</p>';
+	}
+	document.getElementById('region_goods').innerHTML = res;
+}
+</script>

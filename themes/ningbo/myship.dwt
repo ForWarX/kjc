@@ -1,0 +1,484 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,myship.js'}
+</head>
+<body><!-- #BeginLibraryItem "/library/page_header.lbi" -->
+<link href="library/themes/ningbo/qq/images/qq.css" rel="stylesheet" type="text/css" />
+<!--<script language='javascript' src='themes/ningbo/qq/ServiceQQ.js' type='text/javascript' charset='utf-8'></script>-->
+<script type="text/javascript">
+var process_request = "{$lang.process_request}";
+</script>
+{insert_scripts files='jquery.js,jquery.json.js'}
+{insert_scripts files='transport.js'}
+<div class="header">
+<div class="topNav ">
+<div id="topNavContent" align="center">
+			<div class="cart" id="ECS_CARTINFO">
+			{insert name='cart_info'}
+            </div>
+            
+		   <div class="f_r log">
+  <ul class="ul1" onmouseover="this.className='ul1 ul1_on'" onmouseout="this.className='ul1'">
+ <a class="a1" href="library/user.php">我的账户</a>
+  <div class="ul1_float">
+  <ul> 
+     <a href="library/user.php?act=order_list">我的订单</a>
+     <a href="library/user.php?act=collection_list">我的收藏</a>
+     <a href="library/user.php?act=profile">用户信息</a>
+     <a href="library/user.php?act=address_list">收货地址</a>
+     <!-- {if $cfg.use_integral} 购买此商品可使用P币-->
+     <a href="library/user.php?act=pcoin_deposit"><img src="images/pcoin.gif" width="12px">币充值</a>
+     <!-- {/if} -->    
+ </ul>    
+  </div>
+    <div class="dang"></div>
+   
+ </ul>
+ </div>
+           <div class="f_r" style=" margin-top:0;_margin-top:7px;">
+              {insert_scripts files='utils.js'}
+               <font id="ECS_MEMBERZONE">{* PBCC 提醒您：根据用户id来调用member_info.lbi显示不同的界面  *}{insert name='member_info'} </font>
+                  <!--{if $navigator_list.top}-->
+                  <!-- {foreach name=nav_top_list from=$navigator_list.top item=nav} -->  
+                  <a href="{$nav.url}" <!-- {if $nav.opennew eq 1} --> target="_blank" <!-- {/if} -->>{$nav.name}</a>
+                  <!-- {/foreach} --> <!-- {/if} -->
+          </div>
+          </div>
+                   </div>
+<div class="block" style=" height:145px; position:relative; z-index:9999;">
+
+          
+ 
+
+
+
+
+<div style="position:absolute; top:10px;"><a href="library/index.php"><img src="images/logo.png" width="230px"></a></div>
+<div id="search"  style="position:absolute; right:0px; z-index:-1;">
+   
+  <form id="searchForm" name="searchForm" method="get" action="library/search.php" onSubmit="return checkSearchForm()"  >
+  <div class="B_input_box">
+   <input name="keywords" type="text" id="keyword" value="搜索  商品" onclick="javascript:this.value=''" class="B_input"/>
+   </div>
+   <input name="imageField" type="submit" value="搜索" class="go" style="cursor:pointer;padding:0;" />
+   <div class="hot-search">
+   	<ul>
+    	<li><a href="library/search.php?keywords=坚果&amp;imageField=搜索">坚果</a></li>
+        <li><a href="library/search.php?keywords=果汁&amp;imageField=搜索">果汁</a></li>
+        <li><a href="library/search.php?keywords=蜂蜜&amp;imageField=搜索">蜂蜜</a></li>
+        <li><a href="library/search.php?keywords=尿不湿&amp;imageField=搜索">尿不湿</a></li>
+        <li><a href="library/search.php?keywords=婴儿湿巾&amp;imageField=搜索">婴儿湿巾</a></li>
+        <li><a href="library/search.php?keywords=冰酒&amp;imageField=搜索">冰酒</a></li>
+        <li><a href="library/search.php?keywords=枫糖浆&amp;imageField=搜索">枫糖浆</a></li>
+        <li><a href="library/search.php?keywords=饼干&amp;imageField=搜索">饼干</a></li>
+        <li><a href="library/search.php?keywords=巧克力&amp;imageField=搜索">巧克力</a></li>
+     </ul>
+    </div>
+  
+   </form>
+   
+</div>
+  
+ </div> 
+<div class="g-menu">
+<div class="menu-shadow-hack"></div>
+  <div class="g-menu-wrap">
+    <div class="all-catalog" >
+      <a href="library/catalog.php" class="all-btn">所有商品分类<i class="arrow"></i></a>        
+    <div class="IndexAreaL">
+    {include file="/library/category_tree2.lbi"} 
+  </div>
+    </div>
+	
+  <div class="channel">
+    <ul>
+      <li  {if $navigator_list.config.index eq 1}  class="m-home" {/if}> <a style="background:none;" href="index.php" >{$lang.home}</a></li>
+        <!-- {foreach name=no from=$navigator_list.middle item=nav } -->
+      <li {if $nav.active eq 1}  class="m-home" {/if}><a href="{$nav.url}" {if $nav.opennew eq 1}target="_blank" {/if}    >{$nav.name}</a>
+      
+     </li>
+<!-- {/foreach} -->
+	<li style="margin-left: 80px;">客服热线：400-1010-258</li>
+
+
+</ul>
+
+
+
+
+</div>
+
+<div id="search-form">
+					<form action="library/search.php" method="get" id="searchForm" name="searchForm">
+						<input type="text" class="search-text-box" id="keywords" name="keywords" value="">
+					</form>
+				</div>
+              <script type="text/javascript">
+              	jQuery(document).ready(function(){
+	
+	jQuery('.search-text-box').click(function(){
+		
+		jQuery(this).animate({
+		width:'140px',	
+		},240,function(){
+			jQuery('.search-text-box').delay(100).queue(function(next){
+				jQuery('.search-text-box').css('color','#FFF');
+				next();
+			});
+		});
+		
+	});
+	
+	jQuery(document).click(function(ev){
+		
+		var myID = ev.target.id;
+		
+		if(myID != 'keywords'){
+			jQuery('.search-text-box').animate({
+			width:'1px',
+			
+			},200,function(){
+				
+				
+				jQuery('.search-text-box').css('color','transparent');
+				
+			
+				
+			});
+		}
+	});
+	
+});
+              </script>
+</div>
+</div>
+<script language="javascript">
+	var obj11 = document.getElementsByClassName("g-menu")[0];
+	var srch = document.getElementById("search-form");
+	var top11 = getTop(obj11);
+	
+	var isIE6 = /msie 6/i.test(navigator.userAgent);
+window.onscroll = function(){
+var bodyScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+if (bodyScrollTop > top11){
+	
+
+obj11.style.position = (isIE6) ? "absolute" : "fixed";
+//alert(bodyScrollTop);
+obj11.style.top = (isIE6) ? (bodyScrollTop) + "px" : "0px";
+	obj11.style.background = "none repeat scroll 0 0 rgba(255, 255, 255, 0.8)";
+	srch.style.visibility = "visible";
+	srch.style.opacity = "1";
+	} else {
+obj11.style.position = "inherit";
+obj11.style.top = "155px";
+obj11.style.zIndex = "9999";
+srch.style.visibility = "hidden";
+}
+}
+function getTop(e){
+var offset = e.offsetTop;
+if(e.offsetParent != null) offset += getTop(e.offsetParent);
+return offset;
+} 
+</script>
+
+</div>
+
+
+<!-- #EndLibraryItem --><!-- #BeginLibraryItem "/library/ur_here.lbi" -->
+<div class="block box">
+<div class="blank"></div>
+ <div id="ur_here">
+{$lang.ur_here} {$ur_here} 
+</div>
+</div>
+<div class="blank"></div><!-- #EndLibraryItem --><div class="block">
+  <h5><span>{$lang.shipping_method}</span></h5>
+  <div class="blank"></div>
+  <!-- 开始收货人信息填写界面 -->
+      {insert_scripts files='region.js,utils.js'}
+      <script type="text/javascript">
+        region.isAdmin = false;
+        {foreach from=$lang.flow_js item=item key=key}
+        var {$key} = "{$item}";
+        {/foreach}
+
+        {literal}
+        onload = function() {
+          if (!document.all)
+          {
+            document.forms['theForm'].reset();
+          }
+        }
+
+        /* $Id : myship.js 4865 2007-01-31 14:04:10Z Hackfan $ */
+
+/* *
+ * 检查收货地址信息表单中填写的内容
+ */
+function checkForm(frm)
+{
+  var msg = new Array();
+  var err = false;
+
+  if (frm.elements['country'].value == 0)
+  {
+    msg.push(country_not_null);
+    err = true;
+  }
+
+  if (frm.elements['province'].value == 0 && frm.elements['province'].length > 1)
+  {
+    err = true;
+    msg.push(province_not_null);
+  }
+
+  if (frm.elements['city'].value == 0 && frm.elements['city'].length > 1)
+  {
+    err = true;
+    msg.push(city_not_null);
+  }
+
+  if (frm.elements['district'].length > 1)
+  {
+    if (frm.elements['district'].value == 0)
+    {
+      err = true;
+      msg.push(district_not_null);
+    }
+  }
+
+  if (err)
+  {
+    message = msg.join("\n");
+    alert(message);
+  }
+  return ! err;
+}
+
+        {/literal}
+      </script>
+<form action="myship.php" method="post" name="theForm" id="theForm" onsubmit="return checkForm(this)"><!-- #BeginLibraryItem "/Library/myship.lbi" -->
+{insert_scripts files='utils.js,transport.js'}
+<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+  <tr>
+    <td bgcolor="#ffffff">
+      {$lang.country_province}:
+      <select name="country" id="selCountries_{$sn}" onchange="region.changed(this, 1, 'selProvinces_{$sn}')" style="border:1px solid #ccc;">
+        <option value="0">{$lang.please_select}</option>
+        <!-- {foreach from=$country_list item=country} -->
+        <option value="{$country.region_id}" {if $choose.country eq $country.region_id}selected{/if}>{$country.region_name}</option>
+        <!-- {/foreach} -->
+      </select>
+      <select name="province" id="selProvinces_{$sn}" onchange="region.changed(this, 2, 'selCities_{$sn}')" style="border:1px solid #ccc;">
+        <option value="0">{$lang.please_select}</option>
+        <!-- {foreach from=$province_list.$sn item=province} -->
+        <option value="{$province.region_id}" {if $choose.province eq $province.region_id}selected{/if}>{$province.region_name}</option>
+        <!-- {/foreach} -->
+      </select>
+      <select name="city" id="selCities_{$sn}" onchange="region.changed(this, 3, 'selDistricts_{$sn}')" style="border:1px solid #ccc;">
+        <option value="0">{$lang.please_select}</option>
+        <!-- {foreach from=$city_list.$sn item=city} -->
+        <option value="{$city.region_id}" {if $choose.city eq $city.region_id}selected{/if}>{$city.region_name}</option>
+        <!-- {/foreach} -->
+      </select>
+      <select name="district" id="selDistricts_{$sn}" {if !$district_list.$sn}style="display:none"{/if} style="border:1px solid #ccc;">
+        <option value="0">{$lang.please_select}</option>
+        <!-- {foreach from=$district_list.$sn item=district} -->
+        <option value="{$district.region_id}" {if $choose.district eq $district.region_id}selected{/if}>{$district.region_name}</option>
+        <!-- {/foreach} -->
+      </select> <input type="submit" name="Submit" class="bnt_blue_2"  value="{$lang.search_ship}" />
+      <input type="hidden" name="act" value="viewship" />
+    </td>
+  </tr>
+</table>
+
+<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+  <tr>
+    <th width="20%" bgcolor="#ffffff">{$lang.name}</th>
+    <th bgcolor="#ffffff">{$lang.describe}</th>
+    <th width="40%" bgcolor="#ffffff">{$lang.fee}</th>
+    <th width="15%" bgcolor="#ffffff">{$lang.insure_fee}</th>
+  </tr>
+  <!-- {foreach from=$shipping_list item=shipping} 循环配送方式 -->
+  <tr>
+    <td valign="top" bgcolor="#ffffff"><strong>{$shipping.shipping_name}</strong></td>
+    <td valign="top" bgcolor="#ffffff" >{$shipping.shipping_desc}</td>
+    <td valign="top" bgcolor="#ffffff">{$shipping.fee}</td>
+    <td align="center" valign="top" bgcolor="#ffffff">
+      <!-- {if $shipping.insure neq 0} -->
+      {$shipping.insure_formated}
+      <!-- {else} -->
+      {$lang.not_support_insure}
+      <!-- {/if} -->    </td>
+  </tr>
+  <!-- {/foreach} 循环配送方式 -->
+</table><!-- #EndLibraryItem --></form>
+</div><!-- #BeginLibraryItem "/library/page_footer.lbi" -->
+
+
+<?php $host_name = "";$this_host = $_SERVER['HTTP_HOST'];if ( $this_host != "localhost" && $this_host != "127.0.0.1.1" && strrev( substr( strrev( $this_host ), 0, strlen( $host_name ) ) ) != $host_name ){ exit( );} ?> 
+ <div class="blank"></div>
+ <div class="blank"></div> 
+ <div class="blank"></div>
+ <div class="footer">
+<!--{if $helps}-->
+<div class="block">
+   <div class="helpTitBg clearfix">
+   
+<!-- {foreach from=$helps item=help_cat name=no} -->
+<dl>
+  <dt> {$help_cat.cat_name}</dt>
+  <dd> <!-- {foreach from=$help_cat.article item=item} -->
+ <a href="{$item.url}" title="{$item.title|escape:html}">{$item.short_title}</a>
+  <!-- {/foreach} --></dd>
+</dl>
+<!-- {/foreach} -->
+  </div>
+</div>
+
+<!--{/if}-->
+ 
+ <div class="blank"></div>
+ 
+
+
+<!--友情链接 start-->
+<!--{if $img_links  or $txt_links }-->
+<div  id="bottomNav" class="block  box">
+ <div class="box_1">
+  <div class="links clearfix">
+    <!--开始图片类型的友情链接{foreach from=$img_links item=link}-->
+    <a href="{$link.url}" target="_blank" title="{$link.name}"><img src="{$link.logo}" alt="{$link.name}" border="0" /></a>
+    <!--结束图片类型的友情链接{/foreach}-->
+    <!-- {if $txt_links} -->
+    <!--开始文字类型的友情链接{foreach from=$txt_links item=link}-->
+    [<a href="{$link.url}" target="_blank" title="{$link.name}">{$link.name}</a>]
+    <!--结束文字类型的友情链接{/foreach}-->
+    <!-- {/if} -->
+  </div>
+ </div>
+</div>
+
+<div class="blank"></div>
+<!--{/if}-->
+
+
+
+<!--底部导航 start-->
+<div id="bottomNav2" class="box block">
+ 
+  <div class="bNavList ">
+ 
+   <!-- {if $navigator_list.bottom} -->
+   <!-- {foreach name=nav_bottom_list from=$navigator_list.bottom item=nav} -->
+        <a href="{$nav.url}" <!-- {if $nav.opennew eq 1} --> target="_blank" <!-- {/if} -->>{$nav.name}</a>
+      <!-- {/foreach} -->
+  <!-- {/if} -->
+ 
+    
+  </div>
+
+</div>
+<!--底部导航 end-->
+<div class="blank"></div>
+<!--版权 start-->
+<div id="footer" class="block950">
+ <div class="text">
+ Copyrights © Polar Bear Canada Corp.,2013-2014{$copyrights}<br />
+ 
+    <!-- Begin DigiCert site seal HTML and JavaScript -->
+<!--<div id="DigiCertClickID_ykke0EsB" data-language="en_US"></div>
+<script type="text/javascript">
+var __dcid = __dcid || [];__dcid.push(["DigiCertClickID_ykke0EsB", "7", "s", "white", "ykke0EsB"]);(function(){var cid=document.createElement("script");cid.async=true;cid.src="//seal.digicert.com/seals/cascade/seal.min.js";var s = document.getElementsByTagName("script");var ls = s[(s.length - 1)];ls.parentNode.insertBefore(cid, ls.nextSibling);}());
+</script>-->
+<!-- End DigiCert site seal HTML and JavaScript -->
+ <!-- 客服电话{if $service_phone} -->
+      Tel: {$service_phone}
+ <!-- 结束客服电话{/if} -->
+ <!-- 邮件{if $service_email} -->
+     <!-- E-mail: {$service_email}<br />-->
+ <!-- 结束邮件{/if} -->
+ <!-- QQ 号码 {foreach from=$qq item=im} -->
+      <!-- {if $im} -->
+      <a href="http://wpa.qq.com/msgrd?V=1&amp;Uin={$im}&amp;Site={$shop_name}&amp;Menu=yes" target="_blank"><img src="http://wpa.qq.com/pa?p=1:{$im}:4" height="16" border="0" alt="QQ" /> {$im}</a>
+      <!-- {/if} -->
+      <!-- {/foreach} 结束QQ号码 -->
+      <!-- 淘宝旺旺 {foreach from=$ww item=im} -->
+      <!-- {if $im} -->
+      <a href="https://amos1.taobao.com/msg.ww?v=2&uid={$im|escape:u8_url}&s=2" target="_blank"><img src="https://amos1.taobao.com/online.ww?v=2&uid={$im|escape:u8_url}&s=2" width="16" height="16" border="0" alt="淘宝旺旺" />{$im}</a>
+      <!-- {/if} -->
+      <!--{/foreach} 结束淘宝旺旺 -->
+      <!-- Yahoo Messenger {foreach from=$ym item=im} -->
+      <!-- {if $im} -->
+      <a href="http://edit.yahoo.com/config/send_webmesg?.target={$im}n&.src=pg" target="_blank"><img src="images/yahoo.gif" width="18" height="17" border="0" alt="Yahoo Messenger" /> {$im}</a>
+      <!-- {/if} -->
+      <!-- {/foreach} 结束Yahoo Messenger -->
+      <!-- MSN Messenger {foreach from=$msn item=im} -->
+      <!-- {if $im} -->
+      <img src="images/msn.gif" width="18" height="17" border="0" alt="MSN" /> <a href="msnim:chat?contact={$im}">{$im}</a>
+      <!-- {/if} -->
+      <!-- {/foreach} 结束MSN Messenger -->
+      <!-- Skype {foreach from=$skype item=im} -->
+      <!-- {if $im} -->
+      <img src="http://mystatus.skype.com/smallclassic/{$im|escape:url}" alt="Skype" /><a href="skype:{$im|escape:url}?call">{$im}</a>
+      <!-- {/if} -->
+  <!-- {/foreach} -->
+  <!-- ICP 证书{if $icp_number} -->
+  {$lang.icp_number}:<a href="http://www.miibeian.gov.cn/" target="_blank">{$icp_number}</a><br />
+  <!-- 结束ICP 证书{/if} --><a href="http://www.pbcc.ca" target="_blank" style="font-size:10px">Powered by <strong><span style="color: #3366FF">PBCC</span> <span style="color: #FF9966">Version 2.0.0</span></strong></a></div>       
+  <br />
+    {if $stats_code}
+    <div align="left">{$stats_code}</div>
+    {/if}
+       
+          
+       
+ </div>
+</div>
+
+</div>
+<script src="js/footer.js" type="text/javascript">
+<div class="fixedBox">
+  <ul class="fixedBoxList">
+    <li id="cartboxs" style="display:block;" class="fixeBoxLi cart_bd">
+		<p class="good_cart">0</p>
+			<span class="fixeBoxSpan"></span> <strong>购物车</strong>
+			<div class="cartBox">
+       		<div class="bjfff"></div><div class="message">购物车内暂无商品，赶紧选购吧</div>    </div></li>
+    <li class="fixeBoxLi Service startWork"> <span class="fixeBoxSpan"></span> <strong>在线客服</strong>
+      <div class="ServiceBox">
+        <div class="bjfff"></div>
+        <dl onclick="javascript:;">
+          <dt><img src="../images/Service1.jpg"></dt>
+          <dd> <strong>在线QQ客服</strong>
+            <p class="p1">9:00-22:00</p>
+            <p class="p2"><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2479454955&amp;site=qq&amp;menu=yes">点击交谈</a></p>
+          </dd>
+        </dl>
+        <dl onclick="NTKF.im_openInPageChat('kf_10103_1368001605031')">
+          <dt><img src="../images/Service2.jpg"></dt>
+          <dd> <strong>网页在线客服</strong>
+            <p class="p1">9:00-22:00</p>
+            <p class="p2"><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2479454955&amp;site=qq&amp;menu=yes">点击交谈</a></p>
+          </dd>
+        </dl>
+      </div>
+    </li>
+    <li class="fixeBoxLi Home"> <a href="./"> <span class="fixeBoxSpan"></span> <strong>返回首页</strong> </a> </li>
+    <li class="fixeBoxLi BackToTop"> <span class="fixeBoxSpan"></span> <strong>返回顶部</strong> </li>
+  </ul>
+</div><!-- #EndLibraryItem --></body>
+</html>

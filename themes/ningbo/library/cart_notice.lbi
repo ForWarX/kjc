@@ -1,0 +1,23 @@
+<div id="shopbox" class="shopbox">
+    <div class="shopboxcon">
+        <div id="shoploading" style="display: block;"><img alt="loading" src="../images/loading.gif"></div>
+        <div>
+          <h2><a class="track close" name="item-close-cart" href="#"  onclick="document.getElementById('shopbox').style.display='none';"><img src="../images/close_red.png"><span onclick="document.getElementById('shopbox').style.display='none';">关闭</span></a></h2>
+          <div class="spboxcontent">
+              <div class="shopboxdetail">
+                <div class="spboxleft"><img src="../images/cart_red.png"></div>
+                <div class="spboxright">
+                  <span class="spboxtitle">该商品已成功放入购物车</span> <span class="blank5"></span>
+                  <p class="num">购物车共 <span id="shopboxcount" class="numstyle"></span> 件商品 合计：<span id="shopboxprice" class="numstyle2"></span> 元</p>
+                  <span class="blank5"></span>
+                  <p class="spbbtndiv">
+                    <a href="javascript:void(0)" name="item-continueshop" class="jxgwbtn track" onclick=" document.getElementById('shopbox').style.display='none';">&lt;&lt;继续购物</a>
+                    <a target="_parent" href="flow.php" name="item-Settlement" class="track"><img src="../images/checkout_red.png" class="qujiesuan"></a>
+                  </p>
+                </div>
+              </div>
+             
+          </div>
+        </div>
+    </div>
+</div>    

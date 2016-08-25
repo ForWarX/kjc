@@ -1,0 +1,48 @@
+body,h1,h2,h3,h4,h5,h6,dl,dd,ul,ol,form,input,p,table,tr,td { margin:0; padding:0; font-family:Arial, Helvetica, sans-serif; font-family:'Microsoft Yahei'; font-size:12px;}
+li{ list-style:none;}
+img{ border:none;}
+.clear{zoom:1;}
+.clear:after{content:"\20";display:block;clear:both;}
+
+/*头部*/
+.lightCloudSite-head { height:79px; background:#f2f2f2; border-bottom:3px solid #595656;}
+.lightCloudSite-head-info { width:944px; height:79px; margin:0 auto;}
+.lightCloudSite-head-infoLeft { float:left; line-height:78px; height:79px;}
+.lightCloudSite-head-infoLeft a { display:inline-block;}
+.lightCloudSite-head-infoLeft span { font-size:14px; color:#5d5d5d; vertical-align:top; position:relative; top:14px; *top:44px;}
+.lightCloudSite-head-infoRight { float:right; padding-right:4px; padding-top:50px;}
+.lightCloudSite-head-infoRight li { line-height:30px; font-size:12px; float:left;}
+.lightCloudSite-head-infoRight li a { color:#5d5d5d; text-decoration:none;}
+
+/*内容*/
+.lightCloudSite-main { border-top:1px solid #60bcee; background:#f1f1f1 url(../images/lightCloudSite-main-bg.gif) repeat-x;}
+.lightCloudSite-main-top { width:100%; height:121px; background:url(../images/lightCloudSite-main-top.gif) no-repeat center center;}
+.lightCloudSite-main-info { width:100%; height:439px; background:url(../images/lightCloudSite-main-info.gif) no-repeat center center;}
+.lightCloudSite-main-centerInfo { width:944px; margin:0 auto; position:relative;}
+.lightCloudSite-main-title { height:62px; line-height:62px; font-size:16px; color:#464646; padding-left:68px; background:url(../images/lightCloudSite-main-title.gif) no-repeat 32px 21px;}
+.lightCloudSite-main-title a { padding-left:17px; background:url(../images/help-icon.gif) no-repeat 0 4px; color:#508fd1; text-decoration:underline; font-size:13px;}
+.open-process { height:34px; line-height:34px; font-size:22px; color:#464646; padding-left:28px; _padding-left:10px; font-weight:500; _position:absolute; _top:56px;}
+.lightCloudSite-main-process { height:95px; width:908px; margin:0 auto; _padding-top:22px;}
+.process-one { float:left; margin:12px 0 0 6px;}
+.process-div-one { float:left; width:130px; padding-left:9px; padding-top:12px;}
+.process-div-one h4 { line-height:22px; font-size:16px; color:#464646;}
+.process-div-one p { line-height:22px; font-size:12px; color:#5d5d5d;}
+.process-div-one span { display:inline-block; line-height:28px; font-size:13px;}
+.process-div-one span a { text-decoration:underline; color:#4087ce;}
+.process-two { float:left; margin:12px 0 0 0;}
+.process-three { float:left; margin:12px 0 0 0;}
+.process-four { float:left; margin:12px 0 0 0;}
+.processWidth1 { width:160px;}
+.processWidth2 { width:150px;}
+.process-div-two { float:left;}
+.process-div-two p { line-height:92px; font-size:14px; color:#464646; padding-left:8px;}
+.product-adv { padding-top:10px;}
+.product-adv dt { height:44px; line-height:44px; font-size:24px; color:#464646; padding-left:29px; _padding-top:10px;}
+.product-adv dd { width:386px; float:left; margin-left:28px; display:inline; height:92px;}
+.product-adv dd img { float:left; width:70px; height:62px;}
+.product-adv-txt { float:left; width:270px; padding-left:34px; padding-bottom:30px;}
+.product-adv-txt h4 { line-height:30px; font-size:18px; color:#4f4f4f; font-weight:600;}
+.product-adv-txt p { line-height:16px; font-size:12px; color:#4f4f4f;}
+
+/*底部*/
+.lightCloudSite-footer { height:50px; line-height:50px; font-size:12px; color:#5d5d5d; text-align:center; margin:0 auto; width:944px;}

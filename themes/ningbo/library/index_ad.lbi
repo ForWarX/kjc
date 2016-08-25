@@ -1,0 +1,40 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+
+<!-- {if $index_ad eq 'sys'} -->
+<script type="text/javascript">
+var swf_width=760;
+var swf_height=420;
+</script>
+<script type="text/javascript" src="data/flashdata/{$flash_theme}/cycle_image.js"></script>
+<!-- {elseif $index_ad eq 'cus'} -->
+<!-- {if $ad.ad_type eq 0} -->
+<a href="{$ad.url}" target="_blank"><img src="{$ad.content}" width="760" height="420" border="0"></a>
+<!-- {elseif $ad.ad_type eq 1} -->
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="760" height="420">
+<param name="movie" value="{$ad.content}" />
+<param name="quality" value="high" />
+<embed src="{$ad.content}" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="760" height="420"></embed>
+</object>
+<!-- {elseif $ad.ad_type eq 2} -->
+<div class="pb_slider_box" id="pb_slider">
+  <div class="pb_slider_con_box">
+  	{foreach from=$playerdb item=item key=key}
+    	<div><a style="background: url('{$item.src}') no-repeat scroll center center transparent; position: absolute; z-index: 9; opacity: 1;" href="{$item.url}" title="{$item.text}" target="_blank"></a></div>
+    {/foreach}		 
+  </div>
+  <div class="pb_slider_switcher">
+  	{foreach from=$playerdb item=item key=key}
+  		<a class="cur" href="{$item.url}" title="{$item.text}" target="_blank"></a>
+    {/foreach}	     
+   </div>
+</div>
+<script type="text/javascript">
+{$ad.content}
+</script>
+<!-- {elseif $ad.ad_type eq 3} -->
+<a href="{$ad.url}" target="_blank">{$ad.content}</a>
+<!-- {/if} -->
+<!-- {else} -->
+<!-- {/if} -->
+<br/>

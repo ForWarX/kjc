@@ -1,0 +1,157 @@
+/* CSS base */
+
+.b{background:url(images/ico.png) no-repeat;}/*åŽæœŸå®Œæˆåœ¨FWè½¬å­˜é€‰å–alphaé€æ˜Žpng8æ ¼å¼ä»¥è¾¾åˆ°å…¼å®¹ie6*/
+
+body a{outline:none;blr:expression(this.onFocus=this.blur());}
+
+.wrap{/*z-index:8;*/margin-left:auto;margin-right:auto;width:1200px;}
+#stu_verify{background: url(../images/top_banner.jpg) no-repeat 0 0; height:80px; position: relative;}
+#stu_verify a{display: block; height: 80px;}
+#stu_verify span{background: url(../images/top_banner_close.png) no-repeat 0 0; width:30px; height:30px; position: absolute; top:25px; right:14px; cursor: pointer;}
+
+.borderb_none{border-bottom: none;}
+
+.topbar{ height:30px; line-height:30px; background:#f2f2f2; border:1px solid #d5d5d5; border-width:1px 0; color:#444;}
+
+.dlg_box { background-color: #FFFFFF; border-radius: 5px;  box-shadow: 0 0 4px rgba(0, 0, 0, 0.7); display: none; height: auto; left: 38%; padding: 25px;  position: fixed;
+
+ top: 200px; width: 348px; z-index: 2000;}
+
+.mySearver h2,.cnsb h2{ border-bottom:1px solid #d6d4d3;text-align:center;}
+
+.mySearver h2 span,.cnsb h2 span{ position:relative;top:20px; padding:0 15px;letter-spacing:1px;background:#FFF; font-size:30px;}
+
+.mysList{ margin-top:56px;}
+
+.mysList li{ display:inline;float:left; width:298px; text-align:center;}
+
+.mysList li p{font-size: 14px; text-align: center;}
+
+.mysList li.num1{ margin-left:22px;}
+
+.mysList li.num2{ margin:0 138px;}
+
+.mysList li a{display:block; margin:0 auto;width:134px;height:157px; text-indent:-9999px;overflow:hidden;}
+
+.mysList li.num1 a{background-position:0 -100px;}
+
+.mysList li.num1 a:hover{background-position:0 -286px;}
+
+.mysList li.num2 a{background-position:-154px -100px;}
+
+.mysList li.num2 a:hover{background-position:-154px -286px;}
+
+.mysList li.num3 a{background-position:-314px -100px;}
+
+.mysList li.num3 a:hover{background-position:-314px -286px;}
+
+.mysList li a:hover{-moz-transition:all 0.3s linear;-webkit-transition:all 0.3s linear; transition:all 0.3s linear;}
+
+
+.superiority{background:#fff no-repeat center 0;width: 1210px;padding-bottom:50px;}
+
+.superiority h2{ margin-top:10px;border-bottom:2px solid #473278;text-align:center;height:27px;}
+
+.superiority h2 span{ position:relative;padding:0 15px;letter-spacing:1px;background:#473278 no-repeat center -20px;font-size:30px; color:#fefefe}
+
+.superiority h3{ line-height:normal;font-size:medium;background:0;text-align:inherit;font-weight:normal;}
+
+.mysuperList{ overflow:hidden}
+
+.mysuperList ul{ width:100%; padding-left:42px}
+
+.mysuperList li{ margin:62px 65px 0 0; display:inline;float:left; width:234px; text-align:center;}
+
+.mysuperList li a{display:block;margin:0 auto; font-size:20px;}
+
+.mysuperList li h3{border-bottom: none!important;color: #473278;font-size: 18px;font-weight: 600;}
+
+.mysuperList li a:hover{text-decoration: none;}
+
+.mysuperList li a i{display:block;margin:0 auto 20px;width:85px;height:85px; text-indent:-9999px;overflow:hidden;}
+
+.mysuperList li p{ line-height:22px; text-align: left; font-size: 14px;margin: 15px 0 0 5px;}
+
+.mysuperList li.num1 a i{background-position:-19px -472px;}
+
+.mysuperList li.num1 a:hover i{background-position:-18px -768px;}
+
+.mysuperList li.num2 a i{background-position:-148px -472px;}
+
+.mysuperList li.num2 a:hover i{background-position:-147px -768px;}
+
+.mysuperList li.num3 a i{background-position:-276px -472px;}
+
+.mysuperList li.num3 a:hover i{background-position:-275px -768px;}
+
+.mysuperList li.num4 a i{background-position:-404px -472px;}
+
+.mysuperList li.num4 a:hover i{background-position:-403px -768px;}
+
+.mysuperList li.num5 a i{background-position:-19px -611px;}
+
+.mysuperList li.num5 a:hover i{background-position:-19px -908px;}
+
+.mysuperList li.num6 a i{background-position:-147px -611px;}
+
+.mysuperList li.num6 a:hover i{background-position:-147px -908px;}
+
+.mysuperList li.num7 a i{background-position:-276px -611px;}
+
+.mysuperList li.num7 a:hover i{background-position:-276px -908px;}
+
+.mysuperList li.num8 a i{background-position:-403px -611px;}
+
+.mysuperList li.num8 a:hover i{background-position:-403px -908px;}
+
+.mysuperList li a:hover i{-moz-animation:icoscale 1s;-webkit-animation:icoscale 1s;animation:icoscale 1s;}
+
+@-webkit-keyframes icoscale {
+
+	30% {-webkit-transform:scale(0.5);-moz-transform:scale(0.5);transform:scale(0.5)};
+
+	50% {-webkit-transform:scale(1.5);-moz-transform:scale(1.5);transform:scale(1.5)};
+
+	100%{-webkit-transform:scale(1.0);-moz-transform:scale(1.0);transform:scale(1.0)}}
+
+@-moz-keyframes icoscale {
+
+	30% {-webkit-transform:scale(0.5);-moz-transform:scale(0.5);transform:scale(0.5)};
+
+	50% {-webkit-transform:scale(1.5);-moz-transform:scale(1.5);transform:scale(1.5)};
+
+	100%{-webkit-transform:scale(1.0);-moz-transform:scale(1.0);transform:scale(1.0)}}
+
+@keyframes icoscale {
+
+	30% {-webkit-transform:scale(0.5);-moz-transform:scale(0.5);transform:scale(0.5)};
+
+	50% {-webkit-transform:scale(1.5);-moz-transform:scale(1.5);transform:scale(1.5)};
+
+	100%{-webkit-transform:scale(1.0);-moz-transform:scale(1.0);transform:scale(1.0)}}
+
+.cnsb .cnsbTxt{ padding-top:20px;text-align:center}
+
+.focus_us .focus_list li dt a:hover{
+	animation:showRotate .8s 1;
+	-moz-animation:showRotate .8s 1; /* Firefox */
+	-webkit-animation:showRotate .8s 1; /* Safari and Chrome */
+	-webkit-transition-timing-function:ease-in;
+	-o-animation:showRotate .8s 1; /* Opera */
+}
+@-webkit-keyframes showRotate {
+	from{ -webkit-transform: rotate(0deg); }
+	to { -webkit-transform: rotate(360deg); }
+}
+@-moz-keyframes showRotate {
+	from{ -moz-transform: rotate(0deg); }
+	to { -moz-transform: rotate(360deg); }
+}
+@-o-keyframes showRotate {
+	from{ -o-transform: rotate(0deg); }
+	to { -o-transform: rotate(360deg); }
+}
+@-ms-keyframes showRotate {
+	from{ -ms-transform: rotate(0deg); }
+	to { -ms-transform: rotate(360deg); }
+}

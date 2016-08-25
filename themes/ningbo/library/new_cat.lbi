@@ -1,0 +1,32 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<div class="cat-tree">
+
+<!--{foreach from=$all-categories item=cat}-->
+<div class="cat-tree-inner">
+<div class="cat-tree-left">
+<a href="{$cat.url}"><span>{$cat.name|escape:html}</span></a>
+</div>
+<div class="cat-tree-right">
+	<ul>
+		<!--{foreach from=$cat.cat_id item=child}-->
+		
+		<li onmouseover="this.className='sub-cat-open'" onmouseout="this.className=''"><a href="{$child.url}">{$child.name|escape:html}</a>
+		
+		<div class="sub-cat">
+			<div class="sub-cat-wrap">
+				<dl>
+					<!--{foreach from=$child.cat_id item=grandchild}-->
+                    <dd> <a href="{$grandchild.url}">{$grandchild.name|escape:html}</a> </dd>
+					<!--{/foreach}-->
+				</dl>
+			</div>
+		</div>
+		</li>
+		<!--{/foreach}-->
+		<li></li>
+	</ul>	
+</div>
+</div>
+<!--{/foreach}--> 
+</div>
