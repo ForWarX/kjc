@@ -231,6 +231,6 @@ define('SEND_RANK', 2);
 define('LICENSE_VERSION', '1.0');
 
 /* 配送方式 */
-define('SHIP_LIST', 'cac|city_express|ems|flat|fpd|post_express|post_mail|presswork|sf_express|sto_express|yto|zto|vw_express|f_express|zt_express');
+define('SHIP_LIST', 'cac|city_express|ems|flat|fpd|post_express|post_mail|presswork|sf_express|sto_express|yto|zto|vw_express|f_express|zt_express|ztems_express');
 
 ?>
