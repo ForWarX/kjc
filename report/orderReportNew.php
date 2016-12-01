@@ -1,4 +1,10 @@
 <?php
+
+/*****************************************************************************
+ * 号百接口
+ * 现已跟号百取消合作，改用海关接口
+ */
+
 	header("Content-Type:text/html;charset=UTF-8");
 	date_default_timezone_set("Asia/Shanghai");
 	

@@ -415,10 +415,10 @@ return offset;
       </li>
        <!-- {/if} -->
       <!--{/if}-->
-      
-      <!--{if $kj_tax}-->
+
+      <!--{if $kj_yes} 原先是判断kj_tax-->
       	 <li class="clearfix">
-        <!-- 
+        <!--
        <dd>
        <strong>原产地：</strong>
       {$origin_place}&nbsp;&nbsp;&nbsp;

@@ -654,51 +654,54 @@ elseif ($_REQUEST['step'] == 'checkout')
     $_SESSION['flow_consignee'] = $consignee;
     $smarty->assign('consignee', $consignee);
     
-    
+    /* 实名认证信息 */
+    $real_info = get_account_real_info($_SESSION['user_id']);
+    if ($real_info != null) {
+        $smarty->assign("real_info", $real_info);
+    }
     
     /* 对商品信息赋值 */
     //$cart_goods = cart_goods($flow_type); // 取得商品列表，计算合计
     
-        /*跨境购  购物车改造*/
-        $cart_goods=cart_goods_selected($flow_type);
-        $kj_counter=0;
-        foreach($cart_goods as $goods){
-            $cat_id = $GLOBALS['db']->getOne("SELECT `cat_id` FROM " . $GLOBALS['ecs']->table('goods') . " WHERE `goods_id`='{$goods['goods_id']}'");
-            if(is_kj_product($cat_id)==1){
-                //$check_num=check_is_kj_good($goods['goods_id']);//判断是否备案
-                //if($check_num==1){
-                    $kj_counter++;
-                //}
-               // if($check_num==2){//请求超时
-                   // break;
-               // }
-            }
-            
+    /*跨境购  购物车改造*/
+    $cart_goods=cart_goods_selected($flow_type);
+    $kj_counter=0;
+    foreach($cart_goods as $goods){
+        $cat_id = $GLOBALS['db']->getOne("SELECT `cat_id` FROM " . $GLOBALS['ecs']->table('goods') . " WHERE `goods_id`='{$goods['goods_id']}'");
+        if(is_kj_product($cat_id)==1){
+            //$check_num=check_is_kj_good($goods['goods_id']);//判断是否备案
+            //if($check_num==1){
+                $kj_counter++;
+            //}
+           // if($check_num==2){//请求超时
+               // break;
+           // }
         }
-        if($kj_counter <> 0 && count($cart_goods) > $kj_counter){
-            show_message('<br/>购物车中同时含有跨境购商品和其他商品，跨境购商品需要单独下单。', '', '', 'warning');
-        }
-        /*end*/
-        
-        //跨境购改造 接口改造
-        //$is_binding = kj_check($cart_goods,$_SESSION['user_name']);
-        $is_binding=array(2, "");
-        if(count($cart_goods) == $kj_counter){//只有跨境订单才进行该检查
-            $is_binding = kj_check($cart_goods,$_SESSION['user_name']);
-            if( $is_binding[0]==0){//接口异常
-                if($is_binding[1]==''){
-                    show_message('<br/>服务器连接异常，请稍后再试。', '', '', 'warning');
-                }else{
-                    show_message('<br/>'.$is_binding[1].'。', '', '', 'warning');
-                }
+    }
+    if($kj_counter <> 0 && count($cart_goods) > $kj_counter){
+        show_message('<br/>购物车中同时含有跨境购商品和其他商品，跨境购商品需要单独下单。', '', '', 'warning');
+    }
+    /*end*/
+
+    //跨境购改造 接口改造
+    //$is_binding = kj_check($cart_goods,$_SESSION['user_name']);
+    $is_binding=array(2, ""); //号百接口改造
+    if(count($cart_goods) == $kj_counter){//只有跨境订单才进行该检查
+        $is_binding = kj_check($cart_goods,$_SESSION['user_name']);
+        if($is_binding[0]==0){//接口异常
+            if($is_binding[1]==''){
+                show_message('<br/>服务器连接异常，请稍后再试。', '', '', 'warning');
+            } else {
+                show_message('<br/>'.$is_binding[1], '', '', 'warning');
             }
         }
+    }
         
 	$smarty->assign('is_binding', $is_binding[0]);
 	
 	$smarty->assign('beian_link', $is_binding[1]);
 	
-        $smarty->assign('goods_list', $cart_goods);
+    $smarty->assign('goods_list', $cart_goods);
         
         
 	if ($is_binding[0] == 1){
@@ -713,14 +716,14 @@ elseif ($_REQUEST['step'] == 'checkout')
 		$kj_goods_tax = $is_binding[5];
 		$smarty->assign('kj_goods_tax', $kj_goods_tax);
                 
-                $smarty->assign('disable_surplus', true);//接口改造 增加 跨境订单不允许使用余额支付
+        $smarty->assign('disable_surplus', true);//接口改造 增加 跨境订单不允许使用余额支付
+
+        if($kj_goods_amount > 1000 && $kj_goods_number > 1){
+            show_message('<br/>根据海关规定，单笔订单总价不可以超过1000元，如果单笔订单为一件且不可分割的商品除外。<br/><br/><span style="color:#000;text-decoration:underline;cursor:pointer;font-weight:100;" title="提示：根据海关总署规定，消费者订单均以个人生活消费品为标准，以个人自用、合理数量“为原则，参照《海关总署公告2010年第43号（关于调整进出境邮递物品管理措施有关事宜）》要求，每个订单限值1000元人民币，但如果一个订单内的商品为不可分割的单个商品，价格在1000元以上也是允许的，每人每年有限制交易的额度为2万元人民币，超过将不能够继续购买。">消费者购物金额和数量有限制吗？（请将光标移至此处）</span>', '', '', 'warning');
+        }
 	}
 	
 	$kj_goods_counter = $is_binding[6];
-        
-	if($kj_goods_amount > 1000 && $kj_goods_number > 1){
-		show_message('<br/>根据海关规定，单笔订单总价不可以超过1000元，如果单笔订单为一件且不可分割的商品除外。<br/><br/><span style="color:#000;text-decoration:underline;cursor:pointer;font-weight:100;" title="提示：根据海关总署规定，消费者订单均以个人生活消费品为标准，以个人自用、合理数量“为原则，参照《海关总署公告2010年第43号（关于调整进出境邮递物品管理措施有关事宜）》要求，每个订单限值1000元人民币，但如果一个订单内的商品为不可分割的单个商品，价格在1000元以上也是允许的，每人每年有限制交易的额度为2万元人民币，超过将不能够继续购买。">消费者购物金额和数量有限制吗？（请将光标移至此处）</span>', '', '', 'warning');
-	}
 	
     /* 对是否允许修改购物车赋值 */
     if ($flow_type != CART_GENERAL_GOODS || $_CFG['one_step_buy'] == '1')
@@ -902,7 +905,7 @@ elseif ($_REQUEST['step'] == 'checkout')
     $user_info = user_info($_SESSION['user_id']);
     /*如果是跨境订单，判断用户是否已经实名注册 接口改造 实名认证*/
     if(count($cart_goods) == $kj_counter && check_account($user_info['user_name'])==0 ){//只有跨境订单才进行该检查
-        $smarty->assign('real_authenty', 1);
+        $smarty->assign('real_authenty', 1); // 该变量在页面中作为判断是否需要实名认证，1即为未认证，需要实名认证
     }
 
     /* 如果使用余额，取得用户余额 */
@@ -1939,7 +1942,7 @@ elseif ($_REQUEST['step'] == 'done')
     $order['phone']='';
     $order['identy_email']='';
     
-    if(check_account($user_info['user_name'])==0 && $order['order_type'] == 1){
+    if($order['order_type'] == 1 && check_account($user_info['user_name'])==0){
         $id_num=$_POST['id_num'];
         $real_name=$_POST['real_name'];
         $phone=$_POST['phone'];
@@ -1960,7 +1963,7 @@ elseif ($_REQUEST['step'] == 'done')
             $order['identy_email']=$identy_email;
         */
         //绑定实名帐号
-        $bind_res=bind_account($user_info['user_name'],$id_num,$real_name,$phone,$identy_email);
+        $bind_res=bind_account($user_info['user_id'],$id_num,$real_name,$phone,$identy_email);
         if($bind_res[0]==0){
             show_message('<br/>绑定实名帐号出错，'.$bind_res[1], '','', 'warning');
             exit;
@@ -2110,6 +2113,7 @@ elseif ($_REQUEST['step'] == 'done')
     }
     
     if($order['order_type'] == 1){//接口改造增加
+        /* 需要拿到支付单号才能提交给申报系统，因此不在这里提交
 	   $sql = "SELECT * FROM " . $GLOBALS['ecs']->table('order_info') ." WHERE order_id = ".$order['order_id'];
         $orderDb=$GLOBALS['db']->getRow($sql);
         $goods_list=order_goods($orderDb['order_id']);
@@ -2118,7 +2122,8 @@ elseif ($_REQUEST['step'] == 'done')
         if($orderData!=null){
             $submit_suc=kj_order_submit($orderData,$orderDb);
         }
-        /*
+        */
+        /* 旧代码， 在上面的注释之前就已注释
         if($submit_suc[0]==1){
             update_order($order['order_id'], array('kj_order_amount' => $orderData['orderAmount']));
         }else{
@@ -2141,7 +2146,15 @@ elseif ($_REQUEST['step'] == 'done')
         $payment = payment_info($order['pay_id']);
         //支付改造
         if($order['order_type'] == 1){//跨境订单使用
-            $pay_online= '<div style="text-align:center"><input type="button" onclick="window.open(\'flow.php?step=pay_order&order_id='.$order['order_id'].'&logId='.$order['log_id'].'\')"  value="立即使用支付宝支付" /></div>';
+            // 号百的支付方式
+            //$pay_online= '<div style="text-align:center"><input type="button" onclick="window.open(\'flow.php?step=pay_order&order_id='.$order['order_id'].'&logId='.$order['log_id'].'\')"  value="立即使用支付宝支付" /></div>';
+
+            // 现改回原来的支付方式，调用支付宝的普通接口
+            include_once('includes/modules/payment/' . $payment['pay_code'] . '.php');
+            $pay_obj    = new $payment['pay_code'];
+            $pay_config = unserialize_config($payment['pay_config']);
+            $pay_config['is_kj'] = true; // 跨境订单标识
+            $pay_online = $pay_obj->get_code($order, $pay_config);
         }else{
             include_once('includes/modules/payment/' . $payment['pay_code'] . '.php');
             $pay_obj    = new $payment['pay_code'];
@@ -2155,22 +2168,21 @@ elseif ($_REQUEST['step'] == 'done')
         $order['shipping_name']=trim(stripcslashes($order['shipping_name']));
     }
     
-		/* 订单信息 */
-		$smarty->assign('order',      $order);
-		$smarty->assign('total',      $total);
-		$smarty->assign('goods_list', $cart_goods);
-		$smarty->assign('order_submit_back', sprintf($_LANG['order_submit_back'], $_LANG['back_home'], $_LANG['goto_user_center'])); // 返回提示
-	
-		user_uc_call('add_feed', array($order['order_id'], BUY_GOODS)); //推送feed到uc
-		unset($_SESSION['flow_consignee']); // 清除session中保存的收货人信息
-		unset($_SESSION['flow_order']);
-		unset($_SESSION['direct_shopping']);
+    /* 订单信息 */
+    $smarty->assign('order',      $order);
+    $smarty->assign('total',      $total);
+    $smarty->assign('goods_list', $cart_goods);
+    $smarty->assign('order_submit_back', sprintf($_LANG['order_submit_back'], $_LANG['back_home'], $_LANG['goto_user_center'])); // 返回提示
+
+    user_uc_call('add_feed', array($order['order_id'], BUY_GOODS)); //推送feed到uc
+    unset($_SESSION['flow_consignee']); // 清除session中保存的收货人信息
+    unset($_SESSION['flow_order']);
+    unset($_SESSION['direct_shopping']);
 }
 
 /*------------------------------------------------------ */
 //-- 更新购物车
 /*------------------------------------------------------ */
-
 elseif ($_REQUEST['step'] == 'update_cart')
 {
     if (isset($_POST['goods_number']) && is_array($_POST['goods_number']))
@@ -2471,49 +2483,59 @@ else if($_REQUEST['step'] == 'pay_order'){//支付改造 增加
     $order['log_id']=$log_id;
     
     include_once('includes/lib_payment.php');
-    if($order['order_type']==1){
-            //判断订单是否已经同步
-            if($order['report_status']==0){
-                $goods_list=order_goods($order['order_id']);
-                //发送订单到接口,再次同步订单
-                $orderData=get_report_order($order,$goods_list);
-                if($orderData==null){
-                    show_message('<br/>服务器连接异常，订单支付失败，请稍后再试。', '', '', 'warning');
-                }
-                if($orderData!=null){
-                    $submit_suc=kj_order_submit($orderData,$order);
-                }
-                if($submit_suc[0]==0){
-                    show_message('<br/>订单支付失败，'.$submit_suc[1].'请稍后再试。', '', '', 'warning');
-                }
+    if($order['order_type']==1){ // 跨境订单
+        //判断订单是否已经同步
+        /* 原本号百同步需要，现在直接对接海关应该在支付成功获取支付单号之后再同步订单
+        if($order['report_status']==0){
+            $goods_list=order_goods($order['order_id']);
+            //发送订单到接口,再次同步订单
+            $orderData=get_report_order($order,$goods_list);
+            if($orderData==null){
+                show_message('<br/>服务器连接异常，订单支付失败，请稍后再试。', '', '', 'warning');
             }
-            
-            include_once('includes/lib_time.php');
-            include_once('includes/cls_json.php');
-            include_once(ROOT_PATH . 'languages/zh_cn/common.php');
-            include_once('includes/modules/payment/kjgpay.php');
-            $pay_obj = new kjgpay();
-            //$url=$pay_obj->get_code($order);//get方式提交
-            //header("Location:".$url); 
-            //post 请求提交
-            $postData=$pay_obj->getPostData($order);
-            echo "<form style='display:none;' id='form1' name='form1' method='post' action='{$GLOBALS['_LANG']['kj_payurl']}'>
-                    <input name='payData' type='text' value='{$postData["payData"]}' />
-                    <input name='method' type='text' value='{$postData["method"]}'/>
-                    <input name='version' type='text' value='{$postData["version"]}'/>
-                    <input name='appId' type='text' value='{$postData["appId"]}'/>
-                    <input name='timestamp' type='text' value='{$postData["timestamp"]}'/>
-                    <input name='nonce' type='text' value='{$postData["nonce"]}'/>
-                    <input name='sign' type='text' value='{$postData["sign"]}'/>
-                   </form>
-                   <script type='text/javascript'>function load_submit(){document.form1.submit()}load_submit();</script>";
+            if($orderData!=null){
+                $submit_suc=kj_order_submit($orderData,$order);
+            }
+            if($submit_suc[0]==0){
+                show_message('<br/>订单支付失败，'.$submit_suc[1].'请稍后再试。', '', '', 'warning');
+            }
+        }
+        */
+        /* 号百的支付方式，已停用
+        include_once('includes/lib_time.php');
+        include_once('includes/cls_json.php');
+        include_once(ROOT_PATH . 'languages/zh_cn/common.php');
+        include_once('includes/modules/payment/kjgpay.php');
+        $pay_obj = new kjgpay();
+        //$url=$pay_obj->get_code($order);//get方式提交
+        //header("Location:".$url);
+        //post 请求提交
+        $postData=$pay_obj->getPostData($order);
+        echo "<form style='display:none;' id='form1' name='form1' method='post' action='{$GLOBALS['_LANG']['kj_payurl']}'>
+                <input name='payData' type='text' value='{$postData["payData"]}' />
+                <input name='method' type='text' value='{$postData["method"]}'/>
+                <input name='version' type='text' value='{$postData["version"]}'/>
+                <input name='appId' type='text' value='{$postData["appId"]}'/>
+                <input name='timestamp' type='text' value='{$postData["timestamp"]}'/>
+                <input name='nonce' type='text' value='{$postData["nonce"]}'/>
+                <input name='sign' type='text' value='{$postData["sign"]}'/>
+               </form>
+               <script type='text/javascript'>function load_submit(){document.form1.submit()}load_submit();</script>";
+        */
+
+        include_once('includes/modules/payment/' . $payment['pay_code'] . '.php');
+        $pay_obj  = new $payment['pay_code'];
+        $pay_config = unserialize_config($payment['pay_config']);
+        $pay_config['is_kj'] = true; // 跨境订单标识
+        $url = $pay_obj->get_code_url($order, $pay_config);
+        ecs_header("Location:".$url);
     }else{
-            include_once('includes/modules/payment/' . $payment['pay_code'] . '.php');
-            $pay_obj  = new $payment['pay_code'];
-            $url = $pay_obj->get_code_url($order, unserialize_config($payment['pay_config']));
-            ecs_header("Location:".$url); 
+        include_once('includes/modules/payment/' . $payment['pay_code'] . '.php');
+        $pay_obj  = new $payment['pay_code'];
+        $url = $pay_obj->get_code_url($order, unserialize_config($payment['pay_config']));
+        ecs_header("Location:".$url);
     }
-    exit;            
+    exit;
 }
 else
 {
@@ -3241,8 +3263,8 @@ function cart_favourable_amount($favourable)
     return $GLOBALS['db']->getOne($sql);
 }
 
-/*接口改造前内容
-function kj_check_bak($cart_goods,$account){
+/* 旧版申报系统
+function kj_check($cart_goods,$account){
 	$url = $GLOBALS['_LANG']['kj_url'];
 	//电商平台帐号
 	$userid = $GLOBALS['_LANG']['kj_userid'];
@@ -3307,7 +3329,7 @@ function kj_check_bak($cart_goods,$account){
 	}
 }
 
-function kj_order_submit_bak($order, $goods_str,$kj_goods_weight, $kj_goods_amount, $kj_shipping_fee,$kj_goods_tax){
+function kj_order_submit($order, $goods_str,$kj_goods_weight, $kj_goods_amount, $kj_shipping_fee,$kj_goods_tax){
 	//提交进口订单
 	
 	include_once('includes/lib_time.php');
@@ -3360,8 +3382,9 @@ function kj_order_submit_bak($order, $goods_str,$kj_goods_weight, $kj_goods_amou
 	
 	return $kj_order_amount;
 }
-*/
+旧版申报系统末尾 */
 
+/* 号百接口，已停止合作
 function kj_check($cart_goods,$account){
 	$merchantCode = $GLOBALS['_LANG']['merchantCode'];
         $merchantName = $GLOBALS['_LANG']['merchantName'];
@@ -3420,20 +3443,89 @@ function kj_order_submit($orderData,$order){
              return array(1,"");
         }
         return array(0,$result['desc']);
-        
-       
 }
+号百接口末尾 */
+
+// 申报系统新代码
+function kj_check($cart_goods,$account){
+    include_once('report/orderReportHaiGuan.php');
+
+    $result = hg_GetAccount($account);
+    if (true) {}
+    else if ($result->Header->Result == 'F') {
+        $beian = '消费者需要在<a href="http://www.kjb2c.com/reg/reg!regedit.html" target="_blank" style="padding-left:0;">宁波跨境贸易电子商务服务平台——跨境购</a>进行实名注册，填写真实身份信息并关联本网站用户名，才能购买本网站跨境购商品。（如已在跨境购平台注册过，只需在跨境购平台上关联本网站用户名即可。）';
+        return array(0, $beian);
+    } else if ($result->Body->IsAuth != 1) {
+        return array(0, "您在<a href='http://www.kjb2c.com/reg/reg!regedit.html' target='_blank' style='padding-left:0;'>宁波跨境贸易电子商务服务平台——跨境购</a>所注册的账号还未通过认证，请先通过认证。");
+    }
+
+    $kj_goods_amount = 0;
+    $kj_goods_weight = 0.0;
+    $kj_goods_number = 0;
+    $kj_goods_tax = 0.0;
+    $kj_goods_counter = 0;
+    $goods_str="";
+    foreach ($cart_goods as $good){
+        //获取商品备案信息
+        $product_rt=hg_GetGoods($good['kj_sn']);
+        if($product_rt==null){//请求异常
+            return array(0,"");
+        }
+        if ($product_rt->Header->Result == "T"){
+            $good_amount = (float)$good["goods_number"] * (float)$good["goods_price"];
+            $sql = "SELECT goods_weight FROM " . $GLOBALS['ecs']->table('goods') . " WHERE goods_id = " . $good['goods_id'];
+            $good_weight = $GLOBALS['db']->getOne($sql) * $good['goods_number'];
+            $kj_goods_amount += $good_amount;
+            $kj_goods_weight += $good_weight;
+            $kj_goods_number += (int)$good["goods_number"];
+            $kj_goods_tax += (float)($product_rt->Body->Tax) * $good_amount;
+            $kj_goods_counter += 1;
+        }else{
+            return array(0,$good['goods_name'].', '.$product_rt->Header->ResultMsg);
+        }
+    }
+    if ($kj_goods_counter > 0){
+        return array(1, $goods_str, $kj_goods_amount, $kj_goods_weight, $kj_goods_number, $kj_goods_tax, $kj_goods_counter);
+    }
+    else{
+        return array(2, "");
+    }
+}
+
+// 订单提交不在这里做，改为在respond.php中等待支付信息成功返回后再进行
+// 因此下面不需要该函数，且该函数也未改完
+/*
+function kj_order_submit($orderData,$order){
+    //提交进口订单
+    include_once('report/orderReportHaiGuan.php');
+    include_once('includes/cls_json.php');
+    $json=new Json();
+    $orderDataJson=$json->encode($orderData);
+
+    logResult("submit order data:".$orderDataJson);//记录发送数据日志
+
+    $result=createGlobalOrder($orderDataJson);//发送订单到海关接口
+
+    //发送成功修改订单同步状态
+    if($result['code']=='200' || $result['code']=='209'){//209表示订单同步重复
+        update_order($order['order_id'], array('report_status' => 1,'kj_order_amount' => $orderData['orderAmount']));
+        return array(1,"");
+    }
+    return array(0,$result['desc']);
+}*/
+
+// 订单提交不在这里做，改为在respond.php中等待支付信息成功返回后再进行
+// 因此下面不需要该函数，且该函数也未改完
 /**
  *  生成申报订单数据
  * @param type $order 订单头信息
  * @param type $goods_list 订单明细信息
  */
+/*
 function get_report_order($order,$goods_list){
-        include_once('report/orderReportNew.php');
-        $merchantCode = $GLOBALS['_LANG']['merchantCode'];
-        $merchantName = $GLOBALS['_LANG']['merchantName'];
-        $sql = "SELECT user_name FROM " . $GLOBALS['ecs']->table('users') . " WHERE user_id = " . $order['user_id'];
-	    $account = $GLOBALS['db']->getOne($sql);
+        include_once('report/orderReportHaiGuan.php');
+        $sql = "SELECT user_name, real_name, real_id, real_phone, real_email FROM " . $GLOBALS['ecs']->table('users') . " WHERE user_id = " . $order['user_id'];
+	    $account = $GLOBALS['db']->getRow($sql);
         //print_r("帐号：" .$account);
         $sql = "SELECT shipping_code FROM " . $GLOBALS['ecs']->table('shipping') . " WHERE shipping_id = " . $order['shipping_id'];
 	    $shipping_code = $GLOBALS['db']->getOne($sql);
@@ -3451,18 +3543,18 @@ function get_report_order($order,$goods_list){
         $kj_goods_amount = 0;
     	$kj_goods_weight = 0.0;
     	$kj_goods_number = 0;
-    	$kj_goods_tax = 0.0;
+    	//$kj_goods_tax = 0.0;
         $goods=array();
         foreach($goods_list as $good){
                 //$sql = "SELECT kj_sn FROM " . $GLOBALS['ecs']->table('goods') . " WHERE goods_id = " . $good['goods_id'];
 		        //$product_id = $GLOBALS['db']->getOne($sql);
         		//获取商品备案信息
-        		$product_rt=queryCommodityRecord($merchantCode,$merchantName,$good['goods_sn']);
+        		$product_rt=hg_GetGoods($good['goods_sn']);
                 if($product_rt==null){//请求异常，直接返回
                     return null;
                 }
-                if ($product_rt['code'] == "200"){
-                    $product_info=$product_rt['result'];
+                if ($product_rt->Header->Result == "T"){
+                    $product_info = $product_rt->Body;
         			$good_amount = (float)$good["goods_number"] * (float)$good["goods_price"];
         			$sql = "SELECT goods_weight FROM " . $GLOBALS['ecs']->table('goods') . " WHERE goods_id = " . $good['goods_id'];
         			$good_weight = $GLOBALS['db']->getOne($sql) * $good['goods_number'];
@@ -3472,7 +3564,7 @@ function get_report_order($order,$goods_list){
                         "goodsSku" => $good['goods_sn'],
                         "goodsName" => $good['goods_name'],
                         "quantity" => $good["goods_number"],
-                        "unit"     => $product_info['unit'],
+                        "unit"     => $product_info->Unit,
                         "price" => $good["goods_price"],
                         "weight" => $good_weight,
                         "tariffRate" => '0',
@@ -3494,14 +3586,12 @@ function get_report_order($order,$goods_list){
         
         if($shipping_code=='sf_express') $shipping_code='shunfeng';
         $orderData=array(
+            "Operation" => 0, // 0=新建，1=更新
             "orderNum" => $order['order_sn'],
             "orderSource" => $GLOBALS['_LANG']['orderSource'],
             //"cityCode" => 'ningbo',
-            "checkStore" => '0',//库存校验
-            //"merchantCode" => $merchantCode,
-            "sourceMerchantCode" => $merchantCode,
-            "merchantName" => $merchantName,
-            "buyerAccount" => $account,
+            "checkStore" => '0',// 库存校验
+            "buyerAccount" => $account['user_name'],
             //物流信息
             "logisticsName" =>  $shipping_code,
             "postFee" => $kj_shipping_fee,
@@ -3530,8 +3620,8 @@ function get_report_order($order,$goods_list){
             "disAmount" => $order['discount'],
             "quantity" => $kj_goods_number,
             "weight" => $kj_goods_weight,
-            "tariffAmount" => $order['tax'],//应缴税费
-            "tariffFee" => $order['tax'],//实缴税费
+            "tariffAmount" => $order['tax'],// 应缴税费
+            "tariffFee" => $order['tax'],// 实缴税费
             "currCode" => "RMB",
             //其他信息
             "orderType" => 1,
@@ -3545,10 +3635,10 @@ function get_report_order($order,$goods_list){
             "deliveryTime" => $current_time,
             "payType" => '91',
             //实名认证信息
-            "idNum" => $order['id_num'],
-            "realName" => $order['real_name'],
-            "phone" => $order['phone'],
-            "email" => $order['identy_email'],
+            "idNum" => $account['real_id'],
+            "realName" => $account['real_name'],
+            "phone" => $account['real_phone'],
+            "email" => $account['real_email'],
             'tariffTaxAmount'=>$total['tariff_amount'],
             'consumptionTaxAmount'=>$total['consumption_duty_amount'],
             'addedvalueTaxAmount'=>$total['added_value_tax_amount'],
@@ -3559,6 +3649,7 @@ function get_report_order($order,$goods_list){
         //var_dump($orderData);
         return $orderData;
 }
+*/
 
 function get_kj_shipping_fee($order,$kj_goods_weight,$kj_goods_amount,$kj_goods_number){
         $region['country']  = $order['country'];
@@ -3569,7 +3660,7 @@ function get_kj_shipping_fee($order,$kj_goods_weight,$kj_goods_amount,$kj_goods_
         $kj_shipping_fee = shipping_fee($shipping_info['shipping_code'], $shipping_info['configure'], $kj_goods_weight, $kj_goods_amount, $kj_goods_number);
         return $kj_shipping_fee;
 }
-
+// 该函数未使用
 function check_is_kj_good($goods_id){
     include_once('report/orderReportNew.php');
     $merchantCode = $GLOBALS['_LANG']['merchantCode'];
@@ -3585,41 +3676,53 @@ function check_is_kj_good($goods_id){
         return 1;
     }
     return 0;
-    
 }
 /**
  * 查询账户是否已经实名认证
  * @param  $account 查询账户
  */
 function check_account($account){
-    include_once('report/orderReportNew.php');
-    $orderSource =$GLOBALS['_LANG']['orderSource'];
-    $res=queryConsumerInfo($orderSource,$account,1);
-    if($res['code']=='200'){
+    include_once('report/orderReportHaiGuan.php');
+    $res=hg_GetAccount($account);
+    $user_info = user_info($_SESSION['user_id']);
+
+    if ($res->Header->Result=='T' && $res->Body->IsAuth == 1 && !empty($user_info['real_name']) && !empty($user_info['real_id']) && !empty($user_info['real_phone']) && !empty($user_info['real_email'])) {
+        // 检查身份证是否与申报系统里的一致，只检查后四位
+        $idnum = $res->Body->Idnum;
+        if (!empty($idnum) && substr($idnum, -4, 4) == substr($user_info['real_id'], -4, 4)) {
+            show_message('<br/>实名认证信息与宁波跨境贸易电子商务服务平台——跨境购上的信息不一致，请重新填写', '','', 'warning');
+            exit;
+        }
         return 1;
     }
     return 0;
-    
 }
 /**
- * 绑定用户帐号
+ * 绑定用户帐号，记录实名信息
  */
- function bind_account($account,$id_num,$real_name,$phone,$email){
-     include_once('report/orderReportNew.php');
-     $orderSource =$GLOBALS['_LANG']['orderSource'];
+ function bind_account($uid,$id_num,$real_name,$phone,$email){
+     include_once('report/orderReportHaiGuan.php');
      $bind_info=array(
-         "account"=>  $account,
-         "id_num"=>  $id_num,
-         "real_name"=>  $real_name,
-         "phone"=>  $phone,
-         "email"=>  $email
+         "user_id"=>  $uid,             // 用户账号ID
+         "id_num"=>  $id_num,           // 身份证
+         "real_name"=>  $real_name,     // 真实姓名
+         "phone"=>  $phone,             // 电话
+         "email"=>  $email              // 邮箱
      );
-     $res=bindConsumerInfo($orderSource,$bind_info);
-     if($res['code']=='200'){
-         return array(1,'');
-     }
-     return array(0,$res['desc']);
+     hg_RecordRealName($bind_info);
+     return array(1,'');
  }
+/**
+ * 获取实名信息
+ */
+function get_account_real_info($userid=null, $username=null) {
+    if ($userid == null && $username == null) return null;
+
+    $sql = "SELECT user_id, user_name, real_name, real_id, real_phone, real_email FROM " . $GLOBALS['ecs']->table('users') . "WHERE ";
+    $sql .= $userid != null ? "user_id='" . $userid ."'" : "user_name='" . $username ."'";
+    $res = $GLOBALS['db']->getRow($sql);
+    return $res;
+}
 /**
  *身份证号校验
  **/

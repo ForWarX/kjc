@@ -64,6 +64,14 @@ if (isset($set_modules) && $set_modules == TRUE)
  */
 class alipay
 {
+    /**
+     * 参数
+     */
+    //ca证书路径地址，用于curl中ssl校验
+    //请保证cacert.pem文件在当前文件夹目录中
+    var $alipay_cacert = '/cacert.pem';
+    // 支付宝API接口地址
+    var $alipay_url = 'https://mapi.alipay.com/gateway.do?'; // 主站
 
     /**
      * 构造函数
@@ -83,22 +91,25 @@ class alipay
     }
 
     /**
-     * 生成支付代码
+     * 生成支付代码按钮
      * @param   array   $order      订单信息
      * @param   array   $payment    支付方式信息
      */
     function get_code($order, $payment)
     {
-        
         $params=$this->get_params($order, $payment);
-        $button = '<div style="text-align:center"><input type="button" onclick="window.open(\'https://mapi.alipay.com/gateway.do?'.$params.'\')" value="' .$GLOBALS['_LANG']['pay_button']. '" /></div>';
+        $button = '<div style="text-align:center"><input type="button" onclick="window.open(\'' . $this->alipay_url .$params . '\')" value="' .$GLOBALS['_LANG']['pay_button']. '" /></div>';
         return $button;
     }
-    
+
+    /**
+     * 生成支付代码链接
+     * @param   array   $order      订单信息
+     * @param   array   $payment    支付方式信息
+     */
     function get_code_url($order, $payment){
-        //支付改造
         $params=$this->get_params($order, $payment);
-        $url = 'https://mapi.alipay.com/gateway.do?'.$params;
+        $url = $this->alipay_url . $params;
         return $url;
     }
     
@@ -128,14 +139,17 @@ class alipay
 
         $extend_param = 'isv^sh22';
 
+        $url = return_url(basename(__FILE__, '.php'));
+        if ($payment['is_kj']) $url .= '_kj'; // 跨境订单标识
+
         $parameter = array(
             'extend_param'      => $extend_param,
             'service'           => $service,
             'partner'           => $payment['alipay_partner'],
             //'partner'           => ALIPAY_ID,
             '_input_charset'    => $charset,
-            'notify_url'        => return_url(basename(__FILE__, '.php')),
-            'return_url'        => return_url(basename(__FILE__, '.php')),
+            'notify_url'        => $url,
+            'return_url'        => $url,
             /* 业务参数 */
             'subject'           => $order['order_sn'],
             'out_trade_no'      => $order['order_sn'] . $order['log_id'],
@@ -171,7 +185,7 @@ class alipay
     /**
      * 响应操作
      */
-    function respond()
+    function respond($is_kj=false, $merchant_customs_code='', $merchant_customs_name='')
     {
         if (!empty($_POST))
         {
@@ -180,19 +194,25 @@ class alipay
                 $_GET[$key] = $data;
             }
         }
+
+        // 以下变量名有些混乱，故在此说明
+        // order_sn：支付的id，非订单本身的id或编号，是pay_log这张表中的log_id
+        // order_no：订单的编号，非数据库中的id，是order_info这张表中的order_sn
         $payment  = get_payment($_GET['code']);
-        $seller_email = rawurldecode($_GET['seller_email']);
+        //$seller_email = rawurldecode($_GET['seller_email']);
         $order_sn = str_replace($_GET['subject'], '', $_GET['out_trade_no']);
         $order_sn = trim($order_sn);
-		
-		$create_time = strtotime($_GET['gmt_payment']);
+
+		//$create_time = strtotime($_GET['gmt_payment']);
 		$payment_no = $_GET['trade_no'];
-		$order_seq_no = $_GET['out_trade_no'];
+		//$order_seq_no = $_GET['out_trade_no'];
 		$amount = $_GET['total_fee'];
-		$pay_id = $order_sn;
-		
-		$tmp = str_replace($pay_id, '', $_GET['out_trade_no']);
-		$order_no = trim($tmp);
+        /*别用，不知道写这个的程序员怎么想的
+		//$pay_id = $order_sn;
+		//$tmp = str_replace($pay_id, '', $_GET['out_trade_no']);
+		//$order_no = trim($tmp);
+        */
+        $order_no = trim($_GET['subject']); // 别用上面的写法，out_trade_no是order_sn+log_id，而subject本身就是order_sn，不管是看上面的写法还是看get_params()里的业务参数都能看出这一点
 		
         /* 检查数字签名是否正确 */
         ksort($_GET);
@@ -223,20 +243,28 @@ class alipay
         if ($_GET['trade_status'] == 'WAIT_SELLER_SEND_GOODS')
         {
             /* 改变订单状态 */
-            order_paid($order_sn, 2);
+            order_paid($order_sn, 2); // 2代表支付成功
 
             return true;
         }
         elseif ($_GET['trade_status'] == 'TRADE_FINISHED')//超过签约合同指定的可退款时间段时，支付宝会主动发送TRADE_FINISHED（不能对该交易再做任何操作）交易状态。
         {
             /* 改变订单状态 */
-            order_paid($order_sn);
+            order_paid($order_sn); // 默认为支付成功
+            if ($is_kj) { // 跨境订单支付宝报关接口
+                $res = $this->acquire_customs($payment_no, $payment, $merchant_customs_code, $merchant_customs_name, $order_no, $amount);
+                return array(true, $res); // 可能需要修改，万一跟支付宝的对接出了问题不能返回true
+            }
             return true;
         }
         elseif ($_GET['trade_status'] == 'TRADE_SUCCESS')//TRADE_SUCCESS（可对交易做其他操作，如退款、分润等）
         {
             /* 改变订单状态 */
-            order_paid($order_sn, 2);
+            order_paid($order_sn, 2); // 2代表支付成功
+            if ($is_kj) {  // 跨境订单支付宝报关接口
+                $res = $this->acquire_customs($payment_no, $payment, $merchant_customs_code, $merchant_customs_name, $order_no, $amount);
+                return array(true, $res); // 可能需要修改，万一跟支付宝的对接出了问题不能返回true
+            }
 			/*if($create_time != '')支付改造 一般进口商品不需要发送到跨境海关
 			{
 				kjpay($create_time, $payment_no, $order_no, $order_seq_no, $pay_id, '02');
@@ -247,6 +275,66 @@ class alipay
         {
             return false;
         }
+    }
+
+    /**
+     * 支付宝报关接口
+     * 调用时机：支付宝支付成功 -> 此接口 -> 提交进口订单到申报系统
+     * @param int $trade_no                         支付宝交易号
+     * @param array $payment                        包含支付宝信息的数组
+     * @param string $merchant_customs_code         商户海关备案编号
+     * @param string $merchant_customs_name         商户海关备案名称
+     * @param string $order_sn                      跨境城的订单编号，用作报关流水号
+     * @param string $amount                        申报金额
+     * @return bool|mixed
+     */
+    function acquire_customs($trade_no=0, $payment=null, $merchant_customs_code='', $merchant_customs_name='', $order_sn='', $amount='') {
+        if ($trade_no == 0) return false;
+
+        if (!defined('EC_CHARSET')) {
+            $charset = 'UTF-8';
+        } else {
+            $charset = EC_CHARSET;
+        }
+
+        $parameter = array(
+            'trade_no'              => $trade_no,                   // 支付宝交易号
+            'merchant_customs_code' => $merchant_customs_code,      // 商户海关备案编号
+            'merchant_customs_name' => $merchant_customs_name,      // 商户海关备案名称
+            'service'               => 'alipay.acquire.customs',    // 支付宝接口名称
+            'partner'               => $payment['alipay_partner'],  // 合作者身份ID，签约的支付宝账号对应的支付宝唯一用户号
+            '_input_charset'        => $charset,                    // 商户网站使用的编码格式
+            'amount'                => $amount,                     // 报关金额，单位为人民币“元”，精确到小数点后2位
+            'customs_place'         => 'NINGBO',                    // 海关编号
+            'out_request_no'        => $order_sn,                   // 报关流水号，商户生成的用于唯一标识一次报关操作的业务编号
+        );
+
+        ksort($parameter);
+        reset($parameter);
+
+        $sign  = '';
+        foreach ($parameter AS $key => $val)
+        {
+            $sign  .= "$key=$val&";
+        }
+
+        $sign  = substr($sign, 0, -1). $payment['alipay_key'];
+        $parameter['sign'] = md5($sign); // 签名
+        $parameter['sign_type'] = 'MD5'; // 签名类型
+
+        $curl = curl_init($this->alipay_url);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);         // SSL证书认证
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);            // 严格认证
+        curl_setopt($curl, CURLOPT_CAINFO, $this->alipay_cacert); // 证书地址
+        curl_setopt($curl, CURLOPT_HEADER, 0 );                   // 过滤HTTP头
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);            // 显示输出结果
+        curl_setopt($curl, CURLOPT_POST, true);                   // post传输数据
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $parameter);       // post传输数据
+        $responseText = curl_exec($curl);
+        //var_dump( curl_error($curl) ); // 如果执行curl过程中出现异常，可打开此开关，以便查看异常内容
+        curl_close($curl);
+
+        return $responseText;
     }
 }
 

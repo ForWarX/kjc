@@ -726,16 +726,36 @@ $_LANG['divided_into'] = '分成规则';
 /*汇率*/
 
 /*跨境信息*/
-//电商平台帐号		
+// 海关网站URL
+$_LANG['kj_haiguan_url'] = 'http://trainer.kjb2c.com'; // 测试
+//$_LANG['kj_haiguan_url'] = 'http://i.kjb2c.com';       // 正式
+//海关接口URL
+$_LANG['kj_api_url'] = 'http://api.trainer.kjb2c.com/dsapi/dsapi.do';  // 测试
+//$_LANG['kj_api_url'] = 'https://api.kjb2c.com/dsapi/dsapi.do';         // 正式
+//电商平台帐号
+// 测试
 $_LANG['kj_userid'] = 'americoclub';
 $_LANG['kj_pwd'] = '81c0e494-dbc5-49ca-8437-363f1309cfa4';
-//电商企业海关代码		
+// 正式
+//$_LANG['kj_userid'] = 'baolebeie';
+//$_LANG['kj_pwd'] = '83a8bb85-0706-4897-9845-94b0b2db2937';
+//电商企业海关代码
 $_LANG['kj_customs_code'] = '3302461400';
-//电商企业名称		
+//电商企业名称
 $_LANG['kj_org_name'] = '宁波宝乐贝尔国际贸易有限公司';
+//店铺代码
+$_LANG['kj_shop_code'] = '10402';
+//电商企业网站
 $_LANG['kj_url'] = 'http://www.americoclub.com';
+//关区代码
+$_LANG['kj_customs'] = 3105; // 北仑保税区
+//购物网站代码
+$_LANG['kj_web_code'] = '0000'; // 别的商家入驻才会有网站代码，无代码填写0000即可
 
 
+/*****************************
+ * 号百
+ * 已停止合作
 //支付改造
 $_LANG['merchantCode'] = 'polarbear';
 $_LANG['merchantName'] = '宝乐贝尔';
@@ -748,5 +768,7 @@ $_LANG['version'] = '1.0';
 $_LANG['proxyEnabled'] = '0';
 $_LANG['proxyHost'] = '192.168.19.9';
 $_LANG['proxyPort'] = '80';
+*/
+
 
 ?>

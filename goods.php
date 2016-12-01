@@ -134,7 +134,7 @@ if (!empty($_REQUEST['act']) && $_REQUEST['act'] == 'gotopage')
 
 $cache_id = $goods_id . '-' . $_SESSION['user_rank'].'-'.$_CFG['lang'];
 $cache_id = sprintf('%X', crc32($cache_id));
-if (!$smarty->is_cached('goods.dwt', $cache_id))
+if (!$smarty->is_cached('goods.dwt', $cache_id) || true) // 记得去掉true！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
 {
     $smarty->assign('image_width',  $_CFG['image_width']);
     $smarty->assign('image_height', $_CFG['image_height']);
@@ -153,44 +153,67 @@ if (!$smarty->is_cached('goods.dwt', $cache_id))
 	
 	/*判断是不是跨境购*/
 	$big_cat = is_kj_product($goods['cat_id']);
-	if ($big_cat == 1){
+	if ($big_cat == 1) {
 		$smarty->assign('is_kj', 1);
 	
 		//if ($goods['kj_sn'] != '' && $goods['kj_sn'] != '5566'){
-                if ($goods['kj_sn'] != ''){
-			/* 接口改造
-                        include_once(ROOT_PATH . 'QueryRequest.php');
-			$goods_xml = GetGoods($goods['kj_sn']);
-			$smarty->assign('origin_place', $goods_xml->Body->OriginPlace);
-			$smarty->assign('kj_tax', 100*(float)$goods_xml->Body->Tax);*/
-                        $merchantCode = $GLOBALS['_LANG']['merchantCode'];
-                        $merchantName = $GLOBALS['_LANG']['merchantName'];
-                        include_once('report/orderReportNew.php');
-                        $rtMsg='此商品暂时无法购买，';
-                        
-                            $product_rt=queryCommodityRecord($merchantCode,$merchantName,$goods['goods_sn']);
-                           
-                            if ($product_rt['code'] == "200"){
-                                $product_info=$product_rt['result'];
-                                $smarty->assign('origin_place',$product_info['originPlace']);
-                                $smarty->assign('kj_tax', 100*(float)$product_info['consolidatedTaxRate']);
-                            }
-                            else{
-                           
-                                if($product_rt==null){
-                                    $rtMsg .='服务器连接异常。';
-                                }
-                                else{
-                                    $rtMsg .=$product_rt['desc'];
-                                }
-                                $smarty->assign('kj_no','1');
-                                $smarty->assign('kj_desc',$rtMsg);
-                            }
-		}
-                else{
-                        $smarty->assign('kj_no','1');
-                        $smarty->assign('kj_desc','此商品暂时无法购买，商品处于预售阶段。');
+        if ($goods['kj_sn'] != ''){
+            /* 接口改造  被号百修改的原接口
+            include_once(ROOT_PATH . 'QueryRequest.php');
+            $goods_xml = GetGoods($goods['kj_sn']);
+            $smarty->assign('origin_place', $goods_xml->Body->OriginPlace);
+            $smarty->assign('kj_tax', 100*(float)$goods_xml->Body->Tax);*/
+            /* 号百接口
+            $merchantCode = $GLOBALS['_LANG']['merchantCode'];
+            $merchantName = $GLOBALS['_LANG']['merchantName'];
+            include_once('report/orderReportNew.php');
+            $rtMsg='此商品暂时无法购买，';
+
+            $product_rt=queryCommodityRecord($merchantCode,$merchantName,$goods['goods_sn']);
+
+            if ($product_rt['code'] == "200"){
+                $product_info=$product_rt['result'];
+                $smarty->assign('origin_place',$product_info['originPlace']);
+                $smarty->assign('kj_tax', 100*(float)$product_info['consolidatedTaxRate']);
+            }
+            else{
+                if($product_rt==null){
+                    $rtMsg .='服务器连接异常。';
                 }
+                else{
+                    $rtMsg .=$product_rt['desc'];
+                }
+                $smarty->assign('kj_no','1');
+                $smarty->assign('kj_desc',$rtMsg);
+            }*/
+            include_once('report/orderReportHaiGuan.php');
+            $rtMsg='此商品暂时无法购买，';
+
+            $product_rt=hg_GetGoods($goods['kj_sn']);
+            //$product_rt=hg_GetGoods('310516614000000003'); // 测试
+            $product_info=$product_rt->Body;
+
+            if ((string)($product_rt->Header->Result)=='T' && !empty($product_info)){
+            //if (true) { // 测试
+                $smarty->assign('kj_yes','1'); // kj_tax有可能是0，页面会判断为false，所以用这个变量判断
+                $smarty->assign('origin_place', $product_info->OriginPlace);
+                $smarty->assign('kj_tax', 100*(float)($product_info->Tax));
+            }
+            else{
+                if((string)($product_rt->Header->Result)=='F'){
+                    $rtMsg .=$product_rt->Header->ResultMsg;
+                }
+                else{
+                    $rtMsg .='服务器连接异常。';
+                }
+                $smarty->assign('kj_no','1');
+                $smarty->assign('kj_desc',$rtMsg);
+            }
+        }
+        else{
+            $smarty->assign('kj_no','1');
+            $smarty->assign('kj_desc','此商品暂时无法购买，商品处于预售阶段。');
+        }
                 /*        
 		else{
 			$smarty->assign('origin_place', '美国');
@@ -198,7 +221,7 @@ if (!$smarty->is_cached('goods.dwt', $cache_id))
 		}*/
 	}
 	else if ($big_cat == 2){
-		$smarty->assign('is_xp', 1);	
+		$smarty->assign('is_xp', 1);
 	}
 	else if ($big_cat == 3){
 		$smarty->assign('is_cn', 1);	
@@ -303,11 +326,11 @@ if (!$smarty->is_cached('goods.dwt', $cache_id))
         $smarty->assign('attribute_linked',    get_same_attribute_goods($properties));           // 相同属性的关联商品
         $smarty->assign('related_goods',       $linked_goods);                                   // 关联商品
         $smarty->assign('goods_article_list',  get_linked_articles($goods_id));                  // 关联文章
-        $smarty->assign('fittings',            get_goods_fittings(array($goods_id)));                   // 配件
-        $smarty->assign('rank_prices',         $rank_price_list);    // 会员等级价格
+        $smarty->assign('fittings',            get_goods_fittings(array($goods_id)));            // 配件
+        $smarty->assign('rank_prices',         $rank_price_list);                                // 会员等级价格
         $smarty->assign('pictures',            get_goods_gallery($goods_id));                    // 商品相册
         $smarty->assign('bought_goods',        get_also_bought($goods_id));                      // 购买了该商品的用户还购买了哪些商品
-        $smarty->assign('goods_rank',          get_goods_rank($goods_id));		                       // 商品的销售排名
+        $smarty->assign('goods_rank',          get_goods_rank($goods_id));		                 // 商品的销售排名
 		
 		$smarty->assign('buy_num', get_buy_sum($goods_id));
 		
