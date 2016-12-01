@@ -69,9 +69,9 @@ class alipay
      */
     //ca证书路径地址，用于curl中ssl校验
     //请保证cacert.pem文件在当前文件夹目录中
-    var $alipay_cacert = '/cacert.pem';
+    var $alipay_cacert = "";
     // 支付宝API接口地址
-    var $alipay_url = 'https://mapi.alipay.com/gateway.do?'; // 主站
+    var $alipay_url = 'https://mapi.alipay.com/gateway.do?';
 
     /**
      * 构造函数
@@ -88,6 +88,7 @@ class alipay
     
     function alipay()
     {
+        $this->alipay_cacert = ROOT_PATH . "cacert.pem";
     }
 
     /**
@@ -198,7 +199,8 @@ class alipay
         // 以下变量名有些混乱，故在此说明
         // order_sn：支付的id，非订单本身的id或编号，是pay_log这张表中的log_id
         // order_no：订单的编号，非数据库中的id，是order_info这张表中的order_sn
-        $payment  = get_payment($_GET['code']);
+        $code = $is_kj ? str_replace("_kj", "", $_GET['code']) : $_GET['code'];
+        $payment  = get_payment($code);
         //$seller_email = rawurldecode($_GET['seller_email']);
         $order_sn = str_replace($_GET['subject'], '', $_GET['out_trade_no']);
         $order_sn = trim($order_sn);
@@ -253,7 +255,9 @@ class alipay
             order_paid($order_sn); // 默认为支付成功
             if ($is_kj) { // 跨境订单支付宝报关接口
                 $res = $this->acquire_customs($payment_no, $payment, $merchant_customs_code, $merchant_customs_name, $order_no, $amount);
-                return array(true, $res); // 可能需要修改，万一跟支付宝的对接出了问题不能返回true
+                echo "TRADE_FINISHED<br>";
+                print_r($res);
+                return array(true, $res); // 可能需要加失败判断，万一跟支付宝的对接出了问题不能返回true
             }
             return true;
         }
@@ -263,6 +267,8 @@ class alipay
             order_paid($order_sn, 2); // 2代表支付成功
             if ($is_kj) {  // 跨境订单支付宝报关接口
                 $res = $this->acquire_customs($payment_no, $payment, $merchant_customs_code, $merchant_customs_name, $order_no, $amount);
+                echo "TRADE_SUCCESS<br>";
+                print_r($res);
                 return array(true, $res); // 可能需要修改，万一跟支付宝的对接出了问题不能返回true
             }
 			/*if($create_time != '')支付改造 一般进口商品不需要发送到跨境海关
@@ -331,7 +337,7 @@ class alipay
         curl_setopt($curl, CURLOPT_POST, true);                   // post传输数据
         curl_setopt($curl, CURLOPT_POSTFIELDS, $parameter);       // post传输数据
         $responseText = curl_exec($curl);
-        //var_dump( curl_error($curl) ); // 如果执行curl过程中出现异常，可打开此开关，以便查看异常内容
+        var_dump( curl_error($curl) ); // 如果执行curl过程中出现异常，可打开此开关，以便查看异常内容
         curl_close($curl);
 
         return $responseText;

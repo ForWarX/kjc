@@ -70,7 +70,7 @@ else
             $res = (@$payment->respond(true, $GLOBALS['_LANG']['kj_customs_code'], $GLOBALS['_LANG']['kj_org_name'])); // $res = array(0=>是否成功, 1=>成功后返回的支付宝数据)
             $msg = $res === false ? $_LANG['pay_fail'] : $_LANG['pay_success'];
 
-            if ($res[0]) {
+            if ($res && $res[0]) {
                 // 调用完支付宝的报关接口后，调用申报系统的进口订单接口
 
                 // 获取要提交给申报系统的数据
