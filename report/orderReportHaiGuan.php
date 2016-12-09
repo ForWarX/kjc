@@ -108,7 +108,7 @@ function hg_SendOrder($orderData=null) {
     $xml .= "<OrderNo>" . $orderData['orderNum'] . "</OrderNo>";
     $xml .= "<PostFee>" . $orderData['postFee'] . "</PostFee>";
     //$xml .= "<InsuranceFee>" . $orderData[''] . "</InsuranceFee>"; // 非必填项
-    $xml .= "<Amount>" . $orderData['payAmount'] . "</Amount>";
+    $xml .= "<Amount>" . $orderData['goodsAmount'] . "</Amount>";
     $xml .= "<BuyerAccount>" . $orderData['buyerAccount'] . "</BuyerAccount>";
     $xml .= "<Phone>" . $orderData['phone'] . "</Phone>";
     $xml .= "<Email>" . $orderData['email'] . "</Email>";
@@ -157,7 +157,8 @@ function hg_SendOrder($orderData=null) {
 
 /**
  * 提交进口（跨境）订单支付信息
- * 调用完进口订单接口后调用此接口以提交与支付机构的交互信息
+ * 注意：此接口只能用于申报系统测试平台
+ * 作用：代替支付机构提交支付单，即在测试平台模拟支付单，仅用于测试
  */
 function hg_SendPayment($Data=null) {
     if ($Data == null) return "";

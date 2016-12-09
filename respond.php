@@ -91,35 +91,28 @@ else
 
                 // 整合要提交给申报系统的数据
                 $orderData = get_report_order($order, $goods_list);
-                $alipay_data = $res[1]; // 支付宝返回的数据
-                $orderData['PaymentNo'] = $orderData['OrderSeqNo'] = $alipay_data['trade_no'];
-                $orderData['Source'] = '02'; // 申报系统定义的支付宝代码
+                if ($orderData != null) {
+                    $alipay_data = $res[1]; // 支付宝返回的数据
+                    $orderData['PaymentNo'] = $orderData['OrderSeqNo'] = $alipay_data->response->alipay->trade_no;
+                    $orderData['Source'] = '02'; // 申报系统定义的支付宝代码
 
-                if($orderData!= null){
-                    // 提交进口订单
-                    include_once('report/orderReportHaiGuan.php');
-                    $result = hg_SendOrder($orderData); // 申报系统API：进口订单
+                    if ($orderData != null) {
+                        // 提交进口订单
+                        include_once('report/orderReportHaiGuan.php');
+                        $result = hg_SendOrder($orderData); // 申报系统API：进口订单
 
-                    // 订单提交成功后提交支付单，这是申报系统的流程
-                    if($result->Header->Result == 'T'){
-                        $Data = array();
-                        $Data['CreateTime'] = $orderData['payTime'];
-                        $Data['MftNo'] = $result->Header->MftNo; // 申报单号
-                        $Data['PaymentNo'] = $orderData['PaymentNo'];
-                        $Data['OrderSeqNo'] = $orderData['OrderSeqNo'];
-                        $Data['Amount'] = $orderData['PaymentNo'];
-                        $Data['Source'] = $orderData['Source'];
-                        $Data['Idnum'] = $order['id_num'];
-                        $Data['Name'] = $order['real_name'];
-                        $Data['Phone'] = $order['phone'];
-                        $Data['Email'] = $order['identy_email'];
-
-                        $result = hg_SendPayment($Data);
+                        // 订单提交成功后提交支付单，这是申报系统的流程
                         if ($result->Header->Result == 'T') {
                             // 全部都成功处理后修改订单状态为已申报
                             update_order($order['order_id'], array('report_status' => 1, 'kj_order_amount' => $orderData['orderAmount']));
+                        } else {
+                            $msg = "申报进口订单失败";
                         }
+                    } else {
+                        $msg = $_LANG['err_kj_order_info'];
                     }
+                } else {
+                    $msg = "查询产品请求异常";
                 }
             }
         }
@@ -182,8 +175,8 @@ function get_report_order($order,$goods_list){
     $sql = "SELECT user_name, real_name, real_id, real_phone, real_email FROM " . $GLOBALS['ecs']->table('users') . " WHERE user_id = " . $order['user_id'];
     $account = $GLOBALS['db']->getRow($sql);
     //print_r("帐号：" .$account);
-    $sql = "SELECT shipping_code FROM " . $GLOBALS['ecs']->table('shipping') . " WHERE shipping_id = " . $order['shipping_id'];
-    $shipping_code = $GLOBALS['db']->getOne($sql);
+    $sql = "SELECT shipping_name FROM " . $GLOBALS['ecs']->table('shipping') . " WHERE shipping_id = " . $order['shipping_id'];
+    $shipping_name = $GLOBALS['db']->getOne($sql);
     $sql = "SELECT region_name FROM " . $GLOBALS['ecs']->table('region') . " WHERE region_id = " . $order['province'];
     $province = $GLOBALS['db']->getOne($sql);
     $sql = "SELECT region_name FROM " . $GLOBALS['ecs']->table('region') . " WHERE region_id = " . $order['city'];
@@ -201,10 +194,11 @@ function get_report_order($order,$goods_list){
     //$kj_goods_tax = 0.0;
     $goods=array();
     foreach($goods_list as $good){
-        //$sql = "SELECT kj_sn FROM " . $GLOBALS['ecs']->table('goods') . " WHERE goods_id = " . $good['goods_id'];
-        //$product_id = $GLOBALS['db']->getOne($sql);
+        // 获取商品备案货号
+        $sql = "SELECT kj_sn FROM " . $GLOBALS['ecs']->table('goods') . " WHERE goods_id = " . $good['goods_id'];
+        $kj_id = $GLOBALS['db']->getOne($sql);
         //获取商品备案信息
-        $product_rt=hg_GetGoods($good['goods_sn']);
+        $product_rt=hg_GetGoods($kj_id);
         if($product_rt==null){//请求异常，直接返回
             return null;
         }
@@ -216,10 +210,10 @@ function get_report_order($order,$goods_list){
             //$tariffFee=(float)$product_info['tax'] * $good_amount;
             // $tariffPrice=(float)$product_info['tax'] * (float)$good["goods_price"];
             $goods[]=array(
-                "goodsSku" => $good['goods_sn'],    // 货号（跨境平台商品备案时产生的唯一编码）
+                "goodsSku" => $kj_id,    // 货号（跨境平台商品备案时产生的唯一编码）
                 "goodsName" => $good['goods_name'],
                 "quantity" => $good["goods_number"],
-                "unit"     => $product_info->Unit,
+                "unit" => $product_info->Unit,
                 "price" => $good["goods_price"],
                 "weight" => $good_weight,
                 "tariffRate" => '0',
@@ -239,7 +233,7 @@ function get_report_order($order,$goods_list){
     $total = order_fee($order, $goods_list, $consignee);
     $kj_shipping_fee=$order['shipping_fee'];
 
-    if($shipping_code=='sf_express') $shipping_code='shunfeng';
+    //if($shipping_code=='sf_express') $shipping_code='shunfeng';
     $orderData=array(
         "Operation" => 0, // 0=新建，1=更新
         "orderNum" => $order['order_sn'],
@@ -248,7 +242,7 @@ function get_report_order($order,$goods_list){
         "checkStore" => '0',// 库存校验
         "buyerAccount" => $account['user_name'],
         //物流信息
-        "logisticsName" =>  $shipping_code,
+        "logisticsName" =>  $shipping_name,
         "postFee" => $kj_shipping_fee,
         "consignee" => $order['consignee'],
         "consigneeTel" => $order['tel'],

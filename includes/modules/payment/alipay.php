@@ -255,8 +255,6 @@ class alipay
             order_paid($order_sn); // 默认为支付成功
             if ($is_kj) { // 跨境订单支付宝报关接口
                 $res = $this->acquire_customs($payment_no, $payment, $merchant_customs_code, $merchant_customs_name, $order_no, $amount);
-                echo "TRADE_FINISHED<br>";
-                print_r($res);
                 return array(true, $res); // 可能需要加失败判断，万一跟支付宝的对接出了问题不能返回true
             }
             return true;
@@ -267,8 +265,6 @@ class alipay
             order_paid($order_sn, 2); // 2代表支付成功
             if ($is_kj) {  // 跨境订单支付宝报关接口
                 $res = $this->acquire_customs($payment_no, $payment, $merchant_customs_code, $merchant_customs_name, $order_no, $amount);
-                echo "TRADE_SUCCESS<br>";
-                print_r($res);
                 return array(true, $res); // 可能需要修改，万一跟支付宝的对接出了问题不能返回true
             }
 			/*if($create_time != '')支付改造 一般进口商品不需要发送到跨境海关
@@ -329,18 +325,41 @@ class alipay
         $parameter['sign_type'] = 'MD5'; // 签名类型
 
         $curl = curl_init($this->alipay_url);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);         // SSL证书认证
-        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);            // 严格认证
-        curl_setopt($curl, CURLOPT_CAINFO, $this->alipay_cacert); // 证书地址
+        // 证书验证不了，因此不使用SSL认证
+        //curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);         // SSL证书认证
+        //curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);            // 严格认证
+        //curl_setopt($curl, CURLOPT_CAINFO, $this->alipay_cacert); // 证书地址
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);        // 不使用SSL证书认证
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);            // 不认证
         curl_setopt($curl, CURLOPT_HEADER, 0 );                   // 过滤HTTP头
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);            // 显示输出结果
         curl_setopt($curl, CURLOPT_POST, true);                   // post传输数据
         curl_setopt($curl, CURLOPT_POSTFIELDS, $parameter);       // post传输数据
         $responseText = curl_exec($curl);
-        var_dump( curl_error($curl) ); // 如果执行curl过程中出现异常，可打开此开关，以便查看异常内容
+        //var_dump( curl_error($curl) ); // 如果执行curl过程中出现异常，可打开此开关，以便查看异常内容
         curl_close($curl);
 
-        return $responseText;
+        // 返回的xml会带有发过去的请求参数，由于这段参数在返回的xml中使用了非闭合格式，会导致simplexml函数无法解析，因此删除
+        /**
+         * 支付宝返回值示例：
+         * <alipay>
+         *     <is_success>T</is_success>
+         *     <request>
+         *         <param name="amount">0.01
+         *         <param name="sign_type">MD5
+         *         及其它发过去的请求，全部为非闭合格式
+         *     </request>
+         *     <response>
+         *         <alipay>
+         *             <alipay_declare_no>2016120311082072979979107</alipay_declare_no>
+         *             及其它返回值
+         *         </alipay>
+         *     </response>
+         * </alipay>
+         */
+        $responseText = preg_replace("/<request>([\s\S]*?)<\/request>/i", '', $responseText);
+
+        return simplexml_load_string($responseText);
     }
 }
 

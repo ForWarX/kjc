@@ -725,7 +725,9 @@ $_LANG['divided_into'] = '分成规则';
 
 /*汇率*/
 
-/*跨境信息*/
+/**
+ * 跨境信息（申报系统），凡是标注了测试/正式的，正式运营的时候一定要切换！
+ */
 // 海关网站URL
 $_LANG['kj_haiguan_url'] = 'http://trainer.kjb2c.com'; // 测试
 //$_LANG['kj_haiguan_url'] = 'http://i.kjb2c.com';       // 正式
@@ -744,13 +746,16 @@ $_LANG['kj_customs_code'] = '3302461400';
 //电商企业名称
 $_LANG['kj_org_name'] = '宁波宝乐贝尔国际贸易有限公司';
 //店铺代码
-$_LANG['kj_shop_code'] = '10402';
+$_LANG['kj_shop_code'] = '11810'; // 测试
+//$_LANG['kj_shop_code'] = '10402'; // 正式
 //电商企业网站
 $_LANG['kj_url'] = 'http://www.americoclub.com';
 //关区代码
 $_LANG['kj_customs'] = 3105; // 北仑保税区
 //购物网站代码
 $_LANG['kj_web_code'] = '0000'; // 别的商家入驻才会有网站代码，无代码填写0000即可
+// 错误信息
+$_LANG['err_kj_order_info'] = "订单信息有错误，无法提交该订单到海关，请联系商家。"
 
 
 /*****************************
