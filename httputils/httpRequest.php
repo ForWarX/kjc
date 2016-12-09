@@ -7,6 +7,8 @@
 		curl_setopt($httpRequest, CURLOPT_URL, $req_url);
 		curl_setopt($httpRequest, CURLOPT_POST, 1);
 
+		curl_setopt($httpRequest, CURLOPT_SSL_VERIFYPEER, false);        // 不使用SSL证书认证
+		curl_setopt($httpRequest, CURLOPT_SSL_VERIFYHOST, 0);            // 不认证
 		curl_setopt($httpRequest, CURLOPT_POSTFIELDS, $postField);
 		curl_setopt($httpRequest, CURLOPT_RETURNTRANSFER, true);
 		if($needProxy == 1)

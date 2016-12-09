@@ -134,7 +134,7 @@ if (!empty($_REQUEST['act']) && $_REQUEST['act'] == 'gotopage')
 
 $cache_id = $goods_id . '-' . $_SESSION['user_rank'].'-'.$_CFG['lang'];
 $cache_id = sprintf('%X', crc32($cache_id));
-if (!$smarty->is_cached('goods.dwt', $cache_id) || true) // 记得去掉true！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+if (!$smarty->is_cached('goods.dwt', $cache_id))
 {
     $smarty->assign('image_width',  $_CFG['image_width']);
     $smarty->assign('image_height', $_CFG['image_height']);
@@ -190,11 +190,9 @@ if (!$smarty->is_cached('goods.dwt', $cache_id) || true) // 记得去掉true！�
             $rtMsg='此商品暂时无法购买，';
 
             $product_rt=hg_GetGoods($goods['kj_sn']);
-            //$product_rt=hg_GetGoods('310516614000000003'); // 测试
             $product_info=$product_rt->Body;
 
             if ((string)($product_rt->Header->Result)=='T' && !empty($product_info)){
-            //if (true) { // 测试
                 $smarty->assign('kj_yes','1'); // kj_tax有可能是0，页面会判断为false，所以用这个变量判断
                 $smarty->assign('origin_place', $product_info->OriginPlace);
                 $smarty->assign('kj_tax', 100*(float)($product_info->Tax));
