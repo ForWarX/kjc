@@ -62,57 +62,64 @@ else
         /* 检查插件文件是否存在，如果存在则验证支付是否成功，否则则返回失败信息 */
         if (file_exists($plugin_file))
         {
-            /* 根据支付方式代码创建支付类的对象并调用其响应操作方法 */
-            include_once($plugin_file);
+            // 支付宝会调用两次该文件，一次notify，一次return，避免重复运行该代码
+            // 获取订单数据
+            $order_sn = $_REQUEST['subject']; // 订单号
+            $sql = "SELECT * FROM " . $GLOBALS['ecs']->table('order_info') ." WHERE order_sn = '$order_sn'";
+            $order = $GLOBALS['db']->getRow($sql);
 
-            $payment = new $pay_code();
-            // 跨境订单使用respond函数报关的调用方式来调用支付宝报关接口
-            $res = (@$payment->respond(true, $GLOBALS['_LANG']['kj_customs_code'], $GLOBALS['_LANG']['kj_org_name'])); // $res = array(0=>是否成功, 1=>成功后返回的支付宝数据)
-            $msg = $res === false ? $_LANG['pay_fail'] : $_LANG['pay_success'];
+            if ((int)($order['report_status']) == 1) {
+                // 已经申报
+                $msg = $_LANG['pay_success'];
+            } else {
+                /* 根据支付方式代码创建支付类的对象并调用其响应操作方法 */
+                include_once($plugin_file);
 
-            if ($res && $res[0]) {
-                // 调用完支付宝的报关接口后，调用申报系统的进口订单接口
+                $payment = new $pay_code();
+                // 跨境订单使用respond函数报关的调用方式来调用支付宝报关接口
+                $res = (@$payment->respond(true, $GLOBALS['_LANG']['kj_customs_code'], $GLOBALS['_LANG']['kj_org_name'])); // $res = array(0=>是否成功, 1=>成功后返回的支付宝数据)
+                $msg = $res === false ? $_LANG['pay_fail'] : $_LANG['pay_success'];
 
-                // 获取要提交给申报系统的数据
-                $order_sn = $_REQUEST['subject'];
-                $sql = "SELECT * FROM " . $GLOBALS['ecs']->table('order_info') ." WHERE order_sn = '$order_sn'";
-                $order = $GLOBALS['db']->getRow($sql);
-                require_once(ROOT_PATH . 'includes/lib_order.php');
-                $payment = payment_info($order['pay_id']);
-                $log_id = $_REQUEST['logId'];
-                if (empty($log_id)){
-                    require_once(ROOT_PATH . 'includes/lib_clips.php');
-                    $log_id = insert_pay_log($order['order_id'], $order['order_amount'], PAY_ORDER);
-                }
-                $order['log_id']=$log_id;
+                if ($res && $res[0]) {
+                    // 调用完支付宝的报关接口后，调用申报系统的进口订单接口
 
-                include_once('includes/lib_payment.php');
-                $goods_list = order_goods($order['order_id']);
+                    // 获取要提交给申报系统的数据
+                    require_once(ROOT_PATH . 'includes/lib_order.php');
+                    $payment = payment_info($order['pay_id']);
+                    $log_id = $_REQUEST['logId'];
+                    if (empty($log_id)) {
+                        require_once(ROOT_PATH . 'includes/lib_clips.php');
+                        $log_id = insert_pay_log($order['order_id'], $order['order_amount'], PAY_ORDER);
+                    }
+                    $order['log_id'] = $log_id;
 
-                // 整合要提交给申报系统的数据
-                $orderData = get_report_order($order, $goods_list);
-                if ($orderData != null) {
-                    $alipay_data = $res[1]; // 支付宝返回的数据
-                    $orderData['PaymentNo'] = $orderData['OrderSeqNo'] = $alipay_data->response->alipay->trade_no;
-                    $orderData['Source'] = '02'; // 申报系统定义的支付宝代码
+                    include_once('includes/lib_payment.php');
+                    $goods_list = order_goods($order['order_id']);
 
+                    // 整合要提交给申报系统的数据
+                    $orderData = get_report_order($order, $goods_list);
                     if ($orderData != null) {
-                        // 提交进口订单
-                        include_once('report/orderReportHaiGuan.php');
-                        $result = hg_SendOrder($orderData); // 申报系统API：进口订单
+                        $alipay_data = $res[1]; // 支付宝返回的数据
+                        $orderData['PaymentNo'] = $orderData['OrderSeqNo'] = $alipay_data->response->alipay->trade_no;
+                        $orderData['Source'] = '02'; // 申报系统定义的支付宝代码
 
-                        // 订单提交成功后提交支付单，这是申报系统的流程
-                        if ($result->Header->Result == 'T') {
-                            // 全部都成功处理后修改订单状态为已申报
-                            update_order($order['order_id'], array('report_status' => 1, 'kj_order_amount' => $orderData['orderAmount']));
+                        if ($orderData != null) {
+                            // 提交进口订单
+                            include_once('report/orderReportHaiGuan.php');
+                            $result = hg_SendOrder($orderData); // 申报系统API：进口订单
+
+                            if ($result->Header->Result == 'T') {
+                                // 全部都成功处理后修改订单状态为已申报
+                                update_order($order['order_id'], array('report_status' => 1, 'kj_order_amount' => $orderData['orderAmount']));
+                            } else {
+                                $msg = "申报进口订单失败";
+                            }
                         } else {
-                            $msg = "申报进口订单失败";
+                            $msg = $_LANG['err_kj_order_info'];
                         }
                     } else {
-                        $msg = $_LANG['err_kj_order_info'];
+                        $msg = "查询产品请求异常";
                     }
-                } else {
-                    $msg = "查询产品请求异常";
                 }
             }
         }

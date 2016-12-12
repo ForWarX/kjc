@@ -904,7 +904,7 @@ elseif ($_REQUEST['step'] == 'checkout')
 
     $user_info = user_info($_SESSION['user_id']);
     /*如果是跨境订单，判断用户是否已经实名注册 接口改造 实名认证*/
-    if(count($cart_goods) == $kj_counter && check_account($user_info['user_name'])==0 ){//只有跨境订单才进行该检查
+    if(count($cart_goods) == $kj_counter && check_account($user_info['user_name'])==1) {//只有跨境订单才进行该检查
         $smarty->assign('real_authenty', 1); // 该变量在页面中作为判断是否需要实名认证，1即为未认证，需要实名认证
     }
 
@@ -1942,7 +1942,7 @@ elseif ($_REQUEST['step'] == 'done')
     $order['phone']='';
     $order['identy_email']='';
     
-    if($order['order_type'] == 1 && check_account($user_info['user_name'])==0){
+    if($order['order_type'] == 1 && check_account($user_info['user_name'])==1){
         $id_num=$_POST['id_num'];
         $real_name=$_POST['real_name'];
         $phone=$_POST['phone'];
@@ -3682,13 +3682,13 @@ function check_is_kj_good($goods_id){
  */
 function check_account($account){
     include_once('report/orderReportHaiGuan.php');
-    $res=hg_GetAccount($account);
+    $res = hg_GetAccount($account);
     $user_info = user_info($_SESSION['user_id']);
 
     if ($res->Header->Result=='T' && $res->Body->IsAuth == 1 && !empty($user_info['real_name']) && !empty($user_info['real_id']) && !empty($user_info['real_phone']) && !empty($user_info['real_email'])) {
         // 检查身份证是否与申报系统里的一致，只检查后四位
         $idnum = $res->Body->Idnum;
-        if (!empty($idnum) && substr($idnum, -4, 4) == substr($user_info['real_id'], -4, 4)) {
+        if (!empty($idnum) && substr($idnum, -4, 4) != substr($user_info['real_id'], -4, 4)) {
             show_message('<br/>实名认证信息与宁波跨境贸易电子商务服务平台——跨境购上的信息不一致，请重新填写', '','', 'warning');
             exit;
         }
