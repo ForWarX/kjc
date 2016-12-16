@@ -3448,8 +3448,7 @@ function kj_check($cart_goods,$account){
     include_once('report/orderReportHaiGuan.php');
 
     $result = hg_GetAccount($account);
-    if (true) {} // 测试 ！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
-    else if ($result->Header->Result == 'F') {
+    if ($result->Header->Result == 'F') {
         $beian = '消费者需要在<a href="http://www.kjb2c.com/reg/reg!regedit.html" target="_blank" style="padding-left:0;">宁波跨境贸易电子商务服务平台——跨境购</a>进行实名注册，填写真实身份信息并关联本网站用户名，才能购买本网站跨境购商品。（如已在跨境购平台注册过，只需在跨境购平台上关联本网站用户名即可。）';
         return array(0, $beian);
     } else if ($result->Body->IsAuth != 1) {
@@ -3691,7 +3690,6 @@ function check_account($account){
     $res = hg_GetAccount($account);
     $user_info = user_info($_SESSION['user_id']);
 
-    if (true){return 1;} // 测试 ！！！！！！！！！！！！！！！！！！！！！！！！！！！
     if ($res->Header->Result=='T' && $res->Body->IsAuth == 1 && !empty($user_info['real_name']) && !empty($user_info['real_id']) && !empty($user_info['real_phone']) && !empty($user_info['real_email'])) {
         // 检查身份证是否与申报系统里的一致，只检查后四位
         $idnum = $res->Body->Idnum;
