@@ -110,7 +110,7 @@ else
 
                             if ($result->Header->Result == 'T') {
                                 // 全部都成功处理后修改订单状态为已申报
-                                update_order($order['order_id'], array('report_status' => 1, 'kj_order_amount' => $orderData['orderAmount']));
+                                update_order($order['order_id'], array('report_status' => 1, 'report_sn' => $result->Header->MftNo, 'kj_order_amount' => $orderData['orderAmount']));
                             } else {
                                 $msg = "申报进口订单失败";
                             }
@@ -238,7 +238,7 @@ function get_report_order($order,$goods_list){
     //$kj_order_amount = $kj_goods_amount + $kj_shipping_fee + $kj_goods_tax;
     $consignee = get_consignee($_SESSION['user_id']);
     $total = order_fee($order, $goods_list, $consignee);
-    $kj_shipping_fee=$order['shipping_fee'];
+    $kj_shipping_fee = $order['shipping_fee'];
 
     //if($shipping_code=='sf_express') $shipping_code='shunfeng';
     $orderData=array(
@@ -302,7 +302,6 @@ function get_report_order($order,$goods_list){
         //订单明细
         "orderDetails" => $goods
     );
-    //var_dump($orderData);
     return $orderData;
 }
 

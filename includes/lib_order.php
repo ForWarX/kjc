@@ -748,9 +748,10 @@ function order_fee($order, $goods, $consignee, $kj_goods_amount=0.0, $kj_goods_t
         $big_cat = is_kj_product($cat_id);//是否是跨境商品的判断
         if ($big_cat == 1){
             $tm_goods=array();
-            $tm_goods['goods_sn']=$val['goods_sn'];
-            $tm_goods['goods_number']=$val['goods_number'];
-            $tm_goods['goods_price']=$val['goods_price'];
+            $tm_goods['kj_sn'] = $val['kj_sn'];
+            $tm_goods['goods_name'] = $val['goods_name'];
+            $tm_goods['goods_number'] = $val['goods_number'];
+            $tm_goods['goods_price'] = $val['goods_price'];
             $tax_goods[]=$tm_goods;
         }
     }
@@ -758,16 +759,29 @@ function order_fee($order, $goods, $consignee, $kj_goods_amount=0.0, $kj_goods_t
     $total['consumption_duty_amount']=0;//消费税
     $total['added_value_tax_amount']=0;//增值税
     $total['tax']=0;//总税额（七折后的税额）
-    if(count($tax_goods) > 0){
-        include_once(ROOT_PATH.'report/orderReportNew.php');
-        $tax_fee_res=apiComputeTariff($total['shipping_fee'],$total['shipping_insure'],$tax_goods);
-        if($tax_fee_res['code']=='200'){
+    if (count($tax_goods) > 0){
+        include_once(ROOT_PATH.'report/orderReportHaiGuan.php');
+        // 号百查询税费接口，已停用
+        //$tax_fee_res=apiComputeTariff($total['shipping_fee'],$total['shipping_insure'],$tax_goods);
+        /*
+        if ($tax_fee_res['code']=='200') {
             $tax_fee=$tax_fee_res['result'];
-        
+
             $total['tariff_amount']=$tax_fee['tariffAmount'];//关税
             $total['consumption_duty_amount']=$tax_fee['consumptionDutyAmount'];//消费税
             $total['added_value_tax_amount']=$tax_fee['addedValueTaxAmount'];//增值税
             $total['tax']=$tax_fee['consolidatedTax'];//总税额（七折后的税额）
+        }*/
+
+        $data = array("PostFee"=>0, "InsuranceFee"=>0, "goods"=>$tax_goods); // 运费不加税
+        $tax_fee_res = hg_GetTax($data);
+        if ($tax_fee_res->Header->Result == 'T') {
+            $tax_fee = $tax_fee_res->Body;
+
+            $total['tariff_amount'] = (float)($tax_fee->TariffAmount); // 关税
+            $total['consumption_duty_amount'] = (float)($tax_fee->ConsumptionDutyAmount); // 消费税
+            $total['added_value_tax_amount'] = (float)($tax_fee->AddedValueTaxAmount); // 增值税
+            $total['tax'] = (float)($tax_fee->TaxAmount); // 总税额
         }
     }
     $total['tariff_amount_formated'] = price_format($total['tariff_amount'], false);

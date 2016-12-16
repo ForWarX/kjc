@@ -159,6 +159,7 @@ function hg_SendOrder($orderData=null) {
  * 提交进口（跨境）订单支付信息
  * 注意：此接口只能用于申报系统测试平台
  * 作用：代替支付机构提交支付单，即在测试平台模拟支付单，仅用于测试
+ * 调用时机：在提交进口订单之后，该接口需要申报订单号
  */
 function hg_SendPayment($Data=null) {
     if ($Data == null) return "";
@@ -184,6 +185,74 @@ function hg_SendPayment($Data=null) {
     $xml .= "<Email>" . $Data['Email'] . "</Email>";
     //$xml .= "<MerId>" . $Data['MerId'] . "</MerId>"; // 非银联不需要填
     $xml .= "</Pay></Body></Massage>";
+    return simplexml_load_string(hg_OrderReportApi($xml, $msgType));
+}
+
+/**
+ * 退货申请
+ */
+function hg_RejectOrder($Data=null) {
+    if ($Data == null) return "";
+
+    $CustomsCode = $GLOBALS["_LANG"]["kj_customs_code"];
+    $msgType = 'cnec_jh_rejdec';
+    $xml = "<?xml version='1.0' encoding='UTF-8'?>";
+    $xml .= "<Massage><Header>";
+    $xml .= "<CustomsCode>" . $CustomsCode . "</CustomsCode>";
+    $xml .= "<CreateTime>" . $Data['CreateTime'] . "</CreateTime>";
+    $xml .= "</Header><Body><RejectedInfo>";
+    $xml .= "<MftNo>" . $Data['MftNo'] . "</MftNo>";
+    $xml .= "<WaybillNo>" . $Data['WaybillNo'] . "</WaybillNo>";
+    $xml .= "<Flag>00</Flag>"; // 退货固定值：00
+    $xml .= "<RejectedGoods>";
+    foreach($Data["RejectedGoods"] as $good) {
+        $xml .= "<Detail>";
+        $xml .= "<ProductId>" . $good['productId'] . "</ProductId>";
+        $xml .= "<RejectedQty>" . $good['rejectedQty'] . "</RejectedQty>";
+        $xml .= "</Detail>";
+    }
+    $xml .= "</RejectedGoods></RejectedInfo></Body></Massage>";
+    return simplexml_load_string(hg_OrderReportApi($xml, $msgType));
+}
+
+/**
+ * 退货查询
+ */
+function hg_RejectSearch($Data=null) {
+    if ($Data == null) return "";
+
+    $msgType = 'cnec_jh_rejser';
+    $xml = "<?xml version='1.0' encoding='UTF-8'?>";
+    $xml .= "<Massage><Header>";
+    $xml .= "<MftNo>" . $Data['MftNo'] . "</MftNo>";
+    $xml .= "<WaybillNo>" . $Data['WaybillNo'] . "</WaybillNo>";
+    $xml .= "<Flag>" . $Data['Flag'] . "</Flag>";
+    $xml .= "</Header></Massage>";
+    return simplexml_load_string(hg_OrderReportApi($xml, $msgType));
+}
+
+/**
+ * 订单税费查询
+ */
+function hg_GetTax($Data=null) {
+    if ($Data == null) return "";
+
+    $msgType = 'cnec_tax_price';
+    $xml = "<?xml version='1.0' encoding='UTF-8'?>";
+    $xml .= "<Massage><Header>";
+    $xml .= "<PostFee>" . $Data['PostFee'] . "</PostFee>";
+    $xml .= "<InsuranceFee>" . $Data['InsuranceFee'] . "</InsuranceFee>";
+    $xml .= "<Goods>";
+    foreach($Data['goods'] as $good) {
+        $xml .= "<Detail>";
+        $xml .= "<ProductId>" . $good['kj_sn'] . "</ProductId>";
+        $xml .= "<GoodsName>" . $good['goods_name'] . "</GoodsName>";
+        $xml .= "<Qty>" . $good['goods_number'] . "</Qty>";
+        $xml .= "<Price>" . $good['goods_price'] . "</Price>";
+        $xml .= "</Detail>";
+    }
+    $xml .= "</Goods>";
+    $xml .= "</Header></Massage>";
     return simplexml_load_string(hg_OrderReportApi($xml, $msgType));
 }
 

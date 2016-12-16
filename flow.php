@@ -664,7 +664,7 @@ elseif ($_REQUEST['step'] == 'checkout')
     //$cart_goods = cart_goods($flow_type); // 取得商品列表，计算合计
     
     /*跨境购  购物车改造*/
-    $cart_goods=cart_goods_selected($flow_type);
+    $cart_goods = cart_goods_selected($flow_type);
     $kj_counter=0;
     foreach($cart_goods as $goods){
         $cat_id = $GLOBALS['db']->getOne("SELECT `cat_id` FROM " . $GLOBALS['ecs']->table('goods') . " WHERE `goods_id`='{$goods['goods_id']}'");
@@ -696,14 +696,11 @@ elseif ($_REQUEST['step'] == 'checkout')
             }
         }
     }
-        
+
 	$smarty->assign('is_binding', $is_binding[0]);
-	
 	$smarty->assign('beian_link', $is_binding[1]);
-	
     $smarty->assign('goods_list', $cart_goods);
-        
-        
+
 	if ($is_binding[0] == 1){
 		$goods_str = "<Goods>" . $is_binding[1] . "</Goods>";
 		$smarty->assign('goods_str', $goods_str);
@@ -3451,7 +3448,8 @@ function kj_check($cart_goods,$account){
     include_once('report/orderReportHaiGuan.php');
 
     $result = hg_GetAccount($account);
-    if ($result->Header->Result == 'F') {
+    if (true) {} // 测试 ！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+    else if ($result->Header->Result == 'F') {
         $beian = '消费者需要在<a href="http://www.kjb2c.com/reg/reg!regedit.html" target="_blank" style="padding-left:0;">宁波跨境贸易电子商务服务平台——跨境购</a>进行实名注册，填写真实身份信息并关联本网站用户名，才能购买本网站跨境购商品。（如已在跨境购平台注册过，只需在跨境购平台上关联本网站用户名即可。）';
         return array(0, $beian);
     } else if ($result->Body->IsAuth != 1) {
@@ -3477,8 +3475,16 @@ function kj_check($cart_goods,$account){
             $kj_goods_amount += $good_amount;
             $kj_goods_weight += $good_weight;
             $kj_goods_number += (int)$good["goods_number"];
-            $kj_goods_tax += (float)($product_rt->Body->Tax) * $good_amount;
             $kj_goods_counter += 1;
+
+            /**
+             * 税的计算参考good.php，搜索综合税
+             */
+            $tax_A = (float)($product_rt->Body->AddedValueTax); // 增值税率
+            $tax_C = (float)($product_rt->Body->ConsumptionDuty); // 消费税率
+            $total_tax = ($tax_C * (1+$tax_A) / (1-$tax_C) + $tax_A) * 0.7; // 综合税率
+            $total_tax = round($total_tax, 2);
+            $kj_goods_tax += $total_tax * $good_amount; // 综合税
         }else{
             return array(0,$good['goods_name'].', '.$product_rt->Header->ResultMsg);
         }
@@ -3685,6 +3691,7 @@ function check_account($account){
     $res = hg_GetAccount($account);
     $user_info = user_info($_SESSION['user_id']);
 
+    if (true){return 1;} // 测试 ！！！！！！！！！！！！！！！！！！！！！！！！！！！
     if ($res->Header->Result=='T' && $res->Body->IsAuth == 1 && !empty($user_info['real_name']) && !empty($user_info['real_id']) && !empty($user_info['real_phone']) && !empty($user_info['real_email'])) {
         // 检查身份证是否与申报系统里的一致，只检查后四位
         $idnum = $res->Body->Idnum;

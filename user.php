@@ -2988,7 +2988,7 @@ elseif ($action == 'kj_return_exchange')
 		include_once(ROOT_PATH . 'QueryRequest.php');
 		
 		//$orders = get_user_orders($user_id, 99, 0);//跨境购接口改造
-                $orders = get_user_kj_orders($user_id, 99, 0);//下拉框只显示跨境订单
+        $orders = get_user_kj_orders($user_id, 99, 0);//下拉框只显示跨境订单
 		$fomatted_order_list = '';
 		foreach ($orders as $one_order){
 			if ($one_order['order_status'] == '已确认,已付款,已发货' || $one_order['order_status'] == '已确认,已付款,收货确认'){
@@ -3035,13 +3035,13 @@ elseif ($action == 'kj_return_exchange')
 	}
 	elseif (!empty($_GET['start'])){
 		$info_str  = $_GET['info_str'];
-                $waybillNo = $_GET['waybillNo'];
+        $waybillNo = $_GET['waybillNo'];
 
 		$info_arr_raw = explode(',',$info_str);
 		$order_id = $info_arr_raw[0];
-		$sql = 'SELECT `order_sn`, `invoice_no` FROM ' . $ecs->table('order_info') . ' WHERE order_id = ' . $order_id;
+		$sql = 'SELECT `order_sn`, `invoice_no`, `report_sn` FROM ' . $ecs->table('order_info') . ' WHERE order_id = ' . $order_id;
 		$order_info = $db->getRow($sql);
-                /*跨境城 接口改造
+        /*跨境城 接口改造
 		$flag = $info_arr_raw[sizeof($info_arr_raw) - 1];
 		$rejected_goods = '<RejectedGoods><Detail>';
 		if(strpos($info_str,';') !== false){
@@ -3061,75 +3061,84 @@ elseif ($action == 'kj_return_exchange')
 			$rejected_goods .= '<ProductId>' . $kj_sn . '</ProductId><RejectedQty>' . $info_arr[2] . '</RejectedQty>';
 		}
 		$rejected_goods .= '</Detail></RejectedGoods>';
-                $result_xml = kj_reject($order_info['order_sn'], $order_info['invoice_no'], $flag, $rejected_goods);
+        $result_xml = kj_reject($order_info['order_sn'], $order_info['invoice_no'], $flag, $rejected_goods);
 		*/
-                include_once(ROOT_PATH . 'includes/cls_json.php');
+        include_once(ROOT_PATH . 'includes/cls_json.php');
 		$json = new JSON();
-                $goods_list=array();
-                $flag = $info_arr_raw[sizeof($info_arr_raw) - 1];
+        $goods_list = array();
+        $flag = $info_arr_raw[sizeof($info_arr_raw) - 1];
 		if(strpos($info_str,';') !== false){
 			$info_arr_multi = explode(';',$info_str);
 			foreach ($info_arr_multi as $info_str_raw){
 				$info_arr = explode(',',$info_str_raw);
 				$sql = 'SELECT `kj_sn` FROM ' . $ecs->table('goods') . ' WHERE goods_id = ' . $info_arr[1];
-                                $kj_sn = $db->getOne($sql);
-                                $quantity=$info_arr[2];
-                                $goods=array(
-                                    "productId" => $kj_sn,
-                                    "rejectedQty" => $quantity
-                                );
-				$goods_list[]=$goods;
-                        }
+                $kj_sn = $db->getOne($sql);
+                $quantity = $info_arr[2];
+                $goods = array(
+                    "productId" => $kj_sn,
+                    "rejectedQty" => $quantity
+                );
+				$goods_list[] = $goods;
+            }
 		}
 		else{
 			$info_arr = explode(',',$info_str);
 			$sql = 'SELECT `kj_sn` FROM ' . $ecs->table('goods') . ' WHERE goods_id = ' . $info_arr[1];
 			$kj_sn = $db->getOne($sql);
-                        $quantity=$info_arr[2];
-                        $goods=array(
-                            "productId" => $kj_sn,
-                            "rejectedQty" => $quantity
-                        );
-			$goods_list[]=$goods;
+            $quantity = $info_arr[2];
+            $goods = array(
+                "productId" => $kj_sn,
+                "rejectedQty" => $quantity
+            );
+			$goods_list[] = $goods;
 		}
+        /* 号百接口，已停用
 		$merchantCode = $GLOBALS['_LANG']['merchantCode'];
-                $merchantName = $GLOBALS['_LANG']['merchantName'];
-                include_once(ROOT_PATH.'report/orderReportNew.php');
-                $orderFrom = "0000";
-                $result=  queryOrderNoList($merchantCode, $merchantName, $order_info['order_sn'], $orderFrom);
-                if($result['code']=='200'){
-                        $mftNo=$result["result"];
+        $merchantName = $GLOBALS['_LANG']['merchantName'];
+        include_once(ROOT_PATH.'report/orderReportNew.php');
+        $orderFrom = "0000";
+        $result=  queryOrderNoList($merchantCode, $merchantName, $order_info['order_sn'], $orderFrom);
+        if($result['code']=='200'){
+            $mftNo=$result["result"];
 			$rejectedGoods=array("detailList" => $goods_list);
-                        $orderData=array(
-                            "mftNo" => $mftNo,
-                            "waybillNo"=>$waybillNo,
-                            "flag" => "00",
-                            "rejectedGoods" => $rejectedGoods
-                        ); 
-                        $json_data=$json->encode($orderData);
+            $orderData=array(
+                "mftNo" => $mftNo,
+                "waybillNo"=>$waybillNo,
+                "flag" => "00",
+                "rejectedGoods" => $rejectedGoods
+            );
+            $json_data=$json->encode($orderData);
                         
-                        //$fp = fopen("ordersubmit.txt","a");
-                        //flock($fp, LOCK_EX) ;
-                        //fwrite($fp,"退换货信息发送：".$json_data."\n");
+            //$fp = fopen("ordersubmit.txt","a");
+            //flock($fp, LOCK_EX) ;
+            //fwrite($fp,"退换货信息发送：".$json_data."\n");
+
+            $result=returnsOrderRequest($merchantCode,$json_data);
                         
-                        $result=returnsOrderRequest($merchantCode,$json_data);
-                        
-                        //fwrite($fp,"退换货信息返回：".$json->encode($result)."\t  desc:".$result['desc']."\n");
-                        //flock($fp, LOCK_UN);
-                        //fclose($fp);
-                }
-                if($result==null){
-                    $reMg='服务器连接异常，请稍后再试。';
-                }else{
-                    $reMg=$result['desc'];
-                }
-                $rtResult=array(
-                     "ResultMsg"=> $reMg
-                );
+            //fwrite($fp,"退换货信息返回：".$json->encode($result)."\t  desc:".$result['desc']."\n");
+            //flock($fp, LOCK_UN);
+            //fclose($fp);
+        }
+        if($result==null){
+            $reMg='服务器连接异常，请稍后再试。';
+        }else{
+            $reMg=$result['desc'];
+        }
+        */
+        include_once(ROOT_PATH.'report/orderReportHaiGuan.php');
+        $data = array("CreateTime"=>date("Y-m-d H:i:s"), "MftNo"=>$order_info['report_sn'], "WaybillNo"=>$waybillNo, "RejectedGoods"=>$goods_list);
+        $result = hg_RejectOrder($data);
+        if ($result->Header->Result == 'T') {
+            $reMg = '申请退货成功。';
+        } else {
+            $reMg = $result->Header->ResultMsg;
+        }
+        $rtResult = array(
+            "ResultMsg" => $reMg
+        );
 		die($json->encode($rtResult));
 	}
-	elseif (!empty($_GET['get_rejected'])){//退换货查询
-		
+	elseif (!empty($_GET['get_rejected'])){//退换货查询，网站暂且好像没有这个功能
 		$fp = fopen("log.txt","a");
 		flock($fp, LOCK_EX) ;
 		fwrite($fp,"执行日期：\n");

@@ -193,9 +193,27 @@ if (!$smarty->is_cached('goods.dwt', $cache_id))
             $product_info=$product_rt->Body;
 
             if ((string)($product_rt->Header->Result)=='T' && !empty($product_info)){
-                $smarty->assign('kj_yes','1'); // kj_tax有可能是0，页面会判断为false，所以用这个变量判断
+                /**
+                 * 具体公式在申报系统里找
+                 * 总价 = 商品总价 + 运费
+                 * 关税 = 0
+                 * 消费税 = 总价 x 消费税率 / (1 - 消费税率)
+                 * 增值税 = (总价 + 消费税) x 增值税率
+                 * 综合税 = (消费税 + 增值税) x 0.7
+                 *
+                 * 整合之后：
+                 * 消费税率 = C
+                 * 增值税率 = A
+                 * 综合税 = 总价 x (C x (1+A) / (1-C) + A) x 0.7
+                 * 除总价外的部分即综合税率
+                 */
+                $tax_A = (float)($product_info->AddedValueTax); // 增值税率
+                $tax_C = (float)($product_info->ConsumptionDuty); // 消费税率
+                $tax = ($tax_C * (1+$tax_A) / (1-$tax_C) + $tax_A) * 0.7; // 综合税率
+                $tax = 100 * round($tax, 2);
+                $smarty->assign('kj_yes','1'); // kj_tax有可能是0，页面会判断为false，所以用这个变量判断是否为跨境
                 $smarty->assign('origin_place', $product_info->OriginPlace);
-                $smarty->assign('kj_tax', 100*(float)($product_info->Tax));
+                $smarty->assign('kj_tax', $tax);
             }
             else{
                 if((string)($product_rt->Header->Result)=='F'){
