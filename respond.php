@@ -240,7 +240,7 @@ function get_report_order($order,$goods_list){
     $total = order_fee($order, $goods_list, $consignee);
     $kj_shipping_fee = $order['shipping_fee'];
 
-    /* Debug
+    // Debug
     $fp = fopen("output.txt", "a+");
     fwrite($fp, "total:\n");
     fwrite($fp, print_r($total, true));
@@ -252,7 +252,6 @@ function get_report_order($order,$goods_list){
     fwrite($fp, print_r($goods_list, true));
     fwrite($fp, "\n");
     fclose($fp);
-    */
 
     //if($shipping_code=='sf_express') $shipping_code='shunfeng';
     $orderData=array(
