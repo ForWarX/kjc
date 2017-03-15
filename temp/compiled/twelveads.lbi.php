@@ -52,26 +52,26 @@
         </div>
         <div u="slides" style="cursor: pointer; position: absolute; left: 0px; top: 0px; width: 233.33px; height: 90px;
             overflow: hidden;">
-            <?php $_from = $this->_var['three_each_0']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'goods_0_86311000_1430172474');if (count($_from)):
-    foreach ($_from AS $this->_var['goods_0_86311000_1430172474']):
+            <?php $_from = $this->_var['three_each_0']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'goods_0_98032000_1488473628');if (count($_from)):
+    foreach ($_from AS $this->_var['goods_0_98032000_1488473628']):
 ?>
             <div>
                 <div class="kjContInner" style="display: block;">
                     <div class="kjAdImg">
-                        <a title="<?php echo $this->_var['goods_0_86311000_1430172474']['name']; ?>" target="_blank" href="<?php echo $this->_var['goods_0_86311000_1430172474']['url']; ?>"><img alt="<?php echo $this->_var['goods_0_86311000_1430172474']['name']; ?>" src="<?php echo $this->_var['goods_0_86311000_1430172474']['thumb']; ?>"></a>
+                        <a title="<?php echo $this->_var['goods_0_98032000_1488473628']['name']; ?>" target="_blank" href="<?php echo $this->_var['goods_0_98032000_1488473628']['url']; ?>"><img alt="<?php echo $this->_var['goods_0_98032000_1488473628']['name']; ?>" src="<?php echo $this->_var['goods_0_98032000_1488473628']['thumb']; ?>"></a>
                     </div>
-                     <a class="kjAdCover" title="<?php echo $this->_var['goods_0_86311000_1430172474']['name']; ?>" target="_blank" href="<?php echo $this->_var['goods_0_86311000_1430172474']['url']; ?>"><img alt="trp" src="themes/ningbo/images/empty.png"></a>
+                     <a class="kjAdCover" title="<?php echo $this->_var['goods_0_98032000_1488473628']['name']; ?>" target="_blank" href="<?php echo $this->_var['goods_0_98032000_1488473628']['url']; ?>"><img alt="trp" src="themes/ningbo/images/empty.png"></a>
                     <ul>
                         <li class="yh18 kjAdCred">
-                        <span class="kjAdPrice"><?php if ($this->_var['goods_0_86311000_1430172474']['promote_price'] != ''): ?><?php echo $this->_var['goods_0_86311000_1430172474']['promote_price']; ?><?php else: ?><?php echo $this->_var['goods_0_86311000_1430172474']['shop_price']; ?><?php endif; ?></span>
+                        <span class="kjAdPrice"><?php if ($this->_var['goods_0_98032000_1488473628']['promote_price'] != ''): ?><?php echo $this->_var['goods_0_98032000_1488473628']['promote_price']; ?><?php else: ?><?php echo $this->_var['goods_0_98032000_1488473628']['shop_price']; ?><?php endif; ?></span>
                         <span style="display:none"></span>
                         </li>
                         <li class="kjAdCred"><span style="display:none"></span></li>
-                        <li class="kjAdName"><?php echo $this->_var['goods_0_86311000_1430172474']['name']; ?></li>
+                        <li class="kjAdName"><?php echo $this->_var['goods_0_98032000_1488473628']['name']; ?></li>
                     </ul>
                 </div>
                 <div u="thumb">
-                    <div class="t"><?php echo $this->_var['goods_0_86311000_1430172474']['cat_name']; ?></div>
+                    <div class="t"><?php echo $this->_var['goods_0_98032000_1488473628']['cat_name']; ?></div>
                 </div>
             </div>
             <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
@@ -97,26 +97,26 @@
         </div>
         <div u="slides" style="cursor: pointer; position: absolute; left: 0px; top: 0px; width: 233.33px; height: 90px;
             overflow: hidden;">
-            <?php $_from = $this->_var['three_each_1']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'goods_0_86333300_1430172474');if (count($_from)):
-    foreach ($_from AS $this->_var['goods_0_86333300_1430172474']):
+            <?php $_from = $this->_var['three_each_1']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'goods_0_98082400_1488473628');if (count($_from)):
+    foreach ($_from AS $this->_var['goods_0_98082400_1488473628']):
 ?>
             <div>
                 <div class="kjContInner" style="display: block;">
                     <div class="kjAdImg">
-                        <a title="<?php echo $this->_var['goods_0_86333300_1430172474']['name']; ?>" target="_blank" href="<?php echo $this->_var['goods_0_86333300_1430172474']['url']; ?>"><img alt="<?php echo $this->_var['goods_0_86333300_1430172474']['name']; ?>" src="<?php echo $this->_var['goods_0_86333300_1430172474']['thumb']; ?>"></a>
+                        <a title="<?php echo $this->_var['goods_0_98082400_1488473628']['name']; ?>" target="_blank" href="<?php echo $this->_var['goods_0_98082400_1488473628']['url']; ?>"><img alt="<?php echo $this->_var['goods_0_98082400_1488473628']['name']; ?>" src="<?php echo $this->_var['goods_0_98082400_1488473628']['thumb']; ?>"></a>
                     </div>
-                     <a class="kjAdCover" title="<?php echo $this->_var['goods_0_86333300_1430172474']['name']; ?>" target="_blank" href="<?php echo $this->_var['goods_0_86333300_1430172474']['url']; ?>"><img alt="trp" src="themes/ningbo/images/empty.png"></a>
+                     <a class="kjAdCover" title="<?php echo $this->_var['goods_0_98082400_1488473628']['name']; ?>" target="_blank" href="<?php echo $this->_var['goods_0_98082400_1488473628']['url']; ?>"><img alt="trp" src="themes/ningbo/images/empty.png"></a>
                     <ul>
                         <li class="yh18 kjAdCred">
-                        <span class="kjAdPrice"><?php if ($this->_var['goods_0_86333300_1430172474']['promote_price'] != ''): ?><?php echo $this->_var['goods_0_86333300_1430172474']['promote_price']; ?><?php else: ?><?php echo $this->_var['goods_0_86333300_1430172474']['shop_price']; ?><?php endif; ?></span>
+                        <span class="kjAdPrice"><?php if ($this->_var['goods_0_98082400_1488473628']['promote_price'] != ''): ?><?php echo $this->_var['goods_0_98082400_1488473628']['promote_price']; ?><?php else: ?><?php echo $this->_var['goods_0_98082400_1488473628']['shop_price']; ?><?php endif; ?></span>
                         <span style="display:none"></span>
                         </li>
                         <li class="kjAdCred"><span style="display:none"></span></li>
-                        <li class="kjAdName"><?php echo $this->_var['goods_0_86333300_1430172474']['name']; ?></li>
+                        <li class="kjAdName"><?php echo $this->_var['goods_0_98082400_1488473628']['name']; ?></li>
                     </ul>
                 </div>
                 <div u="thumb">
-                    <div class="t"><?php echo $this->_var['goods_0_86333300_1430172474']['cat_name']; ?></div>
+                    <div class="t"><?php echo $this->_var['goods_0_98082400_1488473628']['cat_name']; ?></div>
                 </div>
             </div>
             <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
@@ -142,26 +142,26 @@
         </div>
         <div u="slides" style="cursor: pointer; position: absolute; left: 0px; top: 0px; width: 233.33px; height: 90px;
             overflow: hidden;">
-            <?php $_from = $this->_var['three_each_2']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'goods_0_86353300_1430172474');if (count($_from)):
-    foreach ($_from AS $this->_var['goods_0_86353300_1430172474']):
+            <?php $_from = $this->_var['three_each_2']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'goods_0_98131300_1488473628');if (count($_from)):
+    foreach ($_from AS $this->_var['goods_0_98131300_1488473628']):
 ?>
             <div>
                 <div class="kjContInner" style="display: block;">
                     <div class="kjAdImg">
-                        <a title="<?php echo $this->_var['goods_0_86353300_1430172474']['name']; ?>" target="_blank" href="<?php echo $this->_var['goods_0_86353300_1430172474']['url']; ?>"><img alt="<?php echo $this->_var['goods_0_86353300_1430172474']['name']; ?>" src="<?php echo $this->_var['goods_0_86353300_1430172474']['thumb']; ?>"></a>
+                        <a title="<?php echo $this->_var['goods_0_98131300_1488473628']['name']; ?>" target="_blank" href="<?php echo $this->_var['goods_0_98131300_1488473628']['url']; ?>"><img alt="<?php echo $this->_var['goods_0_98131300_1488473628']['name']; ?>" src="<?php echo $this->_var['goods_0_98131300_1488473628']['thumb']; ?>"></a>
                     </div>
-                     <a class="kjAdCover" title="<?php echo $this->_var['goods_0_86353300_1430172474']['name']; ?>" target="_blank" href="<?php echo $this->_var['goods_0_86353300_1430172474']['url']; ?>"><img alt="trp" src="themes/ningbo/images/empty.png"></a>
+                     <a class="kjAdCover" title="<?php echo $this->_var['goods_0_98131300_1488473628']['name']; ?>" target="_blank" href="<?php echo $this->_var['goods_0_98131300_1488473628']['url']; ?>"><img alt="trp" src="themes/ningbo/images/empty.png"></a>
                     <ul>
                         <li class="yh18 kjAdCred">
-                        <span class="kjAdPrice"><?php if ($this->_var['goods_0_86353300_1430172474']['promote_price'] != ''): ?><?php echo $this->_var['goods_0_86353300_1430172474']['promote_price']; ?><?php else: ?><?php echo $this->_var['goods_0_86353300_1430172474']['shop_price']; ?><?php endif; ?></span>
+                        <span class="kjAdPrice"><?php if ($this->_var['goods_0_98131300_1488473628']['promote_price'] != ''): ?><?php echo $this->_var['goods_0_98131300_1488473628']['promote_price']; ?><?php else: ?><?php echo $this->_var['goods_0_98131300_1488473628']['shop_price']; ?><?php endif; ?></span>
                         <span style="display:none"></span>
                         </li>
                         <li class="kjAdCred"><span style="display:none"></span></li>
-                        <li class="kjAdName"><?php echo $this->_var['goods_0_86353300_1430172474']['name']; ?></li>
+                        <li class="kjAdName"><?php echo $this->_var['goods_0_98131300_1488473628']['name']; ?></li>
                     </ul>
                 </div>
                 <div u="thumb">
-                    <div class="t"><?php echo $this->_var['goods_0_86353300_1430172474']['cat_name']; ?></div>
+                    <div class="t"><?php echo $this->_var['goods_0_98131300_1488473628']['cat_name']; ?></div>
                 </div>
             </div>
             <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
@@ -187,26 +187,26 @@
         </div>
         <div u="slides" style="cursor: pointer; position: absolute; left: 0px; top: 0px; width: 233.33px; height: 90px;
             overflow: hidden;">
-            <?php $_from = $this->_var['three_each_3']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'goods_0_86372900_1430172474');if (count($_from)):
-    foreach ($_from AS $this->_var['goods_0_86372900_1430172474']):
+            <?php $_from = $this->_var['three_each_3']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'goods_0_98180300_1488473628');if (count($_from)):
+    foreach ($_from AS $this->_var['goods_0_98180300_1488473628']):
 ?>
             <div>
                 <div class="kjContInner" style="display: block;">
                     <div class="kjAdImg">
-                        <a title="<?php echo $this->_var['goods_0_86372900_1430172474']['name']; ?>" target="_blank" href="<?php echo $this->_var['goods_0_86372900_1430172474']['url']; ?>"><img alt="<?php echo $this->_var['goods_0_86372900_1430172474']['name']; ?>" src="<?php echo $this->_var['goods_0_86372900_1430172474']['thumb']; ?>"></a>
+                        <a title="<?php echo $this->_var['goods_0_98180300_1488473628']['name']; ?>" target="_blank" href="<?php echo $this->_var['goods_0_98180300_1488473628']['url']; ?>"><img alt="<?php echo $this->_var['goods_0_98180300_1488473628']['name']; ?>" src="<?php echo $this->_var['goods_0_98180300_1488473628']['thumb']; ?>"></a>
                     </div>
-                     <a class="kjAdCover" title="<?php echo $this->_var['goods_0_86372900_1430172474']['name']; ?>" target="_blank" href="<?php echo $this->_var['goods_0_86372900_1430172474']['url']; ?>"><img alt="trp" src="themes/ningbo/images/empty.png"></a>
+                     <a class="kjAdCover" title="<?php echo $this->_var['goods_0_98180300_1488473628']['name']; ?>" target="_blank" href="<?php echo $this->_var['goods_0_98180300_1488473628']['url']; ?>"><img alt="trp" src="themes/ningbo/images/empty.png"></a>
                     <ul>
                         <li class="yh18 kjAdCred">
-                        <span class="kjAdPrice"><?php if ($this->_var['goods_0_86372900_1430172474']['promote_price'] != ''): ?><?php echo $this->_var['goods_0_86372900_1430172474']['promote_price']; ?><?php else: ?><?php echo $this->_var['goods_0_86372900_1430172474']['shop_price']; ?><?php endif; ?></span>
+                        <span class="kjAdPrice"><?php if ($this->_var['goods_0_98180300_1488473628']['promote_price'] != ''): ?><?php echo $this->_var['goods_0_98180300_1488473628']['promote_price']; ?><?php else: ?><?php echo $this->_var['goods_0_98180300_1488473628']['shop_price']; ?><?php endif; ?></span>
                         <span style="display:none"></span>
                         </li>
                         <li class="kjAdCred"><span style="display:none"></span></li>
-                        <li class="kjAdName"><?php echo $this->_var['goods_0_86372900_1430172474']['name']; ?></li>
+                        <li class="kjAdName"><?php echo $this->_var['goods_0_98180300_1488473628']['name']; ?></li>
                     </ul>
                 </div>
                 <div u="thumb">
-                    <div class="t"><?php echo $this->_var['goods_0_86372900_1430172474']['cat_name']; ?></div>
+                    <div class="t"><?php echo $this->_var['goods_0_98180300_1488473628']['cat_name']; ?></div>
                 </div>
             </div>
             <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>

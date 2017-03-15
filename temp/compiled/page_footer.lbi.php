@@ -64,12 +64,12 @@ if ($this->_foreach['no']['total'] > 0):
   <div class="bNavList ">
  
    <?php if ($this->_var['navigator_list']['bottom']): ?>
-   <?php $_from = $this->_var['navigator_list']['bottom']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'nav_0_55208000_1433820208');$this->_foreach['nav_bottom_list'] = array('total' => count($_from), 'iteration' => 0);
+   <?php $_from = $this->_var['navigator_list']['bottom']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'nav_0_24868900_1481915980');$this->_foreach['nav_bottom_list'] = array('total' => count($_from), 'iteration' => 0);
 if ($this->_foreach['nav_bottom_list']['total'] > 0):
-    foreach ($_from AS $this->_var['nav_0_55208000_1433820208']):
+    foreach ($_from AS $this->_var['nav_0_24868900_1481915980']):
         $this->_foreach['nav_bottom_list']['iteration']++;
 ?>
-        <a href="<?php echo $this->_var['nav_0_55208000_1433820208']['url']; ?>" <?php if ($this->_var['nav_0_55208000_1433820208']['opennew'] == 1): ?> target="_blank" <?php endif; ?>><?php echo $this->_var['nav_0_55208000_1433820208']['name']; ?></a>
+        <a href="<?php echo $this->_var['nav_0_24868900_1481915980']['url']; ?>" <?php if ($this->_var['nav_0_24868900_1481915980']['opennew'] == 1): ?> target="_blank" <?php endif; ?>><?php echo $this->_var['nav_0_24868900_1481915980']['name']; ?></a>
       <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
   <?php endif; ?>
  
@@ -133,7 +133,7 @@ var __dcid = __dcid || [];__dcid.push(["DigiCertClickID_ykke0EsB", "7", "s", "wh
   <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
   <br/>
   <?php if ($this->_var['icp_number']): ?>
-  <?php echo $this->_var['lang']['icp_number']; ?>:<a href="http://www.miibeian.gov.cn/" target="_blank"><?php echo $this->_var['icp_number']; ?></a><br />
+  <?php echo $this->_var['lang']['icp_number']; ?>:<a href="http://www.miibeian.gov.cn/" target="_blank"><?php echo $this->_var['icp_number']; ?></a>
   <?php endif; ?>       
   <br />
     <?php if ($this->_var['stats_code']): ?>
@@ -141,7 +141,8 @@ var __dcid = __dcid || [];__dcid.push(["DigiCertClickID_ykke0EsB", "7", "s", "wh
     <?php endif; ?>
        
           
-       
+   <script language='javaScript' src='http://zjnet.zjaic.gov.cn/bsjs/330214/33021400000476.js'></script>
+   <br />
  </div>
 </div>
 

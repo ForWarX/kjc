@@ -127,7 +127,7 @@ function hg_SendOrder($orderData=null) {
         $xml .= "<Qty>" . $good['quantity'] . "</Qty>";
         $xml .= "<Unit>" . $good['unit'] . "</Unit>";
         $xml .= "<Price>" . $good['price'] . "</Price>";
-        $xml .= "<Amount>" . (int)($good['quantity'])*(float)($good['goodsName']) . "</Amount>";
+        $xml .= "<Amount>" . (int)($good['quantity'])*(float)($good['price']) . "</Amount>";
         $xml .= "</Detail>";
     }
     $xml .= "</Goods>";

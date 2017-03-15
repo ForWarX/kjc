@@ -755,7 +755,7 @@ elseif ($_REQUEST['step'] == 'checkout')
      * 计算订单的费用
      */
     $total = order_fee($order, $cart_goods, $consignee,$kj_goods_amount,$kj_goods_tax);
-	
+
     $smarty->assign('total', $total);
     $smarty->assign('shopping_money', sprintf($_LANG['shopping_money'], $total['formated_goods_price']));
     $smarty->assign('market_price_desc', sprintf($_LANG['than_market_price'], $total['formated_market_price'], $total['formated_saving'], $total['save_rate']));

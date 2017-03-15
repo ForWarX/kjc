@@ -1,0 +1,93 @@
+[2016-09-10 00:10:17]商品查询结果：{"code":"216","desc":"商品信息不存在！goodsSku:81785182","result":null,"count":0}
+
+[2016-09-10 00:10:17]商品备案查询 kj_sn：81785182  返回错误代码：216错误描述：商品信息不存在！goodsSku:81785182
+[2016-09-10 01:16:17]商品查询结果：{"code":"216","desc":"商品信息不存在！goodsSku:81785182","result":null,"count":0}
+
+[2016-09-10 01:16:17]商品备案查询 kj_sn：81785182  返回错误代码：216错误描述：商品信息不存在！goodsSku:81785182
+[2016-09-10 01:28:09]商品查询结果：{"code":"216","desc":"商品信息不存在！goodsSku:81785182","result":null,"count":0}
+
+[2016-09-10 01:28:09]商品备案查询 kj_sn：81785182  返回错误代码：216错误描述：商品信息不存在！goodsSku:81785182
+[2016-09-14 01:04:47]商品查询结果：
+[2016-09-14 01:04:47]商品备案查询  请求超时.
+[2016-11-09 03:27:27]订单税费计算接口调用，参数:{"appId":null,"method":"getTaxPrice","version":null,"nonce":298,"timestamp":"20161109032727","goodsData":"{\"orderSource\":null,\"postFee\":0,\"insuranceFee\":0,\"goodDetails\":[{\"goodsSku\":\"412954\",\"price\":\"89.00\",\"quantity\":\"1\"}]}","sign":"80bf98f75c31f41b7443726b8a0e3f00"}
+[2016-11-09 03:27:27]订单税费计算接口调用，返回结果:
+[2016-11-09 03:27:27]查询订单的税费 请求超时.
+[2016-11-09 03:35:50]订单税费计算接口调用，参数:{"appId":null,"method":"getTaxPrice","version":null,"nonce":5532,"timestamp":"20161109033550","goodsData":"{\"orderSource\":null,\"postFee\":0,\"insuranceFee\":0,\"goodDetails\":[{\"goodsSku\":\"412954\",\"price\":\"89.00\",\"quantity\":\"1\"}]}","sign":"2fa5583d0b0b8befc4640dfe89637492"}
+[2016-11-09 03:35:50]订单税费计算接口调用，返回结果:
+[2016-11-09 03:35:50]查询订单的税费 请求超时.
+[2016-11-09 06:12:02]订单税费计算接口调用，参数:{"appId":null,"method":"getTaxPrice","version":null,"nonce":8821,"timestamp":"20161109061202","goodsData":"{\"orderSource\":null,\"postFee\":0,\"insuranceFee\":0,\"goodDetails\":[{\"goodsSku\":\"412954\",\"price\":\"89.00\",\"quantity\":\"1\"}]}","sign":"bde8dd7d489143a1f2ecfe5413d05972"}
+[2016-11-09 06:12:02]订单税费计算接口调用，返回结果:
+[2016-11-09 06:12:02]查询订单的税费 请求超时.
+[2016-11-19 04:01:56]订单税费计算接口调用，参数:{"appId":null,"method":"getTaxPrice","version":null,"nonce":2547,"timestamp":"20161119040156","goodsData":"{\"orderSource\":null,\"postFee\":\"9\",\"insuranceFee\":0,\"goodDetails\":[{\"goodsSku\":\"KJC001791\",\"price\":\"159.00\",\"quantity\":\"1\"}]}","sign":"beda5c6e11e0c859c5a357e00f6a25b8"}
+[2016-11-19 04:01:56]订单税费计算接口调用，返回结果:
+[2016-11-19 04:01:56]查询订单的税费 请求超时.
+[2016-11-19 04:02:27]订单税费计算接口调用，参数:{"appId":null,"method":"getTaxPrice","version":null,"nonce":3701,"timestamp":"20161119040227","goodsData":"{\"orderSource\":null,\"postFee\":\"9\",\"insuranceFee\":0,\"goodDetails\":[{\"goodsSku\":\"KJC001791\",\"price\":\"159.00\",\"quantity\":\"1\"}]}","sign":"96d96e486efae73ed6887c4d79eb8cf6"}
+[2016-11-19 04:02:27]订单税费计算接口调用，返回结果:
+[2016-11-19 04:02:27]查询订单的税费 请求超时.
+[2016-11-19 04:02:39]订单税费计算接口调用，参数:{"appId":null,"method":"getTaxPrice","version":null,"nonce":149,"timestamp":"20161119040239","goodsData":"{\"orderSource\":null,\"postFee\":\"9\",\"insuranceFee\":0,\"goodDetails\":[{\"goodsSku\":\"KJC001791\",\"price\":\"159.00\",\"quantity\":\"1\"}]}","sign":"8ba7c9eac144243bc71ce3d7fac51555"}
+[2016-11-19 04:02:39]订单税费计算接口调用，返回结果:
+[2016-11-19 04:02:39]查询订单的税费 请求超时.
+[2016-11-19 04:02:53]订单税费计算接口调用，参数:{"appId":null,"method":"getTaxPrice","version":null,"nonce":9942,"timestamp":"20161119040253","goodsData":"{\"orderSource\":null,\"postFee\":\"9\",\"insuranceFee\":0,\"goodDetails\":[{\"goodsSku\":\"KJC001791\",\"price\":\"159.00\",\"quantity\":\"1\"}]}","sign":"f58d27bc66b50235c71408cf536681c1"}
+[2016-11-19 04:02:53]订单税费计算接口调用，返回结果:
+[2016-11-19 04:02:53]查询订单的税费 请求超时.
+[2016-11-19 04:07:16]订单税费计算接口调用，参数:{"appId":null,"method":"getTaxPrice","version":null,"nonce":1254,"timestamp":"20161119040716","goodsData":"{\"orderSource\":null,\"postFee\":\"9\",\"insuranceFee\":0,\"goodDetails\":[{\"goodsSku\":\"KJC001791\",\"price\":\"159.00\",\"quantity\":\"1\"}]}","sign":"d6ffc4959310d7320b48bce202ccef7e"}
+[2016-11-19 04:07:16]订单税费计算接口调用，返回结果:
+[2016-11-19 04:07:16]查询订单的税费 请求超时.
+[2016-11-19 04:07:17]订单税费计算接口调用，参数:{"appId":null,"method":"getTaxPrice","version":null,"nonce":3542,"timestamp":"20161119040717","goodsData":"{\"orderSource\":null,\"postFee\":\"9\",\"insuranceFee\":0,\"goodDetails\":[{\"goodsSku\":\"KJC001791\",\"price\":\"159.00\",\"quantity\":\"1\"}]}","sign":"b2926c8e37e078d82a327d1cd5c3c726"}
+[2016-11-19 04:07:17]订单税费计算接口调用，返回结果:
+[2016-11-19 04:07:17]查询订单的税费 请求超时.
+[2016-11-19 04:07:17]submit order data:{"Operation":0,"orderNum":"2016111919646","orderSource":null,"checkStore":"0","buyerAccount":"warket","logisticsName":"zt_express","postFee":"9.00","consignee":"warket","consigneeTel":"12345678","regionCode":"\/","consigneeCountry":"CHN","consigneeProvince":"\u9ed1\u9f99\u6c5f","consigneeCity":"\u5927\u5174\u5b89\u5cad","consigneeDistrict":"\u6f20\u6cb3\u53bf","consigneeAddr":"warket","mailNo":"123456","senderAddr":"\/","senderCity":"\/","senderCompanyName":"\/","senderCountry":"\/","senderName":"\/","senderProvince":"\/","senderTel":"\/","senderZip":"\/","goodsDesc":"","goodsAmount":0,"orderAmount":"168.00","payAmount":"168.00","disAmount":"0.00","quantity":0,"weight":0,"tariffAmount":"0.00","tariffFee":"0.00","currCode":"RMB","orderType":1,"orderDesc":"","status":0,"payStatus":0,"orderTime":"2016-11-19 04:07:17","orderCreateTime":"2016-11-19 04:07:17","payTime":"2016-11-19 04:07:17","deliveryStatus":0,"deliveryTime":"2016-11-19 04:07:17","payType":"91","idNum":"330205199203250318","realName":"123","phone":"123","email":"123","tariffTaxAmount":0,"consumptionTaxAmount":0,"addedvalueTaxAmount":0,"insuranceFee":"0","orderDetails":[]}
+[2016-11-19 04:07:17]同步订单  请求超时.
+[2016-11-19 04:29:57]订单税费计算接口调用，参数:{"appId":null,"method":"getTaxPrice","version":null,"nonce":5874,"timestamp":"20161119042957","goodsData":"{\"orderSource\":null,\"postFee\":0,\"insuranceFee\":0,\"goodDetails\":[{\"goodsSku\":\"KJC001791\",\"price\":\"159.00\",\"quantity\":\"1\"}]}","sign":"2a2156be81e63898b01db228222ea0f7"}
+[2016-11-19 04:29:57]订单税费计算接口调用，返回结果:
+[2016-11-19 04:29:57]查询订单的税费 请求超时.
+[2016-11-19 04:29:57]submit order data:{"Operation":0,"orderNum":"2016111919646","orderSource":null,"checkStore":"0","buyerAccount":"warket","logisticsName":"zt_express","postFee":"9.00","consignee":"warket","consigneeTel":"12345678","regionCode":"\/","consigneeCountry":"CHN","consigneeProvince":"\u9ed1\u9f99\u6c5f","consigneeCity":"\u5927\u5174\u5b89\u5cad","consigneeDistrict":"\u6f20\u6cb3\u53bf","consigneeAddr":"warket","mailNo":"123456","senderAddr":"\/","senderCity":"\/","senderCompanyName":"\/","senderCountry":"\/","senderName":"\/","senderProvince":"\/","senderTel":"\/","senderZip":"\/","goodsDesc":"","goodsAmount":0,"orderAmount":"168.00","payAmount":"168.00","disAmount":"0.00","quantity":0,"weight":0,"tariffAmount":"0.00","tariffFee":"0.00","currCode":"RMB","orderType":1,"orderDesc":"","status":0,"payStatus":0,"orderTime":"2016-11-19 04:29:56","orderCreateTime":"2016-11-19 04:29:56","payTime":"2016-11-19 04:29:56","deliveryStatus":0,"deliveryTime":"2016-11-19 04:29:56","payType":"91","idNum":"330205199203250318","realName":"123","phone":"123","email":"123","tariffTaxAmount":0,"consumptionTaxAmount":0,"addedvalueTaxAmount":0,"insuranceFee":"0","orderDetails":[]}
+[2016-11-19 04:29:57]同步订单  请求超时.
+[2016-11-30 02:26:24]订单税费计算接口调用，参数:{"appId":null,"method":"getTaxPrice","version":null,"nonce":2799,"timestamp":"20161130022624","goodsData":"{\"orderSource\":null,\"postFee\":15.2,\"insuranceFee\":0,\"goodDetails\":[{\"goodsSku\":\"KJC001804\",\"price\":\"0.01\",\"quantity\":\"1\"}]}","sign":"22431e7cf9c2d2c0825a1b76721136d2"}
+[2016-11-30 02:26:24]订单税费计算接口调用，返回结果:
+[2016-11-30 02:26:24]查询订单的税费 请求超时.
+[2016-11-30 03:14:40]订单税费计算接口调用，参数:{"appId":null,"method":"getTaxPrice","version":null,"nonce":1334,"timestamp":"20161130031440","goodsData":"{\"orderSource\":null,\"postFee\":15.2,\"insuranceFee\":0,\"goodDetails\":[{\"goodsSku\":\"KJC001804\",\"price\":\"0.01\",\"quantity\":\"1\"}]}","sign":"d932a429d9f2763a48111f7cfc4d5f86"}
+[2016-11-30 03:14:40]订单税费计算接口调用，返回结果:
+[2016-11-30 03:14:40]查询订单的税费 请求超时.
+[2016-11-30 03:14:53]订单税费计算接口调用，参数:{"appId":null,"method":"getTaxPrice","version":null,"nonce":4947,"timestamp":"20161130031453","goodsData":"{\"orderSource\":null,\"postFee\":15.2,\"insuranceFee\":0,\"goodDetails\":[{\"goodsSku\":\"KJC001804\",\"price\":\"0.01\",\"quantity\":\"1\"}]}","sign":"20f558d133ec839c4f7d8d4199674a62"}
+[2016-11-30 03:14:53]订单税费计算接口调用，返回结果:
+[2016-11-30 03:14:53]查询订单的税费 请求超时.
+[2016-11-30 03:15:56]订单税费计算接口调用，参数:{"appId":null,"method":"getTaxPrice","version":null,"nonce":1058,"timestamp":"20161130031556","goodsData":"{\"orderSource\":null,\"postFee\":15.2,\"insuranceFee\":0,\"goodDetails\":[{\"goodsSku\":\"KJC001804\",\"price\":\"0.01\",\"quantity\":\"1\"}]}","sign":"0db792e3398d65527fb0f954c71c706b"}
+[2016-11-30 03:15:56]订单税费计算接口调用，返回结果:
+[2016-11-30 03:15:56]查询订单的税费 请求超时.
+[2016-11-30 03:47:06]订单税费计算接口调用，参数:{"appId":null,"method":"getTaxPrice","version":null,"nonce":6643,"timestamp":"20161130034706","goodsData":"{\"orderSource\":null,\"postFee\":15.2,\"insuranceFee\":0,\"goodDetails\":[{\"goodsSku\":\"KJC001804\",\"price\":\"0.01\",\"quantity\":\"1\"}]}","sign":"91f574795a10af01136e0af324bda8cf"}
+[2016-11-30 03:47:06]订单税费计算接口调用，返回结果:
+[2016-11-30 03:47:06]查询订单的税费 请求超时.
+[2016-11-30 04:15:17]订单税费计算接口调用，参数:{"appId":null,"method":"getTaxPrice","version":null,"nonce":3872,"timestamp":"20161130041517","goodsData":"{\"orderSource\":null,\"postFee\":15.2,\"insuranceFee\":0,\"goodDetails\":[{\"goodsSku\":\"KJC001804\",\"price\":\"0.01\",\"quantity\":\"1\"}]}","sign":"69d7a7982f3eb198b163e8d2941e1598"}
+[2016-11-30 04:15:17]订单税费计算接口调用，返回结果:
+[2016-11-30 04:15:17]查询订单的税费 请求超时.
+[2016-11-30 05:49:09]订单税费计算接口调用，参数:{"appId":null,"method":"getTaxPrice","version":null,"nonce":4358,"timestamp":"20161130054909","goodsData":"{\"orderSource\":null,\"postFee\":15.2,\"insuranceFee\":0,\"goodDetails\":[{\"goodsSku\":\"KJC001804\",\"price\":\"0.01\",\"quantity\":\"1\"}]}","sign":"0911efefa447ff6cdb6fadc0abe366cf"}
+[2016-11-30 05:49:09]订单税费计算接口调用，返回结果:
+[2016-11-30 05:49:09]查询订单的税费 请求超时.
+[2016-11-30 05:49:16]订单税费计算接口调用，参数:{"appId":null,"method":"getTaxPrice","version":null,"nonce":1403,"timestamp":"20161130054916","goodsData":"{\"orderSource\":null,\"postFee\":14.4,\"insuranceFee\":0,\"goodDetails\":[{\"goodsSku\":\"KJC001804\",\"price\":\"0.01\",\"quantity\":\"1\"}]}","sign":"35db82049dbe71cb8426a96b3d0275a1"}
+[2016-11-30 05:49:16]订单税费计算接口调用，返回结果:
+[2016-11-30 05:49:16]查询订单的税费 请求超时.
+[2016-11-30 05:49:26]订单税费计算接口调用，参数:{"appId":null,"method":"getTaxPrice","version":null,"nonce":3525,"timestamp":"20161130054926","goodsData":"{\"orderSource\":null,\"postFee\":14.4,\"insuranceFee\":0,\"goodDetails\":[{\"goodsSku\":\"KJC001804\",\"price\":\"0.01\",\"quantity\":\"1\"}]}","sign":"cfa28de068e9236f8e7b1e3356558034"}
+[2016-11-30 05:49:26]订单税费计算接口调用，返回结果:
+[2016-11-30 05:49:26]查询订单的税费 请求超时.
+[2016-12-02 04:54:10]订单税费计算接口调用，参数:{"appId":null,"method":"getTaxPrice","version":null,"nonce":2131,"timestamp":"20161202045410","goodsData":"{\"orderSource\":null,\"postFee\":14.4,\"insuranceFee\":0,\"goodDetails\":[{\"goodsSku\":\"KJC001804\",\"price\":\"0.01\",\"quantity\":\"1\"}]}","sign":"8bd7f2e3f209e29be5a1631248390cab"}
+[2016-12-02 04:54:10]订单税费计算接口调用，返回结果:
+[2016-12-02 04:54:10]查询订单的税费 请求超时.
+[2016-12-15 07:15:22]订单税费计算接口调用，参数:{"appId":null,"method":"getTaxPrice","version":null,"nonce":4337,"timestamp":"20161215071522","goodsData":"{\"orderSource\":null,\"postFee\":700.8,\"insuranceFee\":0,\"goodDetails\":[{\"goodsSku\":\"KJC001804\",\"price\":\"0.01\",\"quantity\":\"100\"}]}","sign":"1ddf5aa7cb72a0a49a0c774779c40d59"}
+[2016-12-15 07:15:22]订单税费计算接口调用，返回结果:
+[2016-12-15 07:15:22]查询订单的税费 请求超时.
+[2016-12-15 07:42:17]订单税费计算接口调用，参数:{"appId":null,"method":"getTaxPrice","version":null,"nonce":634,"timestamp":"20161215074217","goodsData":"{\"orderSource\":null,\"postFee\":700.8,\"insuranceFee\":0,\"goodDetails\":[{\"goodsSku\":\"KJC001804\",\"price\":\"0.01\",\"quantity\":\"100\"}]}","sign":"41d518a94946e3687400bd2694f20b73"}
+[2016-12-15 07:42:17]订单税费计算接口调用，返回结果:
+[2016-12-15 07:42:17]查询订单的税费 请求超时.
+[2016-12-16 03:41:03]订单税费计算接口调用，参数:{"appId":null,"method":"getTaxPrice","version":null,"nonce":1411,"timestamp":"20161216034103","goodsData":"{\"orderSource\":null,\"postFee\":700.8,\"insuranceFee\":0,\"goodDetails\":[{\"goodsSku\":\"KJC001804\",\"price\":\"0.01\",\"quantity\":\"100\"}]}","sign":"38ea83d15e5d0d7ab3ccbe85bacbfc2c"}
+[2016-12-16 03:41:03]订单税费计算接口调用，返回结果:
+[2016-12-16 03:41:03]查询订单的税费 请求超时.
+[2016-12-16 04:23:51]订单税费计算接口调用，参数:{"appId":null,"method":"getTaxPrice","version":null,"nonce":2827,"timestamp":"20161216042351","goodsData":"{\"orderSource\":null,\"postFee\":700.8,\"insuranceFee\":0,\"goodDetails\":[{\"goodsSku\":\"KJC001804\",\"price\":\"0.01\",\"quantity\":\"100\"}]}","sign":"81d461fd35dc5d01347bf80c46e6c194"}
+[2016-12-16 04:23:51]订单税费计算接口调用，返回结果:
+[2016-12-16 04:23:51]查询订单的税费 请求超时.
+[2016-12-16 04:24:31]订单税费计算接口调用，参数:{"appId":null,"method":"getTaxPrice","version":null,"nonce":5386,"timestamp":"20161216042431","goodsData":"{\"orderSource\":null,\"postFee\":700.8,\"insuranceFee\":0,\"goodDetails\":[{\"goodsSku\":\"KJC001804\",\"price\":\"0.01\",\"quantity\":\"100\"}]}","sign":"0a7370ca88357d23421a22f6cca518ff"}
+[2016-12-16 04:24:31]订单税费计算接口调用，返回结果:
+[2016-12-16 04:24:31]查询订单的税费 请求超时.
+[2016-12-16 04:27:20]订单税费计算接口调用，参数:{"appId":null,"method":"getTaxPrice","version":null,"nonce":8690,"timestamp":"20161216042720","goodsData":"{\"orderSource\":null,\"postFee\":700.8,\"insuranceFee\":0,\"goodDetails\":[{\"goodsSku\":\"KJC001804\",\"price\":\"0.01\",\"quantity\":\"100\"}]}","sign":"20b11ff7c5a74d54aa4d7abd5874cb0c"}
+[2016-12-16 04:27:20]订单税费计算接口调用，返回结果:
+[2016-12-16 04:27:20]查询订单的税费 请求超时.

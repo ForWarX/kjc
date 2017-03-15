@@ -744,11 +744,11 @@ function order_fee($order, $goods, $consignee, $kj_goods_amount=0.0, $kj_goods_t
     //2016.04.20 新税额的计算
     $tax_goods=array();
     foreach ($goods AS $val){
-        $cat_id = $GLOBALS['db']->getOne("SELECT `cat_id` FROM " . $GLOBALS['ecs']->table('goods') . " WHERE `goods_id`='{$val['goods_id']}'");
-        $big_cat = is_kj_product($cat_id);//是否是跨境商品的判断
+        $row = $GLOBALS['db']->getRow("SELECT `cat_id`, `kj_sn` FROM " . $GLOBALS['ecs']->table('goods') . " WHERE `goods_id`='{$val['goods_id']}'");
+        $big_cat = is_kj_product($row['cat_id']);//是否是跨境商品的判断
         if ($big_cat == 1){
             $tm_goods=array();
-            $tm_goods['kj_sn'] = $val['kj_sn'];
+            $tm_goods['kj_sn'] = $row['kj_sn'];
             $tm_goods['goods_name'] = $val['goods_name'];
             $tm_goods['goods_number'] = $val['goods_number'];
             $tm_goods['goods_price'] = $val['goods_price'];

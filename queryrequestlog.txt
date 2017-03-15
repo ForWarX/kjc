@@ -1,0 +1,40 @@
+执行日期：20161105031258
+<?xml version="1.0" encoding="utf-8"?>
+<Message>
+  <Header>
+    <Result>F</Result>
+  </Header>
+  <Body/>
+</Message>
+
+
+执行日期：20161105031259
+<?xml version="1.0" encoding="UTF-8"?>
+<Message>
+  <Header>
+    <Result>F</Result>
+    <ResultMsg>该货号不存在。</ResultMsg>
+  </Header>
+</Message>
+
+
+执行日期：20161105031259
+<?xml version="1.0" encoding="utf-8"?>
+<Message>
+  <Header>
+    <Result>F</Result>
+  </Header>
+  <Body/>
+</Message>
+
+
+执行日期：20161105031300
+<?xml version="1.0" encoding="UTF-8"?>
+<Message>
+  <Header>
+    <Result>F</Result>
+    <ResultMsg>该货号不存在。</ResultMsg>
+  </Header>
+</Message>
+
+
