@@ -773,7 +773,8 @@ function order_fee($order, $goods, $consignee, $kj_goods_amount=0.0, $kj_goods_t
             $total['tax']=$tax_fee['consolidatedTax'];//总税额（七折后的税额）
         }*/
 
-        $data = array("PostFee"=>0, "InsuranceFee"=>0, "goods"=>$tax_goods); // 运费不加税
+        $post_fee = $shipping_cod_fee == NULL ? 0 : $shipping_cod_fee;
+        $data = array("PostFee"=>$post_fee, "InsuranceFee"=>0, "goods"=>$tax_goods);
         $tax_fee_res = hg_GetTax($data);
         if ($tax_fee_res->Header->Result == 'T') {
             $tax_fee = $tax_fee_res->Body;
